@@ -125,7 +125,6 @@ public class PS4ControllerWrapper : ControllerInputWrapper
                 triggerName = getAxisName("5", "6", "6");
                 break;
         }
-        //Debug.Log(triggerName);
         if (isRaw)
         {
             return Input.GetAxisRaw(triggerName);
