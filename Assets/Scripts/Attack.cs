@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityStandardAssets.Utility;
 
-public class Attack : MonoBehaviour {
+public class Attack : MonoBehaviour, Spawnable {
 	/// <summary>
 	/// The damage this attack will deal on impact
 	/// This is normalized (0-1)
@@ -25,10 +25,20 @@ public class Attack : MonoBehaviour {
 	[HideInInspector]
 	public bool impacted;
 
+	protected bool crit;
+
 	protected virtual void Start() {
 		if(destroyAfterTime > 0) {
 			Destroy(this.gameObject, destroyAfterTime);
 		}
+	}
+
+	public void Crit(bool value) {
+		crit = value;
+	}
+
+	public void Owner(PlayerID owner) {
+
 	}
 
 	protected virtual void OnTriggerEnter(Collider other) {

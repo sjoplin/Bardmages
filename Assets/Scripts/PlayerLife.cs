@@ -20,8 +20,19 @@ public class PlayerLife : MonoBehaviour {
 
 	public void DealDamage(float amount) {
 		health -= amount;
+		if(health <= 0) {
+			transform.position = Vector3.up*10f;
+			health = 1f;
+		}
+
 		greenHealthBar.fillAmount = health/2f + 0.5f;
 		StartCoroutine(HealthBarCatchup());
+	}
+
+	void OnControllerColliderHit(ControllerColliderHit hit) {
+		if(hit.collider.gameObject.tag.Equals("Kill")) {
+			DealDamage(1f);
+		}
 	}
 
 	private IEnumerator HealthBarCatchup() {

@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour {
 
 	public static LevelManager instance;
 
+	public PlayerUIController[] playerUI;
+
 	public Dictionary<PlayerID, PlayerControl> playerDict;
 
 	public Dictionary<ControllerInputWrapper.Buttons, float> buttonPitchMap;

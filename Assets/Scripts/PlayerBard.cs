@@ -7,6 +7,9 @@ public class PlayerBard : MonoBehaviour {
 	public Tune[] tunes;
 	public AudioClip instrumentSound;
 
+	public float buttonPressDelay = 0.1f;
+	private float buttonPressDelayTimer;
+
 	private PlayerControl control;
 
 	void Start() {
@@ -26,21 +29,42 @@ public class PlayerBard : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach(Tune t in tunes) {
-			if(ControllerManager.instance.GetButtonDown(t.NextButton(),control.player)) {
+		if(buttonPressDelayTimer < 0f) {
+			foreach(Tune t in tunes) {
+				bool soundPlayed = false; //prevents two sounds from being played the same frame
+				if(ControllerManager.instance.GetButtonDown(t.NextButton(),control.player)) {
 
-				GetComponent<AudioSource>().pitch = LevelManager.instance.buttonPitchMap[t.NextButton()];
-				GetComponent<AudioSource>().PlayOneShot(instrumentSound);
+					buttonPressDelayTimer = buttonPressDelay;
 
-				StopAllCoroutines();
-				StartCoroutine(TuneTimeOut());
-					
-				if(t.IterateTune()) {
-					foreach (Tune x in tunes) {
-						x.ResetTune();
+					if(!soundPlayed) {
+						GetComponent<AudioSource>().pitch = LevelManager.instance.buttonPitchMap[t.NextButton()];
+						GetComponent<AudioSource>().PlayOneShot(instrumentSound);
+					}
+
+					LevelManager.instance.playerUI[(int)control.player - 1].TuneProgressed(t);
+
+					StopAllCoroutines();
+					StartCoroutine(TuneTimeOut());
+						
+					if(t.IterateTune()) {
+						foreach (Tune x in tunes) {
+							x.ResetTune();
+							LevelManager.instance.playerUI[(int)control.player - 1].TuneReset();
+						}
 					}
 				}
 			}
+		} else {
+			foreach(Tune t in tunes) {
+				if(ControllerManager.instance.GetButtonDown(t.NextButton(),control.player)) {
+					StopAllCoroutines();
+					foreach (Tune x in tunes) {
+						x.ResetTune();
+						LevelManager.instance.playerUI[(int)control.player - 1].TuneReset();
+					}
+				}
+			}
+			buttonPressDelayTimer -= Time.deltaTime;
 		}
 	}
 
@@ -48,6 +72,7 @@ public class PlayerBard : MonoBehaviour {
 		yield return new WaitForSeconds(LevelManager.instance.Tempo*2f);
 		foreach (Tune x in tunes) {
 			x.ResetTune();
+			LevelManager.instance.playerUI[(int)control.player - 1].TuneReset();
 		}
 		yield return null;
 	}

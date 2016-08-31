@@ -6,7 +6,7 @@ public class Tune : MonoBehaviour {
 	public ControllerInputWrapper.Buttons[] tune;
 	public GameObject spawnObject;
 
-	private int tuneProgress;
+	public int tuneProgress;
 	private bool perfectTiming = true;
 
 	public Transform ownerTransform;

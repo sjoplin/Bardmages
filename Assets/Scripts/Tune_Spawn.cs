@@ -17,5 +17,7 @@ public class Tune_Spawn : Tune {
 		if(attach) temp.AddComponent<FollowTarget>();
 		temp.GetComponent<FollowTarget>().target = ownerTransform;
 		temp.GetComponent<FollowTarget>().offset = Vector3.zero;
+		temp.GetComponent<Spawnable>().Crit(crit);
+		temp.GetComponent<Spawnable>().Owner(ownerTransform.GetComponent<PlayerControl>().player);
 	}
 }

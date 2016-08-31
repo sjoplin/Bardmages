@@ -49,17 +49,17 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_LEFTRIGHT;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_LEFTRIGHT;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_LEFTRIGHT;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_LEFTRIGHT;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.DPAD_LEFTRIGHT;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.DPAD_LEFTRIGHT;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.DPAD_LEFTRIGHT;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.DPAD_LEFTRIGHT;
 					}
 					break;
 				}
@@ -74,17 +74,17 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_UPDOWNLEFTRIGHT;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_UPDOWNLEFTRIGHT;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_UPDOWNLEFTRIGHT;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_UPDOWNLEFTRIGHT;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.JOYLEFT;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.JOYLEFT;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.JOYLEFT;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.JOYLEFT;
 					}
 					break;
 				}
@@ -103,23 +103,23 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_A;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_A;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_A;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_A;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.XBOX_A;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.XBOX_A;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.XBOX_A;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.XBOX_A;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.PS4_A;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.PS4_A;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.PS4_A;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.PS4_A;
 					}
 					break;
 				}
@@ -128,23 +128,23 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_B;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_B;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_B;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_B;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.XBOX_B;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.XBOX_B;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.XBOX_B;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.XBOX_B;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.PS4_B;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.PS4_B;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.PS4_B;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.PS4_B;
 					}
 					break;
 				}
@@ -153,17 +153,17 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_L_JOY_CLICK;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_L_JOY_CLICK;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_L_JOY_CLICK;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_L_JOY_CLICK;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.L_JOY_CLICK;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.L_JOY_CLICK;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.L_JOY_CLICK;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.L_JOY_CLICK;
 					}
 					break;
 				}
@@ -172,17 +172,17 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_RB;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_RB;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_RB;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_RB;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.RB;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.RB;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.RB;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.RB;
 					}
 					break;
 				}
@@ -191,17 +191,17 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_LB;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_LB;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_LB;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_LB;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.LB;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.LB;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.LB;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.LB;
 					}
 					break;
 				}
@@ -210,17 +210,17 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_R_JOY_CLICK;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_R_JOY_CLICK;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_R_JOY_CLICK;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_R_JOY_CLICK;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.R_JOY_CLICK;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.R_JOY_CLICK;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.R_JOY_CLICK;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.R_JOY_CLICK;
 					}
 					break;
 				}
@@ -229,23 +229,23 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_START;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_START;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_START;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_START;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.XBOX_START;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.XBOX_START;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.XBOX_START;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.XBOX_START;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.PS4_START;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.PS4_START;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.PS4_START;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.PS4_START;
 					}
 					break;
 				}
@@ -254,23 +254,23 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_X;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_X;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_X;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_X;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.XBOX_X;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.XBOX_X;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.XBOX_X;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.XBOX_X;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.PS4_X;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.PS4_X;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.PS4_X;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.PS4_X;
 					}
 					break;
 				}
@@ -279,23 +279,23 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_Y;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_Y;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_Y;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_Y;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.XBOX_Y;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.XBOX_Y;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.XBOX_Y;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.XBOX_Y;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.PS4_Y;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.PS4_Y;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.PS4_Y;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.PS4_Y;
 					}
 					break;
 				}
@@ -304,23 +304,23 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_BACK;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_BACK;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_BACK;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_BACK;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.XBOX_BACK;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.XBOX_BACK;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.XBOX_BACK;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.XBOX_BACK;
 					}
 					break;
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.PS4_BACK;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.PS4_BACK;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.PS4_BACK;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.PS4_BACK;
 					}
 					break;
 				}
@@ -333,17 +333,17 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_RT;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_RT;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_RT;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_RT;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.RT;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.RT;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.RT;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.RT;
 					}
 					break;
 				}
@@ -352,17 +352,17 @@ public class AutoKeyUI : MonoBehaviour {
 				switch(ControllerManager.instance.PlayerControlType(id)) {
 				case ControllerManager.ControlType.Keyboard:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.KEY_LT;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_LT;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_LT;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_LT;
 					}
 					break;
 				case ControllerManager.ControlType.Xbox:
 				case ControllerManager.ControlType.PS4:
 					if(uiImage) {
-						GetComponent<Image>().sprite = InputTester.instance.LT;
+						GetComponent<Image>().sprite = LevelControllerManager.instance.LT;
 					} else {
-						GetComponent<SpriteRenderer>().sprite = InputTester.instance.LT;
+						GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.LT;
 					}
 					break;
 				}
@@ -373,17 +373,17 @@ public class AutoKeyUI : MonoBehaviour {
 			switch(ControllerManager.instance.PlayerControlType(id)) {
 			case ControllerManager.ControlType.Keyboard:
 				if(uiImage) {
-					GetComponent<Image>().sprite = InputTester.instance.KEY_UPDOWNLEFTRIGHT;
+					GetComponent<Image>().sprite = LevelControllerManager.instance.KEY_UPDOWNLEFTRIGHT;
 				} else {
-					GetComponent<SpriteRenderer>().sprite = InputTester.instance.KEY_UPDOWNLEFTRIGHT;
+					GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.KEY_UPDOWNLEFTRIGHT;
 				}
 				break;
 			case ControllerManager.ControlType.PS4:
 			case ControllerManager.ControlType.Xbox:
 				if(uiImage) {
-					GetComponent<Image>().sprite = InputTester.instance.DPAD_LEFTRIGHTUPDOWN;
+					GetComponent<Image>().sprite = LevelControllerManager.instance.DPAD_LEFTRIGHTUPDOWN;
 				} else {
-					GetComponent<SpriteRenderer>().sprite = InputTester.instance.DPAD_LEFTRIGHTUPDOWN;
+					GetComponent<SpriteRenderer>().sprite = LevelControllerManager.instance.DPAD_LEFTRIGHTUPDOWN;
 				}
 				break;
 			}

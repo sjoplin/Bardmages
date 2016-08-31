@@ -9,6 +9,8 @@ public class PlayerControl : MonoBehaviour {
 	private Vector2 move;
 	private CharacterController charControl;
 
+	private Vector2 knockback;
+
 	// Use this for initialization
 	void Start () {
 		charControl = GetComponent<CharacterController>();
@@ -36,5 +38,9 @@ public class PlayerControl : MonoBehaviour {
 				transform.eulerAngles = new Vector3(transform.eulerAngles.x, targetRotation*dir, transform.eulerAngles.z);
 			}
 		}
+	}
+
+	public void Knockback(Vector2 direction) {
+		move += direction;
 	}
 }

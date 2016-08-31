@@ -7,9 +7,15 @@ public class CameraMovement : MonoBehaviour {
 
 	private Vector3 offset;
 
+	private Vector3 lookPosition;
+
+	private float initialFOV;
+
 	// Use this for initialization
 	void Start () {
 		offset = transform.position;
+		initialFOV = GetComponent<Camera>().fieldOfView;
+		lookPosition = Vector3.zero;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +28,12 @@ public class CameraMovement : MonoBehaviour {
 
 		averagePosition /= targets.Length;
 
-		transform.position = Vector3.MoveTowards(transform.position,averagePosition + offset, Time.deltaTime*Vector3.Distance(transform.position,averagePosition + offset));
+		GetComponent<Camera>().fieldOfView = LevelManager.instance.BeatValue(0f) + initialFOV;
+		transform.GetChild(0).GetComponent<Camera>().fieldOfView = LevelManager.instance.BeatValue(0f) + initialFOV;
+
+		transform.localPosition = Vector3.MoveTowards(transform.localPosition,averagePosition + offset, Time.deltaTime*Vector3.Distance(transform.localPosition,averagePosition + offset)/2f);
+		lookPosition = Vector3.MoveTowards(lookPosition,averagePosition,Time.deltaTime*Vector3.Distance(lookPosition,averagePosition));
+		transform.LookAt(lookPosition);
+
 	}
 }
