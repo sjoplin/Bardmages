@@ -10,6 +10,8 @@ public class PlayerBard : MonoBehaviour {
 	public float buttonPressDelay = 0.1f;
 	private float buttonPressDelayTimer;
 
+	public float volumeOverride;
+
 	private PlayerControl control;
 
 	void Start() {
@@ -25,20 +27,22 @@ public class PlayerBard : MonoBehaviour {
 		}
 
 		tunes = tempTunes;
+
+		if(volumeOverride != 0) GetComponent<AudioSource>().volume = volumeOverride;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(buttonPressDelayTimer < 0f) {
+			bool soundPlayed = false; //prevents two sounds from being played the same frame
 			foreach(Tune t in tunes) {
-				bool soundPlayed = false; //prevents two sounds from being played the same frame
 				if(ControllerManager.instance.GetButtonDown(t.NextButton(),control.player)) {
-
 					buttonPressDelayTimer = buttonPressDelay;
 
 					if(!soundPlayed) {
 						GetComponent<AudioSource>().pitch = LevelManager.instance.buttonPitchMap[t.NextButton()];
-						GetComponent<AudioSource>().PlayOneShot(instrumentSound);
+						GetComponent<AudioSource>().PlayOneShot(instrumentSound, volumeOverride);
+						soundPlayed = true;
 					}
 
 					LevelManager.instance.playerUI[(int)control.player - 1].TuneProgressed(t);

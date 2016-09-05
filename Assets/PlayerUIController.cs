@@ -10,10 +10,14 @@ public class PlayerUIController : MonoBehaviour {
 
 	private Tune[] tunes;
 	private Image[] tune1Keys, tune2Keys, tune3Keys;
+	private Image healthBar;
+	private Text deathCounter;
 	private RectTransform[] redFill;
 	private float redFillInitialLength;
 
 	private RectTransform circle;
+
+	private int deaths = 0;
 
 	public void SetupUI () {
 		tunes = LevelManager.instance.playerDict[player].GetComponent<PlayerBard>().tunes;
@@ -60,6 +64,10 @@ public class PlayerUIController : MonoBehaviour {
 			tune3Keys[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(rightSideUI ? 30 + 40*i : -(30 + 40*i),0f);
 			tune3Keys[i].color = new Color(1,1,1,1-((float)i/(float)tune3Keys.Length));
 		}
+
+		healthBar = transform.FindChild("ColorCircle").FindChild("HealthBar").GetComponent<Image>();
+
+		deathCounter = transform.FindChild("Deaths").GetComponent<Text>();
 	}
 
 	void Update() {
@@ -138,6 +146,12 @@ public class PlayerUIController : MonoBehaviour {
 		}
 			
 		yield return null;
+	}
+
+	public void UpdateHealth(float amount, bool died) {
+		healthBar.fillAmount = amount;
+		deaths++;
+		if(died) deathCounter.text = deaths.ToString();
 	}
 
 

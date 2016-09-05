@@ -31,20 +31,14 @@ public class Tune : MonoBehaviour {
 	/// <returns><c>true</c>, if tune was finished, <c>false</c> otherwise.</returns>
 	public bool IterateTune() {
 		tuneProgress++;
-		if(LevelManager.instance.PerfectTiming() == 0) {
-//			Debug.Log("PERFECT!");
-		} else if (LevelManager.instance.PerfectTiming() == -1){
-			perfectTiming = false;
-//			Debug.Log("Too Early...");
-		} else if (LevelManager.instance.PerfectTiming() == 1){
-//			Debug.Log("Too Late...");
-			perfectTiming = false;
-		} else if (LevelManager.instance.PerfectTiming() == 2){
-//			Debug.Log("Eh?");
+
+		if(LevelManager.instance.PerfectTiming() < 0.75f) {
 			perfectTiming = false;
 		}
+
 		if(tuneProgress == tune.Length) {
 			TuneComplete(perfectTiming);
+			perfectTiming = true;
 			return true;
 		}
 		return false;

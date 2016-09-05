@@ -31,12 +31,12 @@ public class LevelControllerManager : MonoBehaviour {
     }
 
 	void Update() {
-		if(cm.NumPlayers < 2) {
+		if(cm.NumPlayers < 4) {
 			if(cm.AddPlayer(ControllerInputWrapper.Buttons.Start)) {
 				for(int i = 0; i < players.Length; i++) {
 					if(players[i].player == (PlayerID)cm.NumPlayers) {
 						LevelManager.instance.playerDict.Add((PlayerID)cm.NumPlayers,players[i]);
-						LevelManager.instance.playerUI[i].SetupUI();
+						LevelManager.instance.playerUI[(int)players[i].player - 1].SetupUI();
 					}
 				}
 			}

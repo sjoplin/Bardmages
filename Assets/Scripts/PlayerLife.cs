@@ -20,13 +20,17 @@ public class PlayerLife : MonoBehaviour {
 
 	public void DealDamage(float amount) {
 		health -= amount;
+		bool died = false;
 		if(health <= 0) {
 			transform.position = Vector3.up*10f;
 			health = 1f;
+			died = true;
 		}
 
 		greenHealthBar.fillAmount = health/2f + 0.5f;
 		StartCoroutine(HealthBarCatchup());
+
+		LevelManager.instance.playerUI[((int)GetComponent<PlayerControl>().player) - 1].UpdateHealth(health, died);
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit) {

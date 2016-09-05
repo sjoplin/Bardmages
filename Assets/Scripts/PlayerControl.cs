@@ -33,7 +33,7 @@ public class PlayerControl : MonoBehaviour {
 			float targetRotation = Vector2.Angle(Vector2.left, new Vector2(-rawInput.y,rawInput.x));
 			float dir = Mathf.Sign(rawInput.x);
 			if(ControllerManager.instance.PlayerControlType(player) == ControllerManager.ControlType.Keyboard) {
-				transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetRotation*dir, Time.deltaTime*200f), transform.eulerAngles.z);
+				transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetRotation*dir, Time.deltaTime*500f), transform.eulerAngles.z);
 			} else {
 				transform.eulerAngles = new Vector3(transform.eulerAngles.x, targetRotation*dir, transform.eulerAngles.z);
 			}

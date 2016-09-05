@@ -28,8 +28,8 @@ public class CameraMovement : MonoBehaviour {
 
 		averagePosition /= targets.Length;
 
-		GetComponent<Camera>().fieldOfView = LevelManager.instance.BeatValue(0f) + initialFOV;
-		transform.GetChild(0).GetComponent<Camera>().fieldOfView = LevelManager.instance.BeatValue(0f) + initialFOV;
+		GetComponent<Camera>().fieldOfView = LevelManager.instance.BeatValue(0f)/2f + initialFOV;
+		transform.GetChild(0).GetComponent<Camera>().fieldOfView = LevelManager.instance.BeatValue(0f)/2f + initialFOV;
 
 		transform.localPosition = Vector3.MoveTowards(transform.localPosition,averagePosition + offset, Time.deltaTime*Vector3.Distance(transform.localPosition,averagePosition + offset)/2f);
 		lookPosition = Vector3.MoveTowards(lookPosition,averagePosition,Time.deltaTime*Vector3.Distance(lookPosition,averagePosition));
