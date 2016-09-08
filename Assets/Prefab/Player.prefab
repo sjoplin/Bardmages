@@ -462,7 +462,10 @@ MonoBehaviour:
   tunes:
   - {fileID: 114000011246562238, guid: e14b9db2dcbd84a7d985981971f0f71d, type: 2}
   - {fileID: 114000011396993340, guid: 716f894956e7746fc89528d8bbec500a, type: 2}
+  - {fileID: 114000013588802250, guid: fbcf9d394b8244195ab435fbcc71a12c, type: 2}
   instrumentSound: {fileID: 8300000, guid: e4cabc1c31d1041a0b5f2eca6ce9e637, type: 3}
+  buttonPressDelay: 0.1
+  volumeOverride: 0
 --- !u!143 &143000011165448310
 CharacterController:
   m_ObjectHideFlags: 1
