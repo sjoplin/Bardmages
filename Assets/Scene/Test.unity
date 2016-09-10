@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44583184, g: 0.49552953, b: 0.57434225, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3677,16 +3677,34 @@ Prefab:
         type: 2}
       propertyPath: instrumentSound
       value: 
-      objectReference: {fileID: 8300000, guid: 801625d1b61b84ff4b253556a2f649df, type: 3}
+      objectReference: {fileID: 8300000, guid: e4cabc1c31d1041a0b5f2eca6ce9e637, type: 3}
     - target: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
         type: 2}
       propertyPath: volumeOverride
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1000012993668686, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
       propertyPath: m_Name
       value: Player_1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: tunes.Array.data[3]
+      value: 
+      objectReference: {fileID: 114000011396993340, guid: 33b2e3974a0624c51a3ffc617a283f9a,
+        type: 2}
+    - target: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: tunes.Array.data[0]
+      value: 
+      objectReference: {fileID: 114000011396993340, guid: 33b2e3974a0624c51a3ffc617a283f9a,
+        type: 2}
+    - target: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: tunes.Array.data[1]
+      value: 
+      objectReference: {fileID: 114000013588802250, guid: fbcf9d394b8244195ab435fbcc71a12c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
   m_IsPrefabParent: 0
