@@ -14,10 +14,14 @@ public class Tune_Spawn : Tune {
 	{
 		base.TuneComplete (crit);
 		GameObject temp = (GameObject)GameObject.Instantiate(spawnObject, ownerTransform.position, ownerTransform.rotation);
-		if(attach) temp.AddComponent<FollowTarget>();
-		temp.GetComponent<FollowTarget>().target = ownerTransform;
-		temp.GetComponent<FollowTarget>().offset = Vector3.zero;
-		temp.GetComponent<Spawnable>().Crit(crit);
-		temp.GetComponent<Spawnable>().Owner(ownerTransform.GetComponent<PlayerControl>().player);
+		if(attach) {
+			temp.AddComponent<FollowTarget>();
+			temp.GetComponent<FollowTarget>().target = ownerTransform;
+			temp.GetComponent<FollowTarget>().offset = Vector3.zero;
+		}
+		if(temp.GetComponent<Spawnable>() != null) {
+			temp.GetComponent<Spawnable>().Crit(crit);
+			temp.GetComponent<Spawnable>().Owner(ownerTransform.GetComponent<PlayerControl>().player);
+		}
 	}
 }
