@@ -27,9 +27,7 @@ public class Mine : Attack {
             base.OnTriggerEnter(other);
 
             transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            Destroy(transform.GetChild(0).gameObject, 1f);
-            transform.GetChild(0).parent = null;
-            Destroy(this.gameObject, 0.1f);
+            Destroy(this.gameObject, .1f);
         }
     }
 }
