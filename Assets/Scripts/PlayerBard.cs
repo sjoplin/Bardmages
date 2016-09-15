@@ -4,16 +4,37 @@ using System.Collections.Generic;
 
 public class PlayerBard : MonoBehaviour {
 
+	/// <summary>
+	/// The tunes this player has equipped.
+	/// </summary>
 	public Tune[] tunes;
+
+	/// <summary>
+	/// The sound their instrument makes.
+	/// </summary>
 	public AudioClip instrumentSound;
 
+	/// <summary>
+	/// What is the minimum time that must pass before this player
+	/// is allowed to play the next key in the tune?
+	/// </summary>
 	public float buttonPressDelay = 0.1f;
 	private float buttonPressDelayTimer;
 
+	/// <summary>
+	/// Overrides the volume for this character and ensures that
+	/// the instruments are all at an even volume
+	/// </summary>
 	public float volumeOverride;
 
+	/// <summary>
+	/// The player control component that is attached to this player
+	/// </summary>
 	private PlayerControl control;
 
+	/// <summary>
+	/// What tunes is this player currently completing?
+	/// </summary>
 	private List<Tune> currentTunes;
 
 	void Start() {
