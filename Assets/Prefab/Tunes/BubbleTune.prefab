@@ -54,5 +54,7 @@ MonoBehaviour:
   tune: 000000000100000001000000
   spawnObject: {fileID: 1000013446107098, guid: 4f50feffe47de4924a5e2b8e01557502,
     type: 2}
+  tuneProgress: 0
   ownerTransform: {fileID: 0}
+  tuneName: Bubble
   attach: 1

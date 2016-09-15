@@ -30,8 +30,8 @@ public class PlayerLife : MonoBehaviour {
 		greenHealthBar.fillAmount = health/2f + 0.5f;
 		StartCoroutine(HealthBarCatchup());
 
-		if(LevelManager.instance.playerUI[((int)GetComponent<PlayerControl>().player) - 1] != null) {
-			LevelManager.instance.playerUI[((int)GetComponent<PlayerControl>().player) - 1].UpdateHealth(health, died);
+		if(LevelManager.instance.playerUI[((int)GetComponent<BaseControl>().player) - 1] != null) {
+			LevelManager.instance.playerUI[((int)GetComponent<BaseControl>().player) - 1].UpdateHealth(health, died);
 		}
 	}
 

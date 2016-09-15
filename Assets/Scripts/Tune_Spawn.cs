@@ -10,6 +10,10 @@ public class Tune_Spawn : Tune {
 	/// </summary>
 	public bool attach;
 
+    /// <summary>
+    /// What should happen when the tune completes?
+    /// </summary>
+    /// <param name="crit">Was the tune played perfectly?</param>
 	public override void TuneComplete (bool crit)
 	{
 		base.TuneComplete (crit);
@@ -21,7 +25,7 @@ public class Tune_Spawn : Tune {
 		}
 		if(temp.GetComponent<Spawnable>() != null) {
 			temp.GetComponent<Spawnable>().Crit(crit);
-			temp.GetComponent<Spawnable>().Owner(ownerTransform.GetComponent<PlayerControl>().player);
+			temp.GetComponent<Spawnable>().Owner(ownerTransform.GetComponent<BaseControl>().player);
 		}
 	}
 }

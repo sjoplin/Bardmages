@@ -56,4 +56,5 @@ MonoBehaviour:
     type: 2}
   tuneProgress: 0
   ownerTransform: {fileID: 0}
+  tuneName: Something
   attach: 0
