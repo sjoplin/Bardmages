@@ -7,18 +7,36 @@ using System.Collections.Generic;
 /// </summary>
 public abstract class BaseBard : MonoBehaviour {
 
-    public Tune[] tunes;
-    public AudioClip instrumentSound;
+	/// <summary>
+	/// The tunes this player has equipped.
+	/// </summary>
+	public Tune[] tunes;
 
-    public float buttonPressDelay = 0.01f;
-    protected float buttonPressDelayTimer;
+	/// <summary>
+	/// The sound their instrument makes.
+	/// </summary>
+	public AudioClip instrumentSound;
 
-    public float volumeOverride;
+	/// <summary>
+	/// What is the minimum time that must pass before this player
+	/// is allowed to play the next key in the tune?
+	/// </summary>
+	public float buttonPressDelay = 0.1f;
+	protected float buttonPressDelayTimer;
+
+	/// <summary>
+	/// Overrides the volume for this character and ensures that
+	/// the instruments are all at an even volume
+	/// </summary>
+	public float volumeOverride;
+
+	/// <summary>
+	/// What tunes is this player currently completing?
+	/// </summary>
+	private List<Tune> currentTunes;
 
     /// <summary> The bard's movement controls. </summary>
     protected BaseControl control;
-
-    private List<Tune> currentTunes;
 
     protected virtual void Start() {
         control = GetComponent<BaseControl>();
