@@ -28,3 +28,5 @@ sysinfo.txt
 
 ProjectSettings/ProjectSettings.asset
 ProjectSettings/ProjectVersion.txt
+
+*.DS_Store
