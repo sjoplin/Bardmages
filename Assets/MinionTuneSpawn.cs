@@ -17,10 +17,11 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 
 	// Use this for initialization
 	void Start () {
+		GetComponent<PlayerLife> ().DealDamage (0.5f);
 		if (crit) {
-			Destroy (this.gameObject, 10f);
+			Destroy (this.gameObject, 20f);
 		} else {
-			Destroy (this.gameObject, 5f);
+			Destroy (this.gameObject, 10f);
 		}
 	}
 	
