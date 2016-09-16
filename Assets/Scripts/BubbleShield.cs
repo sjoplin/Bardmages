@@ -3,8 +3,11 @@ using System.Collections;
 
 public class BubbleShield : MonoBehaviour, Spawnable {
 
+	// handels how many blocks this bubble can take
+	[HideInInspector]
 	public int numBlocks;
 
+	[HideInInspector]
 	public PlayerID owner;
 
 	void Start() {

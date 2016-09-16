@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
 /// <summary>
 /// Gets player input for generating notes and attacks.
 /// </summary>
@@ -21,4 +24,5 @@ public class PlayerBard : BaseBard {
     protected override bool GetButton(ControllerInputWrapper.Buttons button) {
         return ControllerManager.instance.GetButton(button, control.player);
     }
+
 }
