@@ -75,14 +75,14 @@ GameObject:
   - 33: {fileID: 33000011294348894}
   - 23: {fileID: 23000014217677878}
   - 114: {fileID: 114000012753768472}
-  - 114: {fileID: 114000013511017122}
   - 114: {fileID: 114000010205302572}
   - 143: {fileID: 143000012417821496}
   - 82: {fileID: 82000013976419650}
   - 114: {fileID: 114000012185424408}
   - 114: {fileID: 114000013370337980}
+  - 114: {fileID: 114000013516439358}
   m_Layer: 0
-  m_Name: MinionTest
+  m_Name: Minion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: 0
---- !u!114 &114000013511017122
+--- !u!114 &114000013516439358
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
