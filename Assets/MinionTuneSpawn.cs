@@ -17,7 +17,6 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<PlayerLife> ().DealDamage (0.5f);
 		if (crit) {
 			Destroy (this.gameObject, 20f);
 		} else {
