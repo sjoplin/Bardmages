@@ -61,7 +61,7 @@ public class Tune : MonoBehaviour {
 			perfectTiming = false;
 		}
 
-		if(tuneProgress == tune.Length) {
+		if(tuneProgress >= tune.Length) {
 			TuneComplete(perfectTiming);
 			perfectTiming = true;
 			return true;
