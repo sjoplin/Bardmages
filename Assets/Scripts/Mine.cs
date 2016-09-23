@@ -21,8 +21,8 @@ public class Mine : Attack {
     protected override void OnTriggerEnter(Collider other)
     {
         //Player won't detonate the mine
-        if (other.gameObject.GetComponent<PlayerControl>() 
-            && other.gameObject.GetComponent<PlayerControl>().player != agressor)
+		if (other.gameObject.GetComponent<BaseControl>() 
+			&& other.gameObject.GetComponent<BaseControl>().player != agressor)
         {
             base.OnTriggerEnter(other);
 
