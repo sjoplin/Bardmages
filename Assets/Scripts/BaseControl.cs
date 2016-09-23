@@ -21,7 +21,7 @@ public abstract class BaseControl : MonoBehaviour {
         move = Vector2.zero;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update () {
 
         Vector2 rawInput = GetDirectionInput();
