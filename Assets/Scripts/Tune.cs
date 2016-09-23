@@ -47,6 +47,9 @@ public class Tune : MonoBehaviour {
 	/// </summary>
 	/// <returns>The button.</returns>
 	public ControllerInputWrapper.Buttons NextButton() {
+        if (tuneProgress > tune.Length) {
+            Debug.Log(tuneProgress);
+        }
 		return tune[tuneProgress];
 	}
 
