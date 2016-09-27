@@ -18,8 +18,8 @@ public class RandomAI : AIController {
     /// Updates the AI's actions.
     /// </summary>
     protected override void UpdateAI() {
-        if (!bard.IsPlayingTune()) {
-            bard.StartTune(Random.Range(0, 3), enabledRhythms[Random.Range(0, enabledRhythms.Count)]);
+        if (!bard.isPlayingTune) {
+            bard.StartTune(Random.Range(0, 3), false, enabledRhythms[Random.Range(0, enabledRhythms.Count)]);
 
             control.currentDirection = new Vector2(-transform.position.x, -transform.position.z);
         }

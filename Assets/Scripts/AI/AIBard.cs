@@ -15,6 +15,10 @@ public class AIBard : BaseBard {
     private Tune currentTune;
     /// <summary> The progress of the bardmage through its current tune. </summary>
     private int tuneProgress;
+    /// <summary> Whether the bardmage is currently playing a tune. </summary>
+    public bool isPlayingTune {
+        get { return currentTune != null; }
+    }
 
     /// <summary> The minimum time delay between notes being played. </summary>
     private float noteDelay;
@@ -75,17 +79,12 @@ public class AIBard : BaseBard {
     /// Starts executing a tune attack.
     /// </summary>
     /// <param name="tuneIndex">The index of the tune attack.</param>
+    /// <param name="overrideCurrent">Whether to override the current action if already executing one.</param>
     /// <param name="rhythmType">The rhythm to play the tune at.</param>
-    public void StartTune(int tuneIndex, LevelManager.RhythmType rhythmType = LevelManager.RhythmType.None) {
-        currentTune = tunes[tuneIndex];
-        this.rhythmType = rhythmType;
-    }
-
-    /// <summary>
-    /// Checks if the bardmage is currently playing a tune.
-    /// </summary>
-    /// <returns>Whether the bardmage is currently playing a tune.</returns>
-    public bool IsPlayingTune() {
-        return currentTune != null;
+    public void StartTune(int tuneIndex, bool overrideCurrent = false, LevelManager.RhythmType rhythmType = LevelManager.RhythmType.None) {
+        if (overrideCurrent || !isPlayingTune) {
+            currentTune = tunes[tuneIndex];
+            this.rhythmType = rhythmType;
+        }
     }
 }
