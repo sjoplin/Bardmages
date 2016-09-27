@@ -3876,7 +3876,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 4
   speed: 10
-  isMinion: 0
   currentDirection: {x: 0, y: 0}
 --- !u!23 &578383717
 MeshRenderer:
@@ -4972,7 +4971,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 2
   speed: 10
-  isMinion: 0
   currentDirection: {x: 0, y: 0}
 --- !u!23 &801893283
 MeshRenderer:
@@ -11695,7 +11693,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 3
   speed: 10
-  isMinion: 0
   currentDirection: {x: 0, y: 0}
 --- !u!23 &1916897190
 MeshRenderer:

@@ -6540,6 +6540,11 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: instrumentSound
+      value: 
+      objectReference: {fileID: 8300000, guid: feb9fff28441e439593cd28709b6666d, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
   m_IsPrefabParent: 0
@@ -8011,6 +8016,7 @@ MonoBehaviour:
   - {fileID: 1266686750}
   - {fileID: 392539135}
   - {fileID: 1921781250}
+  nullUI: {fileID: 0}
   music: {fileID: 302904548}
   enableQuarter: 1
   enableEighth: 0
@@ -9748,6 +9754,11 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: instrumentSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 801625d1b61b84ff4b253556a2f649df, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
   m_IsPrefabParent: 0
@@ -9818,6 +9829,11 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: instrumentSound
+      value: 
+      objectReference: {fileID: 8300000, guid: cd9dc34c25ce74f928558143f6385938, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
   m_IsPrefabParent: 0

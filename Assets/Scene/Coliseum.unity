@@ -1545,7 +1545,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2725,6 +2725,7 @@ RectTransform:
   - {fileID: 1266686749}
   - {fileID: 392539134}
   - {fileID: 1921781249}
+  - {fileID: 1162615393}
   m_Father: {fileID: 643888921}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
@@ -5672,6 +5673,53 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1149971876}
+--- !u!1 &1162615392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1162615393}
+  - 114: {fileID: 1162615394}
+  m_Layer: 5
+  m_Name: NullUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1162615393
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1162615392}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 545629476}
+  m_RootOrder: 4
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1162615394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1162615392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be4ce98b7ef349d784afd85f42baa56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 0
+  rightSideUI: 0
 --- !u!1 &1172746890
 GameObject:
   m_ObjectHideFlags: 0
@@ -7110,6 +7158,7 @@ MonoBehaviour:
   - {fileID: 1266686750}
   - {fileID: 0}
   - {fileID: 0}
+  nullUI: {fileID: 0}
   music: {fileID: 302904548}
   enableQuarter: 1
   enableEighth: 0
@@ -8292,6 +8341,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82000010742449116, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
   m_IsPrefabParent: 0
@@ -8686,6 +8740,11 @@ Prefab:
     - target: {fileID: 1000012993668686, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000010742449116, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
