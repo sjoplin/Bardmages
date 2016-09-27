@@ -80,7 +80,7 @@ GameObject:
   - 82: {fileID: 82000013976419650}
   - 114: {fileID: 114000012185424408}
   - 114: {fileID: 114000013370337980}
-  - 114: {fileID: 114000013516439358}
+  - 114: {fileID: 114000012380890056}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -435,6 +435,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790c6d6651ed14386aa4537a6f1e2a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000012380890056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010805917098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e6f22f1f7134c3ba4a9b8709478291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000012753768472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -482,17 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: 0
---- !u!114 &114000013516439358
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010805917098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  copy: 0
 --- !u!143 &143000012417821496
 CharacterController:
   m_ObjectHideFlags: 1

@@ -4,6 +4,7 @@ using System.Collections;
 public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 
 	public PlayerID owner;
+	public bool copy;
 	private bool crit;
 
 	public void Crit (bool crit)
@@ -17,9 +18,13 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<PlayerLife> ().DealDamage (0.5f);
+		//GetComponent<PlayerLife> () (0.5f);
 		if (crit) {
-			Destroy (this.gameObject, 20f);
+			Destroy (this.gameObject, 10f);
+			if (!copy) {
+				GameObject temp = (GameObject)GameObject.Instantiate (this.gameObject, transform.position + Vector3.right, transform.rotation);
+				temp.GetComponent<MinionTuneSpawn> ().copy = true;
+			}	
 		} else {
 			Destroy (this.gameObject, 10f);
 		}
