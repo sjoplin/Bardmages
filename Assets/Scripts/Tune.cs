@@ -47,6 +47,9 @@ public class Tune : MonoBehaviour {
 	/// </summary>
 	/// <returns>The button.</returns>
 	public ControllerInputWrapper.Buttons NextButton() {
+        if (tuneProgress > tune.Length) {
+            Debug.Log(tuneProgress);
+        }
 		return tune[tuneProgress];
 	}
 
@@ -61,7 +64,7 @@ public class Tune : MonoBehaviour {
 			perfectTiming = false;
 		}
 
-		if(tuneProgress == tune.Length) {
+		if(tuneProgress >= tune.Length) {
 			TuneComplete(perfectTiming);
 			perfectTiming = true;
 			return true;
