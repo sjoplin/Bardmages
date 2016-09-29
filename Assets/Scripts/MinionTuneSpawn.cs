@@ -18,7 +18,10 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 
 	// Use this for initialization
 	void Start () {
+<<<<<<< HEAD:Assets/Scripts/MinionTuneSpawn.cs
 		//GetComponent<PlayerLife> () (0.5f);
+=======
+>>>>>>> kkiniaes/master:Assets/MinionTuneSpawn.cs
 		if (crit) {
 			Destroy (this.gameObject, 10f);
 			if (!copy) {

@@ -36,6 +36,7 @@ public abstract class AIController : MonoBehaviour {
     /// </summary>
     private void Update() {
         bard.UpdateTune();
+        control.UpdateControl();
         UpdateAI();
     }
 
