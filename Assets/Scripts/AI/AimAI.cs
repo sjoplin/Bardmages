@@ -25,6 +25,7 @@ namespace Bardmages.AI {
                 // Prevent pile-up at the spawn point by moving forward.
                 control.currentDirection = VectorUtil.GetDirection2D(transform.forward);
             } else {
+                // Check if the current move has distance constraints.
                 Vector3 targetPosition = GetClosestPlayer().transform.position;
                 float moveDistance = 0;
                 if (bard.isPlayingTune) {
