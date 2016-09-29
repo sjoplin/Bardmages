@@ -138,10 +138,10 @@ GameObject:
   - 114: {fileID: 114000010205302572}
   - 143: {fileID: 143000012417821496}
   - 82: {fileID: 82000013976419650}
-  - 114: {fileID: 114000012185424408}
   - 114: {fileID: 114000013370337980}
   - 114: {fileID: 114000013516439358}
   - 195: {fileID: 195000011577621276}
+  - 114: {fileID: 114000011066181362}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -1313,7 +1313,6 @@ MonoBehaviour:
   instrumentSound: {fileID: 8300000, guid: cd9dc34c25ce74f928558143f6385938, type: 3}
   buttonPressDelay: 0.1
   volumeOverride: 0.25
-  timingVariance: 0
 --- !u!114 &114000010280693802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1407,7 +1406,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 3
---- !u!114 &114000012185424408
+--- !u!114 &114000011066181362
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1415,7 +1414,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010805917098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 790c6d6651ed14386aa4537a6f1e2a24, type: 3}
+  m_Script: {fileID: 11500000, guid: bd9e61c4818dd4ace809875ad9543062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114000012753768472
