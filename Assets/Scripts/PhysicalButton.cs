@@ -10,12 +10,12 @@ public class PhysicalButton : MonoBehaviour {
 	public UnityEvent onPress;
 
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 		state = ButtonState.Normal;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
 		switch(state) {
 
 		case ButtonState.Normal:
@@ -45,6 +45,7 @@ public class PhysicalButton : MonoBehaviour {
 
 	void OnMouseDown() {
 		onPress.Invoke();
+		HandlePressed();
 		state = ButtonState.Pressed;
 	}
 }
