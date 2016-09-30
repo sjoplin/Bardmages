@@ -16,7 +16,7 @@ public abstract class BaseControl : MonoBehaviour {
     /// <summary>
     /// Use this for initialization.
     /// </summary>
-    void Start () {
+    protected virtual void Start () {
         charControl = GetComponent<CharacterController>();
         move = Vector2.zero;
     }
