@@ -11,17 +11,16 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 	{
 		this.crit = crit;
 	}
+
 	public void Owner (PlayerID owner)
 	{
 		this.owner = owner;
 	}
+		
 
 	// Use this for initialization
 	void Start () {
-<<<<<<< HEAD:Assets/Scripts/MinionTuneSpawn.cs
-		//GetComponent<PlayerLife> () (0.5f);
-=======
->>>>>>> kkiniaes/master:Assets/MinionTuneSpawn.cs
+
 		if (crit) {
 			Destroy (this.gameObject, 10f);
 			if (!copy) {
@@ -34,7 +33,10 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 	}
 	
 	// Update is called once per frame
+	//TODO add points to parent when minion kills
 	void Update () {
-	
+		if (LevelManager.instance.playerDict [owner].GetComponent<PlayerLife> ().Health <= 0) {
+			Destroy (this.gameObject);
+		}
 	}
 }

@@ -3845,8 +3845,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tunes:
   - {fileID: 114000011246562238, guid: e14b9db2dcbd84a7d985981971f0f71d, type: 2}
-  - {fileID: 114000011396993340, guid: d9ba94cbaae67480ba98808e11e597d6, type: 2}
-  - {fileID: 114000011396993340, guid: 1f1150fece5b9495180a0b477ceea51d, type: 2}
+  - {fileID: 114000011396993340, guid: 25da98d4970c849e1b5c668572a12180, type: 2}
+  - {fileID: 114000013588802250, guid: fbcf9d394b8244195ab435fbcc71a12c, type: 2}
   instrumentSound: {fileID: 8300000, guid: e4cabc1c31d1041a0b5f2eca6ce9e637, type: 3}
   buttonPressDelay: 0.1
   volumeOverride: 0.2
@@ -3876,7 +3876,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 4
   speed: 10
-  isMinion: 0
   currentDirection: {x: 0, y: 0}
 --- !u!23 &578383717
 MeshRenderer:
@@ -4972,7 +4971,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 2
   speed: 10
-  isMinion: 0
   currentDirection: {x: 0, y: 0}
 --- !u!23 &801893283
 MeshRenderer:
@@ -5018,7 +5016,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 801893277}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 790c6d6651ed14386aa4537a6f1e2a24, type: 3}
   m_Name: 
@@ -9933,6 +9931,48 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1561318210}
+--- !u!1001 &1621897275
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1624173228
 GameObject:
   m_ObjectHideFlags: 0
@@ -11695,7 +11735,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 3
   speed: 10
-  isMinion: 0
   currentDirection: {x: 0, y: 0}
 --- !u!23 &1916897190
 MeshRenderer:
@@ -11741,7 +11780,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1916897184}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 790c6d6651ed14386aa4537a6f1e2a24, type: 3}
   m_Name: 
