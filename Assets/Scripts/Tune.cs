@@ -36,6 +36,15 @@ public class Tune : MonoBehaviour {
     /// <summary> The percentage threshold for a note being considered on the beat. </summary>
     public const float PERFECT_THRESHOLD = 0.75f;
 
+    /// <summary> The maximum distance away from the enemy for the tune to be able to succeed. Used for AI. </summary>
+    [SerializeField]
+    [Tooltip("The maximum distance away from the enemy for the tune to be able to succeed. Used for AI.")]
+    public float maxDistance = Mathf.Infinity;
+    /// <summary> The minimum distance away from the enemy for the tune to be able to succeed. Used for AI. </summary>
+    [SerializeField]
+    [Tooltip("The minimum distance away from the enemy for the tune to be able to succeed. Used for AI.")]
+    public float minDistance = 0;
+
 	/// <summary>
 	/// What should happen when the tune completes?
 	/// </summary>
@@ -47,8 +56,8 @@ public class Tune : MonoBehaviour {
 	/// </summary>
 	/// <returns>The button.</returns>
 	public ControllerInputWrapper.Buttons NextButton() {
-        if (tuneProgress > tune.Length) {
-            Debug.Log(tuneProgress);
+        if (tuneProgress >= tune.Length) {
+            tuneProgress = tune.Length - 1;
         }
 		return tune[tuneProgress];
 	}

@@ -13,9 +13,9 @@ public class KingofHill : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (king.GetComponent<PlayerLife>().Health <= 0) {
-			this.GetComponentInChildren<MeshRenderer> ().enabled = true;
 			transform.parent = null;
 			king = null;
+			this.GetComponentInChildren<MeshRenderer> ().enabled = true;
 		}
 	}
 
@@ -23,7 +23,6 @@ public class KingofHill : MonoBehaviour {
 		if (other.GetComponent<PlayerControl>() != null && king == null) {
 			king = other.GetComponent<PlayerBard> ();
 			this.GetComponentInChildren<MeshRenderer> ().enabled = false;
-			//transform.parent = other.gameObject.transform;
 			transform.parent = king.transform;
 		}
 	}
