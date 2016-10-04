@@ -18,7 +18,6 @@ public class LevelControllerManager : MonoBehaviour {
     {
         if (instance == null)
         {
-			DontDestroyOnLoad(this);
             instance = this;
             cm = new ControllerManager();
         }
@@ -35,11 +34,22 @@ public class LevelControllerManager : MonoBehaviour {
 			if(cm.AddPlayer(ControllerInputWrapper.Buttons.Start)) {
 				for(int i = 0; i < players.Length; i++) {
 					if(players[i].player == (PlayerID)cm.NumPlayers) {
-						LevelManager.instance.playerDict.Add((PlayerID)cm.NumPlayers,players[i]);
-						LevelManager.instance.playerUI[(int)players[i].player - 1].SetupUI();
+                        AddPlayer((PlayerID)cm.NumPlayers,players[i]);
 					}
 				}
 			}
 		}
 	}
+
+    /// <summary>
+    /// Registers a player in the game.
+    /// </summary>
+    /// <param name="playerID">The ID of the player to register.</param>
+    /// <param name="control">The control component of the player to register.</param>
+    public void AddPlayer(PlayerID playerID, BaseControl control) {
+        if (playerID != PlayerID.None) {
+            LevelManager.instance.playerDict.Add(playerID,control);
+            LevelManager.instance.GetPlayerUI(control.player).SetupUI();
+        }
+    }
 }
