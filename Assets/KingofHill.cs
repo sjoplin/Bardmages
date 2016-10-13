@@ -7,16 +7,18 @@ public class KingofHill : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (king.GetComponent<PlayerLife>().Health <= 0) {
+		//king.GetComponent<PlayerLife> ().DiedLastFrame
+		if (king.GetComponent<PlayerLife> ().Health <= 0) {
 			transform.parent = null;
-			king = null;
 			this.GetComponentInChildren<MeshRenderer> ().enabled = true;
-		}
+			//king.GetComponent<PlayerLife> ().DiedLastFrame = false;
+			king = null;
+		} 
 	}
 
 	void OnTriggerEnter(Collider other) {
