@@ -49,7 +49,7 @@ public class Attack : MonoBehaviour, Spawnable {
 		PlayerID player = PlayerID.None;
 		if (other.transform.root.GetComponent<BaseControl> ()) {
 			player = other.transform.root.GetComponent<BaseControl> ().player;
-		}
+		} else return;
 		if(impacted) return;
 		if (player != agressor || player != PlayerID.None) {
 			other.transform.root.GetComponent<PlayerLife>().DealDamage(damage);

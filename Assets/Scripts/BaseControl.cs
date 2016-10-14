@@ -45,6 +45,10 @@ public abstract class BaseControl : MonoBehaviour {
         move += direction;
     }
 
+	public void ClearMomentum() {
+		move = Vector2.zero;
+	}
+
     /// <summary>
     /// Gets the directional input to move the bardmage with.
     /// </summary>

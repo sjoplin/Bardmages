@@ -4301,7 +4301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 0
+  respawnTime: 4
 --- !u!114 &578383716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4986,6 +4986,11 @@ Prefab:
         type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012843195542, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: respawnTime
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
@@ -5973,7 +5978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 0
+  respawnTime: 4
 --- !u!114 &801893282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5994,7 +5999,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 801893277}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd9e61c4818dd4ace809875ad9543062, type: 3}
   m_Name: 
@@ -9937,7 +9942,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!1 &1266686748
 GameObject:
   m_ObjectHideFlags: 0
@@ -14872,7 +14877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 0
+  respawnTime: 4
 --- !u!114 &1916897189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14913,7 +14918,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1916897184}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd9e61c4818dd4ace809875ad9543062, type: 3}
   m_Name: 

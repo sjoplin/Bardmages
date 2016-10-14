@@ -43,6 +43,7 @@ public class PlayerLife : MonoBehaviour {
 		health -= amount;
 		bool died = false;
 		if(health <= 0) {
+			GetComponent<BaseControl>().ClearMomentum();
 			EffectManager.instance.SpawnDeathEffect(transform.position);
 			respawnTimer = respawnTime;
 			GetComponent<BaseControl>().enabled = false;
