@@ -12,11 +12,10 @@ public class KingofHill : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//king.GetComponent<PlayerLife> ().DiedLastFrame
 		if (king != null && !king.GetComponent<PlayerLife>().Alive) {
 			transform.parent = null;
 			this.GetComponentInChildren<MeshRenderer> ().enabled = true;
-			//king.GetComponent<PlayerLife> ().DiedLastFrame = false;
+			transform.position = king.GetComponent<PlayerLife>().PositionOfDeath;
 			king = null;
 		} 
 	}

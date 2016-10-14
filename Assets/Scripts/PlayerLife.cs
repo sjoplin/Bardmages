@@ -10,6 +10,8 @@ public class PlayerLife : MonoBehaviour {
 	/// </summary>
 	protected float health;
 
+	protected Vector3 positionOfDeath;
+
 	/// <summary>
 	/// The ui elements to be animated when the player is damaged
 	/// </summary>
@@ -47,6 +49,7 @@ public class PlayerLife : MonoBehaviour {
 			EffectManager.instance.SpawnDeathEffect(transform.position);
 			respawnTimer = respawnTime;
 			GetComponent<BaseControl>().enabled = false;
+			positionOfDeath = transform.position;
 			transform.position = Vector3.up*100f;
 			died = true;
 		}
@@ -111,6 +114,12 @@ public class PlayerLife : MonoBehaviour {
 	public float Health {
 		get {
 			return health;
+		}
+	}
+
+	public Vector3 PositionOfDeath {
+		get {
+			return positionOfDeath;
 		}
 	}
 
