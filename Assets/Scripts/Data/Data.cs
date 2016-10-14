@@ -21,7 +21,7 @@ namespace Assets.Scripts.Data
         private AudioClip[] defaultClips;
 
         /// <summary> internal reference fo ensuring singleton. </summary>
-        private static Data instance;
+        public static Data instance;
 
         /// <summary> The tunes for each bard. </summary>
         private Tune[][] tunes;
@@ -37,23 +37,30 @@ namespace Assets.Scripts.Data
         {
             if (instance == null)
             {
-                level = "Test";
-                instance = this;
-                tunes = new Tune[4][];
-                for (int i = 0; i < tunes.Length; i++)
-                {
-                    tunes[i] = new Tune[3];
-                    for (int j = 0; j < tunes[i].Length; j++)
-                        tunes[i][j] = defaultTunes[j];
-                }
-                clips = new AudioClip[4];
-                for (int i = 0; i < clips.Length; i++)
-                    clips[i] = defaultClips[i];
-                instruments = new GameObject[4];
                 DontDestroyOnLoad(this.gameObject);
+                instance = this;
             }
-            else if (instance != this)
+            else if (this != instance)
+            {
                 Destroy(this.gameObject);
+                return;
+            }
+
+            level = "Test";
+            instance = this;
+            tunes = new Tune[4][];
+            for (int i = 0; i < tunes.Length; i++)
+            {
+                tunes[i] = new Tune[3];
+                for (int j = 0; j < tunes[i].Length; j++)
+                    tunes[i][j] = defaultTunes[j];
+            }
+            clips = new AudioClip[4];
+            for (int i = 0; i < clips.Length; i++)
+                clips[i] = defaultClips[i];
+            instruments = new GameObject[4];
+            DontDestroyOnLoad(this.gameObject);
+            
         }
 
         // TEST CODE REMOVE

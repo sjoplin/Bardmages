@@ -28,7 +28,7 @@ namespace Assets.Scripts.Data
 
         void Start()
         {
-            data = FindObjectOfType<Data>();
+            data = Data.instance;
             op = SceneManager.LoadSceneAsync(data.level);
             op.allowSceneActivation = false;
             time = waitTime;
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Data
         void Update()
         {
             float t = op.progress;
-			loadBar.transform.position = new Vector3(Mathf.MoveTowards(loadBar.transform.position.x, xOrig - 10 * (1 - t), Time.deltaTime*(t*10f+2f)), loadBar.transform.position.y, loadBar.transform.position.z);
+			loadBar.transform.position = new Vector3(Mathf.MoveTowards(loadBar.transform.position.x, xOrig - (1 - t), Time.deltaTime*(t*10f+2f)), loadBar.transform.position.y, loadBar.transform.position.z);
 			loadBar.transform.localScale = new Vector3(Mathf.MoveTowards(loadBar.transform.localScale.x, xMax * t, Time.deltaTime*(t*10f+2f)), loadBar.transform.localScale.y, loadBar.transform.localScale.z);
             for (int i = 0; i < data.clips.Length; i++)
             {
