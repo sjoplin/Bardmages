@@ -10,7 +10,7 @@ public class LandSlideSpawn : MonoBehaviour, Spawnable {
 	public void Crit (bool crit) {
 		this.crit = crit;
 		if (crit) {
-			transform.localScale = new Vector3 (1.4f, 1f, 1f);
+			transform.localScale = new Vector3 (1.2f, 1f, 1f);
 		}
 	}
 	public void Owner (PlayerID owner) {
@@ -19,12 +19,12 @@ public class LandSlideSpawn : MonoBehaviour, Spawnable {
 
 	// Use this for initialization
 	void Start () {
-		Destroy (transform.root.gameObject, .8f);
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.GetComponent<PlayerControl> () != null) {
 			if (other.GetComponent<PlayerControl> ().player != this.owner) {
+				other.GetComponent<PlayerControl> ().Knockback (transform.forward);
 				if (crit) {
 					other.GetComponent<PlayerLife> ().DealDamage (.4f);
 				} else {
@@ -32,9 +32,14 @@ public class LandSlideSpawn : MonoBehaviour, Spawnable {
 				}
 			}
 		}
-
 	}
+		
 	void Update() {
-		transform.Translate (0, 0, 50f * Time.deltaTime, Space.Self);
+		Vector3 dwn = transform.TransformDirection(Vector3.down);
+		transform.Translate (0, 0, 20f * Time.deltaTime, Space.Self);
+		if (!Physics.Raycast (transform.position, dwn, 2f)) {
+			Destroy (this.gameObject);
+		}
 	}
+
 }
