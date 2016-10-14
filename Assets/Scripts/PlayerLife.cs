@@ -8,7 +8,7 @@ public class PlayerLife : MonoBehaviour {
 	/// This players' health.
 	/// This is normalized (0-1);
 	/// </summary>
-	private float health;
+	protected float health;
 
 	/// <summary>
 	/// The ui elements to be animated when the player is damaged
@@ -29,7 +29,7 @@ public class PlayerLife : MonoBehaviour {
 	/// <summary>
 	/// Sets the player health to 1 and finds the appropriate UI elements
 	/// </summary>
-	void Start() {
+	protected virtual void Start() {
 		health = 1f;
 		greenHealthBar = transform.FindChild("Canvas").FindChild("HealthBarRed").FindChild("HealthBarGreen").GetComponent<Image>();
 		freshRedHealthBar = transform.FindChild("Canvas").FindChild("HealthBarRed").FindChild("HealthBarFreshRed").GetComponent<Image>();
@@ -105,6 +105,12 @@ public class PlayerLife : MonoBehaviour {
 		}
 
 		yield return null;
+	}
+
+	public float Health {
+		get {
+			return health;
+		}
 	}
 
 }

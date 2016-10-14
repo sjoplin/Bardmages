@@ -56,7 +56,7 @@ MonoBehaviour:
     type: 2}
   tuneProgress: 0
   ownerTransform: {fileID: 0}
-  tuneName: Landslide
+  tuneName: Bubble
   maxDistance: Infinity
   minDistance: 0
   attach: 0
