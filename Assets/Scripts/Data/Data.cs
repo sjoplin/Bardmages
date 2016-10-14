@@ -10,13 +10,23 @@ namespace Assets.Scripts.Data
         [Tooltip("Reference to the prefabs for each character.  4 expected")]
         private BaseBard[] characters;
 
+        /// <summary> Default tunes for testing. </summary>
+        [SerializeField]
+        [Tooltip("Default tunes for testing. 3 expected")]
+        private Tune[] defaultTunes;
+
+        /// <summary> Default sounds for testing. </summary>
+        [SerializeField]
+        [Tooltip("Default sounds for testing.  4 expected")]
+        private AudioClip[] defaultClips;
+
         /// <summary> internal reference fo ensuring singleton. </summary>
         private static Data instance;
 
         /// <summary> The tunes for each bard. </summary>
         private Tune[][] tunes;
         /// <summary> The sound each bard makes. </summary>
-        private AudioClip[] clips;
+        internal AudioClip[] clips;
         /// <summary> The instrument model to spawn for each bard. </summary>
         private GameObject[] instruments;
 
@@ -27,11 +37,18 @@ namespace Assets.Scripts.Data
         {
             if (instance == null)
             {
+                level = "Test";
                 instance = this;
                 tunes = new Tune[4][];
                 for (int i = 0; i < tunes.Length; i++)
+                {
                     tunes[i] = new Tune[3];
+                    for (int j = 0; j < tunes[i].Length; j++)
+                        tunes[i][j] = defaultTunes[j];
+                }
                 clips = new AudioClip[4];
+                for (int i = 0; i < clips.Length; i++)
+                    clips[i] = defaultClips[i];
                 instruments = new GameObject[4];
                 DontDestroyOnLoad(this.gameObject);
             }
