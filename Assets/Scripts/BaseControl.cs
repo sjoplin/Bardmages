@@ -27,7 +27,7 @@ public abstract class BaseControl : MonoBehaviour {
         Vector2 rawInput = GetDirectionInput();
         move = Vector2.MoveTowards(move, rawInput, Time.deltaTime);
 
-        if(move.magnitude > 1) move.Normalize();
+//        if(move.magnitude > 1) move.Normalize();
 
         if(charControl) charControl.Move(new Vector3(move.x,-1f,move.y) * Time.deltaTime * speed);
 
