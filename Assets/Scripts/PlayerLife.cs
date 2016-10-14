@@ -16,6 +16,17 @@ public class PlayerLife : MonoBehaviour {
 	private Image greenHealthBar, freshRedHealthBar;
 
 	/// <summary>
+	/// Handles offsetting the respawn, if the player is allowed to respawn
+	/// </summary>
+	private float respawnTimer;
+
+	/// <summary>
+	/// How much time should the player remain dead?
+	/// Use -1 for game modes like elimination where players don't respawn automatically
+	/// </summary>
+	public float respawnTime;
+
+	/// <summary>
 	/// Sets the player health to 1 and finds the appropriate UI elements
 	/// </summary>
 	void Start() {
@@ -32,8 +43,10 @@ public class PlayerLife : MonoBehaviour {
 		health -= amount;
 		bool died = false;
 		if(health <= 0) {
-			transform.position = Vector3.up*10f;
-			health = 1f;
+			EffectManager.instance.SpawnDeathEffect(transform.position);
+			respawnTimer = respawnTime;
+			GetComponent<BaseControl>().enabled = false;
+			transform.position = Vector3.up*100f;
 			died = true;
 		}
         if(health > 1) {
@@ -49,6 +62,17 @@ public class PlayerLife : MonoBehaviour {
 		}
 	}
 
+	void Update() {
+		if(health <= 0f && respawnTimer > 0f) {
+			respawnTimer -= Time.deltaTime;
+			if(respawnTimer <= 0f) {
+				transform.position = Vector3.up*10f;
+				health = 1f;
+				GetComponent<BaseControl>().enabled = true;
+			}
+		}
+	}
+
 	/// <summary>
 	/// Raises the controller collider hit event.
 	/// </summary>
@@ -56,6 +80,12 @@ public class PlayerLife : MonoBehaviour {
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 		if(hit.collider.gameObject.tag.Equals("Kill")) {
 			DealDamage(1f);
+		}
+	}
+
+	public bool Alive {
+		get {
+			return health > 0;
 		}
 	}
 
