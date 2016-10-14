@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour {
 
 	public static LevelManager instance;
 
+	public bool inMainMenu;
+
     /// <summary> The player UI controllers in the scene. </summary>
     [SerializeField]
     [Tooltip("The player UI controllers in the scene.")]

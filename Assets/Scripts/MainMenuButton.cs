@@ -3,32 +3,24 @@ using System.Collections;
 
 public class MainMenuButton : PhysicalButton {
 
-    public float raisedHeight = 5f;
+    public float raisedHeight = 1f;
 
-    private float initialHeight;
+	private Vector3 initialPos;
 
     void Start() {
         base.Start();
-        initialHeight = transform.position.y;
+        initialPos = transform.position;
     }
 
     protected override void HandleHover ()
     {
-        if(transform.position.y < raisedHeight) {
-            transform.Translate(Vector3.up*Time.deltaTime*15f);
-        } else {
-            transform.position = new Vector3(transform.position.x,raisedHeight, transform.position.z);
-        }
+		transform.position = Vector3.MoveTowards(transform.position, initialPos + Vector3.up*raisedHeight, Time.deltaTime*15f);
         base.HandleHover ();
     }
 
     protected override void HandleNormal ()
     {
-        if(transform.position.y > initialHeight) {
-            transform.Translate(-Vector3.up*Time.deltaTime*15f);
-        } else {
-            transform.position = new Vector3(transform.position.x,initialHeight, transform.position.z);
-        }
+		transform.position = Vector3.MoveTowards(transform.position, initialPos, Time.deltaTime*15f);
         base.HandleNormal ();
     }
 

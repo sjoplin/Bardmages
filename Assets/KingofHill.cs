@@ -3,7 +3,7 @@ using System.Collections;
 
 public class KingofHill : MonoBehaviour {
 
-	public PlayerBard king = null;
+	public BaseControl king = null;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,7 @@ public class KingofHill : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//king.GetComponent<PlayerLife> ().DiedLastFrame
-		if (king.GetComponent<PlayerLife> ().Health <= 0) {
+		if (king != null && !king.GetComponent<PlayerLife>().Alive) {
 			transform.parent = null;
 			this.GetComponentInChildren<MeshRenderer> ().enabled = true;
 			//king.GetComponent<PlayerLife> ().DiedLastFrame = false;
@@ -22,8 +22,8 @@ public class KingofHill : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.GetComponent<PlayerControl>() != null && king == null) {
-			king = other.GetComponent<PlayerBard> ();
+		if (other.GetComponent<BaseControl>() != null && king == null) {
+			king = other.GetComponent<BaseControl> ();
 			this.GetComponentInChildren<MeshRenderer> ().enabled = false;
 			transform.parent = king.transform;
 		}

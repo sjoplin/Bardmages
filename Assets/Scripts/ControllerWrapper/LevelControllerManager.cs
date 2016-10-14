@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class LevelControllerManager : MonoBehaviour {
 
+	public bool testing;
+
 	public static LevelControllerManager instance;
 
 	public Sprite XBOX_A, PS4_A, KEY_A, XBOX_B, PS4_B, KEY_B, XBOX_START, PS4_START, KEY_START, JOYLEFT, DPAD_LEFTRIGHT, DPAD_LEFTRIGHTUPDOWN, KEY_UPDOWNLEFTRIGHT,KEY_LEFTRIGHT;
@@ -30,7 +32,7 @@ public class LevelControllerManager : MonoBehaviour {
     }
 
 	void Update() {
-		if(cm.NumPlayers < 4) {
+		if(testing && cm.NumPlayers < 4) {
 			if(cm.AddPlayer(ControllerInputWrapper.Buttons.Start)) {
 				for(int i = 0; i < players.Length; i++) {
 					if(players[i].player == (PlayerID)cm.NumPlayers) {
