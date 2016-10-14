@@ -7,17 +7,17 @@ public class KingofHill : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//king.GetComponent<PlayerLife> ().DiedLastFrame
 		if (king != null && !king.GetComponent<PlayerLife>().Alive) {
 			transform.parent = null;
 			this.GetComponentInChildren<MeshRenderer> ().enabled = true;
-			//king.GetComponent<PlayerLife> ().DiedLastFrame = false;
+			transform.position = king.GetComponent<PlayerLife>().PositionOfDeath;
 			king = null;
+			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
 		} 
 	}
 
@@ -26,6 +26,7 @@ public class KingofHill : MonoBehaviour {
 			king = other.GetComponent<BaseControl> ();
 			this.GetComponentInChildren<MeshRenderer> ().enabled = false;
 			transform.parent = king.transform;
+			this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
 		}
 	}
 }
