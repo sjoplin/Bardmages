@@ -34,13 +34,14 @@ namespace Assets.Scripts.Data
             time = waitTime;
             xOrig = loadBar.transform.position.x;
             xMax = loadBar.transform.localScale.x;
+			loadBar.transform.localScale = new Vector3(0f, 1f, 1f);
         }
 
         void Update()
         {
             float t = op.progress;
-            loadBar.transform.position = new Vector3(xOrig - 10 * (1 - t), loadBar.transform.position.y, loadBar.transform.position.z);
-            loadBar.transform.localScale = new Vector3(xMax * t, loadBar.transform.localScale.y, loadBar.transform.localScale.z);
+			loadBar.transform.position = new Vector3(Mathf.MoveTowards(loadBar.transform.position.x, xOrig - 10 * (1 - t), Time.deltaTime*(t*10f+2f)), loadBar.transform.position.y, loadBar.transform.position.z);
+			loadBar.transform.localScale = new Vector3(Mathf.MoveTowards(loadBar.transform.localScale.x, xMax * t, Time.deltaTime*(t*10f+2f)), loadBar.transform.localScale.y, loadBar.transform.localScale.z);
             for (int i = 0; i < data.clips.Length; i++)
             {
                 bool soundPlayed = false;
