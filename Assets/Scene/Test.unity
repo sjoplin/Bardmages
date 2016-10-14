@@ -1488,6 +1488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d377c10d671c4c07b764cc5cd058885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testing: 1
   XBOX_A: {fileID: 21300000, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
   PS4_A: {fileID: 21300008, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
   KEY_A: {fileID: 21300086, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
@@ -3889,7 +3890,7 @@ Prefab:
     - target: {fileID: 114000011583056984, guid: a381b8b01a2554adeb361351cf81932b,
         type: 2}
       propertyPath: respawnTime
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a381b8b01a2554adeb361351cf81932b, type: 2}
@@ -6061,7 +6062,7 @@ Prefab:
     - target: {fileID: 114000013441420580, guid: fc15929aee65e4f86a101ad69ff7ce09,
         type: 2}
       propertyPath: respawnTime
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc15929aee65e4f86a101ad69ff7ce09, type: 2}
@@ -7924,7 +7925,7 @@ Prefab:
     - target: {fileID: 114000012167077208, guid: fb99b534a41b24817bbd5bf6372997d1,
         type: 2}
       propertyPath: respawnTime
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb99b534a41b24817bbd5bf6372997d1, type: 2}
@@ -8115,6 +8116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1595f422c71c14e85a14f8711ba18a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inMainMenu: 0
   playerUI:
   - {fileID: 1942549266}
   - {fileID: 1266686750}
@@ -9808,7 +9810,7 @@ Prefab:
     - target: {fileID: 114000013202782614, guid: ee9343b46a08345b8a96978a8ca0d157,
         type: 2}
       propertyPath: respawnTime
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000012064162556, guid: ee9343b46a08345b8a96978a8ca0d157, type: 2}
