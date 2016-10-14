@@ -14,7 +14,7 @@ public class MainMenuButton : PhysicalButton {
 
     protected override void HandleHover ()
     {
-		transform.position = Vector3.MoveTowards(transform.position, initialPos + Vector3.up*raisedHeight, Time.deltaTime*15f);
+		transform.position = Vector3.MoveTowards(transform.position, initialPos + transform.up*raisedHeight, Time.deltaTime*15f);
         base.HandleHover ();
     }
 
