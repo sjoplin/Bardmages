@@ -56,7 +56,7 @@ MonoBehaviour:
     type: 2}
   tuneProgress: 0
   ownerTransform: {fileID: 0}
-  tuneName: Bubble
+  tuneName: Lazer
   maxDistance: 70
   minDistance: 0
   attach: 0

@@ -35,10 +35,11 @@ public class LazerTuneSpawn : MonoBehaviour, Spawnable {
 		if (other.GetComponent<PlayerControl>() != null) {
 			if (other.GetComponent<PlayerControl>().player != this.owner) {
 				if (crit) {
-					other.GetComponent<PlayerLife>().DealDamage(1f);
+					other.GetComponent<PlayerLife> ().DealDamage (1f);
 				} else {
-					other.GetComponent<PlayerLife>().DealDamage(0.1f);
+					other.GetComponent<PlayerLife> ().DealDamage (0.1f);
 				}
+				
 			}
 		}
 	}

@@ -16,5 +16,4 @@ public interface Spawnable {
 	/// </summary>
 	/// <param name="owner">Owner.</param>
 	void Owner(PlayerID owner);
-
 }

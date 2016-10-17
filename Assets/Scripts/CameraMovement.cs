@@ -25,11 +25,17 @@ public class CameraMovement : MonoBehaviour {
 
 		Vector3 averagePosition = Vector3.zero;
 
+		int numDead = 0;
+
 		foreach(Transform t in targets) {
-			averagePosition += t.position;
+			if(t.GetComponent<PlayerLife>().Alive) {
+				averagePosition += t.position;
+			} else {
+				numDead++;
+			}
 		}
 
-		averagePosition /= targets.Length;
+		averagePosition /= (targets.Length - numDead);
 
 		GetComponent<Camera>().fieldOfView = LevelManager.instance.BeatValue(0f)/2f + initialFOV;
 		transform.GetChild(0).GetComponent<Camera>().fieldOfView = LevelManager.instance.BeatValue(0f)/2f + initialFOV;

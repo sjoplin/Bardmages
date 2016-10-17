@@ -1578,6 +1578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d377c10d671c4c07b764cc5cd058885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testing: 1
   XBOX_A: {fileID: 21300000, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
   PS4_A: {fileID: 21300008, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
   KEY_A: {fileID: 21300086, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
@@ -4282,8 +4283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tunes:
-  - {fileID: 114000010569780618, guid: 4f08aca025183464fb343cb37ce8f587, type: 2}
-  - {fileID: 114000011396993340, guid: 8795cf683704f402cb787abd76625bbd, type: 2}
+  - {fileID: 114000011246562238, guid: e14b9db2dcbd84a7d985981971f0f71d, type: 2}
+  - {fileID: 114000013367643740, guid: e9fc643374340c145b2bf206bb566bdf, type: 2}
   - {fileID: 114000011396993340, guid: 716f894956e7746fc89528d8bbec500a, type: 2}
   instrumentSound: {fileID: 8300000, guid: 801625d1b61b84ff4b253556a2f649df, type: 3}
   buttonPressDelay: 0.1
@@ -4300,6 +4301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnTime: 4
 --- !u!114 &578383716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4972,18 +4974,23 @@ Prefab:
         type: 2}
       propertyPath: tunes.Array.data[0]
       value: 
-      objectReference: {fileID: 114000011396993340, guid: d9ba94cbaae67480ba98808e11e597d6,
+      objectReference: {fileID: 114000011396993340, guid: 8795cf683704f402cb787abd76625bbd,
         type: 2}
     - target: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
         type: 2}
       propertyPath: tunes.Array.data[1]
       value: 
-      objectReference: {fileID: 114000013588802250, guid: fbcf9d394b8244195ab435fbcc71a12c,
+      objectReference: {fileID: 114000011396993340, guid: d9ba94cbaae67480ba98808e11e597d6,
         type: 2}
     - target: {fileID: 82000010742449116, guid: 79f9bcf772674475c8dce8b345322f97,
         type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012843195542, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
+      propertyPath: respawnTime
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
@@ -5511,6 +5518,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 739945680}
   m_Mesh: {fileID: 4300006, guid: 16c7f9b3c0aa140b6871b3edb1a98171, type: 3}
+--- !u!1001 &764879294
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011203734770, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 009208edb72844537b8cb0b76fdb45c9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &778355047
 Prefab:
   m_ObjectHideFlags: 0
@@ -5929,6 +5978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnTime: 4
 --- !u!114 &801893282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9851,6 +9901,48 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1233389882}
+--- !u!1 &1238688756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1238688758}
+  - 114: {fileID: 1238688757}
+  m_Layer: 0
+  m_Name: EffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1238688757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238688756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2fb9b6592b714139b0e4fd0a2b2e0b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEffect: {fileID: 1000011052833036, guid: 11908830382094b8faa994a7c0ebdbfd,
+    type: 2}
+--- !u!4 &1238688758
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238688756}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
 --- !u!1 &1266686748
 GameObject:
   m_ObjectHideFlags: 0
@@ -11777,6 +11869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1595f422c71c14e85a14f8711ba18a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inMainMenu: 0
   playerUI:
   - {fileID: 1942549266}
   - {fileID: 1266686750}
@@ -14784,6 +14877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnTime: 4
 --- !u!114 &1916897189
 MonoBehaviour:
   m_ObjectHideFlags: 0

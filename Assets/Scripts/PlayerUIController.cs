@@ -80,7 +80,7 @@ public class PlayerUIController : MonoBehaviour {
 
 	public virtual void TuneProgressed(Tune t) {
 		for(int i = 0; i < tunes.Length; i++) {
-			if(tunes[i].Equals(t)) {
+			if(tunes[i].tuneName.Equals(t.tuneName)) {
 				StopCoroutine(ResetTuneTimer(i));
 				StartCoroutine(ResetTuneTimer(i));
 				StopCoroutine(ProgressTuneAnim(i+1,t.tuneProgress));
