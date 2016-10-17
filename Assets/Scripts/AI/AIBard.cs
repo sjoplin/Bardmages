@@ -24,9 +24,9 @@ namespace Bardmages.AI {
         /// <summary> The minimum time delay between notes being played. </summary>
         private float noteDelay;
 
-        /// <summary> The bardmage's variance for playing on the beat. </summary>
+        /// <summary> The bardmage's accuracy for playing on the beat. </summary>
         [HideInInspector]
-        internal float timingVariance;
+        internal float timingAccuracy;
         /// <summary> The percentage threshold of beat correctness for which the bardmage will make a note at. </summary>
         private float modifiedThreshold = Tune.PERFECT_THRESHOLD;
 
@@ -72,7 +72,10 @@ namespace Bardmages.AI {
                 }
                 buttonPressDelay = Mathf.Max(buttonPressDelayTimer, noteDelay);
 
-                modifiedThreshold = Tune.PERFECT_THRESHOLD + Random.Range(-timingVariance, timingVariance);
+                modifiedThreshold = Tune.PERFECT_THRESHOLD;
+                if (Random.Range(0, 1) > timingAccuracy) {
+                    modifiedThreshold -= 0.1f;
+                }
             }
         }
 

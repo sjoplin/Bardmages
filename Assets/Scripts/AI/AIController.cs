@@ -26,7 +26,7 @@ namespace Bardmages.AI {
             control = GetComponent<AIControl>();
             enabledRhythms = LevelManager.instance.EnabledRhythms;
             LevelControllerManager.instance.AddPlayer(control.player, control);
-            bard.timingVariance = 0.1f;
+            bard.timingAccuracy = 0.9f;
 
             MinionTuneSpawn minion = GetComponent<MinionTuneSpawn>();
             PlayerID selfID;
