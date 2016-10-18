@@ -37,9 +37,12 @@ public abstract class BaseBard : MonoBehaviour {
 
     /// <summary> The bard's movement controls. </summary>
     protected BaseControl control;
+    /// <summary> The bard's health. </summary>
+    protected PlayerLife life;
 
     protected virtual void Start() {
         control = GetComponent<BaseControl>();
+        life = GetComponent<PlayerLife>();
 
         Tune[] tempTunes = new Tune[tunes.Length];
         currentTunes = new List<Tune>();
@@ -60,6 +63,9 @@ public abstract class BaseBard : MonoBehaviour {
     /// Checks for inputs to make notes with.
     /// </summary>
     void Update () {
+        if (!life.Alive) {
+            return;
+        }
         if(buttonPressDelayTimer < 0f) {
             bool soundPlayed = false; //prevents two sounds from being played the same frame
             if(currentTunes.Count > 0) {

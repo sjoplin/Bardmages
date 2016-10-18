@@ -25,7 +25,11 @@ public class Tune_Spawn : Tune {
 		}
 		if(temp.GetComponent<Spawnable>() != null) {
 			temp.GetComponent<Spawnable>().Crit(crit);
-			temp.GetComponent<Spawnable>().Owner(ownerTransform.GetComponent<BaseControl>().player);
+            PlayerID ownerID = ownerTransform.GetComponent<BaseControl>().player;
+            if (ownerID == PlayerID.None) {
+                ownerID = ownerTransform.GetComponent<MinionTuneSpawn>().owner;
+            }
+			temp.GetComponent<Spawnable>().Owner(ownerID);
 		}
 	}
 }

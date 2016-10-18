@@ -18,8 +18,9 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 
         // Switch the minion's robe color to the color of its owner.
         Transform[] robes = new Transform[2];
-        robes[0] = transform.FindChild("bardmage_export").FindChild("pCube2");
-        robes[1] = transform.FindChild("bardmage_export").FindChild("pCube3");
+        Transform bardChild = transform.FindChild("bardmage_export");
+        robes[0] = bardChild.FindChild("pCube2");
+        robes[1] = bardChild.FindChild("pCube3");
 
         Material robeMaterial = LevelManager.instance.playerDict[owner].transform.FindChild("bardmage_export").FindChild("pCube2").GetComponent<Renderer>().material;
         foreach (Transform robe in robes) {
