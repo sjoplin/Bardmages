@@ -51,6 +51,7 @@ public abstract class BaseBard : MonoBehaviour {
             Tune temp = (Tune)GameObject.Instantiate(tunes[i],Vector3.zero,Quaternion.identity);
             tempTunes[i] = temp;
             tempTunes[i].ownerTransform = transform;
+            SetTuneHuman(temp);
             temp.transform.parent = transform;
         }
 
@@ -58,6 +59,12 @@ public abstract class BaseBard : MonoBehaviour {
 
         if(volumeOverride != 0) GetComponent<AudioSource>().volume = volumeOverride;
     }
+
+    /// <summary>
+    /// Sets whether the bard's tunes are played by a human or an AI.
+    /// </summary>
+    /// <param name="tune">The tune to set.</param>
+    protected abstract void SetTuneHuman(Tune tune);
 
     /// <summary>
     /// Checks for inputs to make notes with.

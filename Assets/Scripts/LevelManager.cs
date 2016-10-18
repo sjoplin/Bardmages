@@ -40,6 +40,15 @@ public class LevelManager : MonoBehaviour {
 	private int beatCounter;
 	private float prevBeat = 0f;
 
+    /// <summary> The chance that a notes is played perfectly based on history. </summary>
+    private float _perfectNoteChance = 0.75f;
+    /// <summary> The chance that a notes is played perfectly based on history. </summary>
+    public float perfectNoteChance {
+        get { return _perfectNoteChance; }
+    }
+    /// <summary> The growth rate of the note chance. </summary>
+    private const float NOTE_CHANCE_GROWTH = 100;
+
     /// <summary>
     /// Initializes the singleton instance of the level manager.
     /// </summary>
@@ -157,5 +166,20 @@ public class LevelManager : MonoBehaviour {
         } else {
             return LevelManager.instance.playerUI[(int)player - 1];
         }
+    }
+
+    /// <summary>
+    /// Increments the number of notes that were played.
+    /// </summary>
+    /// <param name="perfect">Whether the note was played on the beat.</param>
+    public void RegisterNote(bool perfect) {
+        float difference;
+        if (perfect) {
+            difference = 1;
+        } else {
+            difference = -1;
+        }
+        _perfectNoteChance *= (NOTE_CHANCE_GROWTH + difference) / NOTE_CHANCE_GROWTH;
+        _perfectNoteChance = Mathf.Clamp(_perfectNoteChance, 0, 1);
     }
 }
