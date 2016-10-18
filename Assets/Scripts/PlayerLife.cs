@@ -28,10 +28,18 @@ public class PlayerLife : MonoBehaviour {
 	/// </summary>
 	public float respawnTime;
 
+    /// <summary> The movement component of the player. </summary>
+    private BaseControl control;
+
+    /// <summary> The controller for this player's UI health bar. </summary>
+    private PlayerUIController uiController;
+
 	/// <summary>
 	/// Sets the player health to 1 and finds the appropriate UI elements
 	/// </summary>
 	protected virtual void Start() {
+        control = GetComponent<BaseControl>();
+        uiController = LevelManager.instance.GetPlayerUI(control.player);
 		health = 1f;
 		greenHealthBar = transform.FindChild("Canvas").FindChild("HealthBarRed").FindChild("HealthBarGreen").GetComponent<Image>();
 		freshRedHealthBar = transform.FindChild("Canvas").FindChild("HealthBarRed").FindChild("HealthBarFreshRed").GetComponent<Image>();
@@ -45,10 +53,10 @@ public class PlayerLife : MonoBehaviour {
 		health -= amount;
 		bool died = false;
 		if(health <= 0) {
-			GetComponent<BaseControl>().ClearMomentum();
+			control.ClearMomentum();
 			EffectManager.instance.SpawnDeathEffect(transform.position);
 			respawnTimer = respawnTime;
-			GetComponent<BaseControl>().enabled = false;
+            control.enabled = false;
 			positionOfDeath = transform.position;
 			transform.position = Vector3.up*100f;
 			died = true;
@@ -57,14 +65,18 @@ public class PlayerLife : MonoBehaviour {
             health = 1f;
         }
 
-		greenHealthBar.fillAmount = health/2f + 0.5f;
-		StartCoroutine(HealthBarCatchup());
+        updateHealthBar();
 
-        PlayerUIController uiController = LevelManager.instance.GetPlayerUI(GetComponent<BaseControl>().player);
         if(uiController != null) {
             uiController.UpdateHealth(health, died);
 		}
 	}
+
+    /// <summary> Updates the health bar around the player with the player's current health. </summary>
+    private void updateHealthBar() {
+        greenHealthBar.fillAmount = health/2f + 0.5f;
+        StartCoroutine(HealthBarCatchup());
+    }
 
 	void Update() {
 		if(health <= 0f && respawnTimer > 0f) {
@@ -72,7 +84,9 @@ public class PlayerLife : MonoBehaviour {
 			if(respawnTimer <= 0f) {
 				transform.position = Vector3.up*10f;
 				health = 1f;
-				GetComponent<BaseControl>().enabled = true;
+                GetComponent<BaseControl>().enabled = true;
+                uiController.UpdateHealth(health, false);
+                updateHealthBar();
 			}
 		}
 	}

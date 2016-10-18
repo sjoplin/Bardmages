@@ -1397,14 +1397,13 @@ MonoBehaviour:
   volumeOverride: 0.5
   randomTuneChoices:
   - {fileID: 114000011396993340, guid: 716f894956e7746fc89528d8bbec500a, type: 2}
-  - {fileID: 114000010569780618, guid: 4f08aca025183464fb343cb37ce8f587, type: 2}
+  - {fileID: 114000011246562238, guid: e14b9db2dcbd84a7d985981971f0f71d, type: 2}
   - {fileID: 114000013588802250, guid: fbcf9d394b8244195ab435fbcc71a12c, type: 2}
   - {fileID: 114000013367643740, guid: e9fc643374340c145b2bf206bb566bdf, type: 2}
   - {fileID: 114000011396993340, guid: 8795cf683704f402cb787abd76625bbd, type: 2}
   - {fileID: 114000011396993340, guid: 25da98d4970c849e1b5c668572a12180, type: 2}
   - {fileID: 114000012703513154, guid: 5d22fb4156c36fb46a9aefb74c92d3a6, type: 2}
   - {fileID: 114000011396993340, guid: d9ba94cbaae67480ba98808e11e597d6, type: 2}
-  - {fileID: 114000011246562238, guid: e14b9db2dcbd84a7d985981971f0f71d, type: 2}
 --- !u!114 &114000011231587190
 MonoBehaviour:
   m_ObjectHideFlags: 1
