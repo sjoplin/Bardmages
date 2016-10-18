@@ -11,6 +11,8 @@ namespace Bardmages.AI {
         protected AIBard bard;
         /// <summary> The AI component for moving. </summary>
         protected AIControl control;
+        /// <summary> The health component of the bardmage. </summary>
+        protected PlayerLife life;
 
         /// <summary> The rhythms that are recognized for perfect attacks. </summary>
         protected List<LevelManager.RhythmType> enabledRhythms;
@@ -23,7 +25,10 @@ namespace Bardmages.AI {
         /// </summary>
     	private void Start() {
             bard = GetComponent<AIBard>();
+            bard.RandomizeTunes();
+
             control = GetComponent<AIControl>();
+            life = GetComponent<PlayerLife>();
             enabledRhythms = LevelManager.instance.EnabledRhythms;
             LevelControllerManager.instance.AddPlayer(control.player, control);
             bard.timingAccuracy = 0.9f;
@@ -57,9 +62,11 @@ namespace Bardmages.AI {
         /// Updates the controller.
         /// </summary>
         private void Update() {
-            bard.UpdateTune();
-            control.UpdateControl();
-            UpdateAI();
+            if (life.Alive) {
+                bard.UpdateTune();
+                control.UpdateControl();
+                UpdateAI();
+            }
         }
 
         /// <summary>

@@ -31,11 +31,43 @@ namespace Bardmages.AI {
         private float modifiedThreshold = Tune.PERFECT_THRESHOLD;
 
         /// <summary>
+        /// The possible tunes that the AI can randomly bring into battle.
+        /// If empty, the AI will not randomize its tune choices.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("The possible tunes that the AI can randomly bring into battle.")]
+        private Tune[] randomTuneChoices;
+
+        /// <summary>
         /// Calculates the time delay between notes.
         /// </summary>
         protected override void Start() {
             base.Start();
             noteDelay = LevelManager.instance.Tempo / 3;
+        }
+
+        /// <summary>
+        /// Picks random tunes for the bardmage to use during the battle.
+        /// </summary>
+        internal void RandomizeTunes() {
+            if (randomTuneChoices.Length > 0) {
+                List<int> indexChoices = new List<int>();
+
+                for (int i = 0; i < randomTuneChoices.Length; i++) {
+                    indexChoices.Add(i);
+                }
+                if (indexChoices.Count < tunes.Length) {
+                    for (int i = 0; i < tunes.Length - indexChoices.Count; i++) {
+                        indexChoices.Add(i);
+                    }
+                }
+
+                for (int i = 0; i < tunes.Length; i++) {
+                    int randomIndex = Random.Range(0, indexChoices.Count);
+                    tunes[i] = randomTuneChoices[indexChoices[randomIndex]];
+                    indexChoices.RemoveAt(randomIndex);
+                }
+            }
         }
 
         /// <summary>

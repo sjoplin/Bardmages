@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(targets.Length == 0) return;
+        if(targets.Length == 0) return;
 
 		Vector3 averagePosition = Vector3.zero;
 
@@ -34,6 +34,10 @@ public class CameraMovement : MonoBehaviour {
 				numDead++;
 			}
 		}
+
+        if (targets.Length <= numDead) {
+            return;
+        }
 
 		averagePosition /= (targets.Length - numDead);
 
