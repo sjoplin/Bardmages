@@ -27,7 +27,7 @@ public abstract class BaseControl : MonoBehaviour {
         Vector2 rawInput = GetDirectionInput();
         move = Vector2.MoveTowards(move, rawInput, Time.deltaTime);
 
-        if(move.magnitude > 1) move.Normalize();
+//        if(move.magnitude > 1) move.Normalize();
 
         if(charControl) charControl.Move(new Vector3(move.x,-1f,move.y) * Time.deltaTime * speed);
 
@@ -44,6 +44,10 @@ public abstract class BaseControl : MonoBehaviour {
     public void Knockback(Vector2 direction) {
         move += direction;
     }
+
+	public void ClearMomentum() {
+		move = Vector2.zero;
+	}
 
     /// <summary>
     /// Gets the directional input to move the bardmage with.

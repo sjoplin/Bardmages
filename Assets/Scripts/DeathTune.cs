@@ -22,17 +22,18 @@ class DeathTune : MonoBehaviour, Spawnable
         foreach (PlayerLife l in lifes)
         {
 
-            if (crit)
-            {
+//            if (crit)
+//            {
                 if (l.gameObject.GetComponent<BaseControl>().player != owner)
                     l.DealDamage(1f);
-            }
-            else
-            {
-                if (l.gameObject.GetComponent<BaseControl>().player == owner)
-                    l.DealDamage(.75f);
-            }
+//            }
+//            else
+//            {
+//                if (l.gameObject.GetComponent<BaseControl>().player == owner)
+//                    l.DealDamage(.75f);
+//            }
         }
         Destroy(transform.root.gameObject);
+		transform.GetChild(0).parent = null;
     }
 }
