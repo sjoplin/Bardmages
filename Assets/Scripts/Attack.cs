@@ -48,15 +48,15 @@ public class Attack : MonoBehaviour, Spawnable {
 	protected virtual void OnTriggerEnter(Collider other) {
 		PlayerID player = PlayerID.None;
 		if (other.transform.root.GetComponent<BaseControl> ()) {
-			player = other.transform.root.GetComponent<BaseControl> ().player;
+			player = other.transform.root.GetComponent<BaseControl> ().playerOwner;
 		} else return;
 		if(impacted) return;
-		if (player != agressor || player != PlayerID.None) {
+		if (player != agressor) {
 			other.transform.root.GetComponent<PlayerLife>().DealDamage(damage);
 			if(destroyOnImpact) Destroy(this.gameObject);
 		} else if (!other.transform.root.GetComponent<BaseControl>()) {
 			if (other.GetComponent<FollowTarget>() && other.GetComponent<FollowTarget>().target.GetComponent<BaseControl>()
-				&& other.GetComponent<FollowTarget>().target.GetComponent<BaseControl>().player == agressor) {
+				&& other.GetComponent<FollowTarget>().target.GetComponent<BaseControl>().playerOwner == agressor) {
 				//TODO reorganize this section...
 			} else {
 				if(destroyOnImpact) {

@@ -14,6 +14,20 @@ public abstract class BaseControl : MonoBehaviour {
     private Vector2 knockback;
 
     /// <summary>
+    /// The main player who owns this control.
+    /// If this is a minion, returns the player who spawned the minion instead of None.
+    /// </summary>
+    public PlayerID playerOwner {
+        get { 
+            if (player == PlayerID.None) {
+                return GetComponent<MinionTuneSpawn>().owner;
+            } else {
+                return player;
+            }
+        }
+    }
+
+    /// <summary>
     /// Use this for initialization.
     /// </summary>
     protected virtual void Start () {

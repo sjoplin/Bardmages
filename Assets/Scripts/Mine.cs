@@ -22,7 +22,7 @@ public class Mine : Attack {
     {
         //Player won't detonate the mine
 		if (other.gameObject.GetComponent<BaseControl>() 
-			&& other.gameObject.GetComponent<BaseControl>().player != agressor)
+			&& other.gameObject.GetComponent<BaseControl>().playerOwner != agressor)
         {
             base.OnTriggerEnter(other);
 
