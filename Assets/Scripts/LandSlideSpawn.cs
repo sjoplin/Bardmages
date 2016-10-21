@@ -5,7 +5,9 @@ public class LandSlideSpawn : MonoBehaviour, Spawnable {
 
 	private PlayerID owner;
 	private bool crit;
-
+	private float secondRockSpawn = .3f;
+	private float thirdRockSpawn = .6f;
+	public GameObject rock2, rock3;
 
 	public void Crit (bool crit) {
 		this.crit = crit;
@@ -39,6 +41,15 @@ public class LandSlideSpawn : MonoBehaviour, Spawnable {
 		transform.Translate (0, 0, 20f * Time.deltaTime, Space.Self);
 		if (!Physics.Raycast (transform.position, dwn, 2f)) {
 			Destroy (this.gameObject);
+		}
+
+		secondRockSpawn -= Time.deltaTime;
+		thirdRockSpawn -= Time.deltaTime;
+		if (secondRockSpawn <= 0) {
+			rock2.SetActive (true);
+		}
+		if (thirdRockSpawn <= 0) {
+			rock3.SetActive (true);
 		}
 	}
 

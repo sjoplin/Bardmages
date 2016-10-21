@@ -8,8 +8,10 @@ public class Land_Spawn : MonoBehaviour, Spawnable {
 	public GameObject spawnObject;
 	private GameObject temp;
 	private LandSlideSpawn temporary;
+
+
 	void Start () {
-		temp = (GameObject)Instantiate (spawnObject, transform.position + transform.forward * 7, transform.rotation);
+		temp = (GameObject)Instantiate (spawnObject, transform.position + transform.forward * 3, transform.rotation);
 		Destroy (transform.root.gameObject, 4f);
 		temporary = temp.GetComponent<LandSlideSpawn>();
 		temporary.Crit (crit);
