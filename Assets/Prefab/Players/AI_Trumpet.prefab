@@ -305,12 +305,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013492002404}
+  - 114: {fileID: 114000014196718952}
   - 114: {fileID: 114000010430660634}
   - 114: {fileID: 114000011617840972}
   - 114: {fileID: 114000010615686736}
   - 143: {fileID: 143000010380481854}
   - 82: {fileID: 82000012111787504}
-  - 114: {fileID: 114000013113355400}
+  - 195: {fileID: 195000012887533324}
   m_Layer: 0
   m_Name: AI_Trumpet
   m_TagString: Untagged
@@ -1376,7 +1377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
-  speed: 0
+  speed: 10
   currentDirection: {x: 0, y: 0}
 --- !u!114 &114000010615686736
 MonoBehaviour:
@@ -1405,6 +1406,8 @@ MonoBehaviour:
   - {fileID: 114000011396993340, guid: 25da98d4970c849e1b5c668572a12180, type: 2}
   - {fileID: 114000012703513154, guid: 5d22fb4156c36fb46a9aefb74c92d3a6, type: 2}
   - {fileID: 114000011396993340, guid: d9ba94cbaae67480ba98808e11e597d6, type: 2}
+  - {fileID: 114000010569780618, guid: 4f08aca025183464fb343cb37ce8f587, type: 2}
+  randomizeTunes: 1
 --- !u!114 &114000011231587190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1443,7 +1446,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fellOffMap: 0
   respawnTime: 4
+  lastHitTune: {fileID: 0}
+  lastHitPlayer: 0
 --- !u!114 &114000011618470196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1504,17 +1510,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114000013113355400
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012440713148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd9e61c4818dd4ace809875ad9543062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000013351644484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1558,6 +1553,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114000014196718952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012440713148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ee3b1bbb2f24158983a56645e7b6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &143000010380481854
 CharacterController:
   m_ObjectHideFlags: 1
@@ -1575,6 +1581,26 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &195000012887533324
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012440713148}
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!222 &222000010111910424
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Bardmages.AI;
 
 /// <summary>
 /// Base class for generating notes and attacks.
@@ -160,5 +161,46 @@ public abstract class BaseBard : MonoBehaviour {
                 currentTunes.Clear();
             }
         }
+    }
+
+    /// <summary>
+    /// Notifies the bard when its tune hits another bard.
+    /// </summary>
+    /// <param name="tune">The tune that caused the damage.</param>
+    /// <param name="weight">A weight for the effectiveness of the tune.</param>
+    /// <param name="isDamage">Whether the weight is the amount of damage dealt by the tune.</param>
+    public void CreditHit(Tune tune, float weight, bool isDamage = true) {
+        AdaptiveAI ai = GetComponent<AdaptiveAI>();
+        if (ai != null) {
+            ai.RegisterHit(tune, weight);
+        }
+    }
+
+    /// <summary>
+    /// Gets the index of a tune in the bardmage's tune book.
+    /// </summary>
+    /// <returns>The index of the tune, or -1 if the tune was not found.</returns>
+    /// <param name="tune">Tune.</param>
+    public int GetTuneIndex(Tune tune) {
+        for (int i = 0; i < tunes.Length; i++) {
+            if (tunes[i].Equals(tune)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /// <summary>
+    /// Gets a bardmage's tune from its name.
+    /// </summary>
+    /// <returns>The tune with the given name, or null if the bardmage doesn't have that tune.</returns>
+    /// <param name="tuneName">The name of the tune to look for.</param>
+    public Tune GetTuneFromName(string tuneName) {
+        for (int i = 0; i < tunes.Length; i++) {
+            if (tunes[i].tuneName == tuneName) {
+                return tunes[i];
+            }
+        }
+        return null;
     }
 }

@@ -14,7 +14,9 @@ public class Tune_Attack : Tune {
 		base.TuneComplete (crit);
 
         GameObject temp = (GameObject)GameObject.Instantiate(spawnObject, GetSpawnPosition(), ownerTransform.rotation);
-		temp.GetComponent<Attack>().agressor = ownerTransform.GetComponent<BaseControl>().playerOwner;
+        Attack attack = temp.GetComponent<Attack>();
+		attack.agressor = ownerTransform.GetComponent<BaseControl>().playerOwner;
+        attack.tune = this;
 		temp.GetComponent<Spawnable>().Crit(crit);
 	}
 

@@ -14,6 +14,8 @@ namespace Bardmages.AI {
 
         /// <summary> The current tune that the bardmage is playing. </summary>
         internal Tune currentTune;
+        /// <summary> The index of the current tune that the bardmage is playing. </summary>
+        internal int currentTuneIndex;
         /// <summary> The progress of the bardmage through its current tune. </summary>
         private int tuneProgress;
         /// <summary> Whether the bardmage is currently playing a tune. </summary>
@@ -32,11 +34,14 @@ namespace Bardmages.AI {
 
         /// <summary>
         /// The possible tunes that the AI can randomly bring into battle.
-        /// If empty, the AI will not randomize its tune choices.
         /// </summary>
         [SerializeField]
         [Tooltip("The possible tunes that the AI can randomly bring into battle.")]
         private Tune[] randomTuneChoices;
+        /// <summary> Whether to randomize the bardmage's tunes. </summary>
+        [SerializeField]
+        [Tooltip("Whether to randomize the bardmage's tunes.")]
+        private bool randomizeTunes;
 
         /// <summary>
         /// Calculates the time delay between notes.
@@ -58,7 +63,7 @@ namespace Bardmages.AI {
         /// Picks random tunes for the bardmage to use during the battle.
         /// </summary>
         internal void RandomizeTunes() {
-            if (randomTuneChoices.Length > 0) {
+            if (randomizeTunes && randomTuneChoices.Length > 0) {
                 List<int> indexChoices = new List<int>();
 
                 for (int i = 0; i < randomTuneChoices.Length; i++) {
@@ -128,6 +133,7 @@ namespace Bardmages.AI {
         internal void StartTune(int tuneIndex, bool overrideCurrent = false, LevelManager.RhythmType rhythmType = LevelManager.RhythmType.None) {
             if (overrideCurrent || !isPlayingTune) {
                 currentTune = tunes[tuneIndex];
+                currentTuneIndex = tuneIndex;
                 this.rhythmType = rhythmType;
             }
         }

@@ -117,13 +117,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013244465594}
+  - 114: {fileID: 114000011232285296}
   - 114: {fileID: 114000013109220014}
   - 114: {fileID: 114000012956151820}
   - 114: {fileID: 114000010358254282}
   - 143: {fileID: 143000010664510426}
   - 82: {fileID: 82000011900853244}
   - 195: {fileID: 195000011452540882}
-  - 114: {fileID: 114000011271379404}
   m_Layer: 0
   m_Name: AI_Glockenspiel
   m_TagString: Untagged
@@ -1461,6 +1461,8 @@ MonoBehaviour:
   - {fileID: 114000011396993340, guid: 25da98d4970c849e1b5c668572a12180, type: 2}
   - {fileID: 114000012703513154, guid: 5d22fb4156c36fb46a9aefb74c92d3a6, type: 2}
   - {fileID: 114000011396993340, guid: d9ba94cbaae67480ba98808e11e597d6, type: 2}
+  - {fileID: 114000010569780618, guid: 4f08aca025183464fb343cb37ce8f587, type: 2}
+  randomizeTunes: 1
 --- !u!114 &114000010476064762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1500,7 +1502,7 @@ MonoBehaviour:
   m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000011271379404
+--- !u!114 &114000011232285296
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1508,7 +1510,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010872730048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd9e61c4818dd4ace809875ad9543062, type: 3}
+  m_Script: {fileID: 11500000, guid: d6ee3b1bbb2f24158983a56645e7b6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114000011542507404
@@ -1613,7 +1615,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fellOffMap: 0
   respawnTime: 4
+  lastHitTune: {fileID: 0}
+  lastHitPlayer: 0
 --- !u!114 &114000013109220014
 MonoBehaviour:
   m_ObjectHideFlags: 1

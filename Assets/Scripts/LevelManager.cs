@@ -182,4 +182,13 @@ public class LevelManager : MonoBehaviour {
         _perfectNoteChance *= (NOTE_CHANCE_GROWTH + difference) / NOTE_CHANCE_GROWTH;
         _perfectNoteChance = Mathf.Clamp(_perfectNoteChance, 0, 1);
     }
+
+    /// <summary>
+    /// Gets the bard component of a player from an ID.
+    /// </summary>
+    /// <returns>The bard component of the specified player.</returns>
+    /// <param name="playerID">The ID of the player to get the bard component of.</param>
+    public BaseBard GetBardFromID(PlayerID playerID) {
+        return playerDict[playerID].GetComponent<BaseBard>();
+    }
 }

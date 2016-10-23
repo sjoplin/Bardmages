@@ -21,12 +21,17 @@ namespace Bardmages.AI {
         protected List<BaseControl> otherPlayers;
 
         /// <summary>
+        /// Generates random tunes for the bard if needed.
+        /// </summary>
+        private void Awake() {
+            bard = GetComponent<AIBard>();
+            bard.RandomizeTunes();
+        }
+
+        /// <summary>
         /// Registers the AI in the level and finds the other players.
         /// </summary>
     	private void Start() {
-            bard = GetComponent<AIBard>();
-            bard.RandomizeTunes();
-
             control = GetComponent<AIControl>();
             life = GetComponent<PlayerLife>();
             enabledRhythms = LevelManager.instance.EnabledRhythms;

@@ -5,7 +5,15 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 
 	public PlayerID owner;
 	public bool copy;
-	private bool crit;
+    private bool crit;
+
+    /// <summary> The tune that spawned this object. </summary>
+    private Tune _tune;
+    /// <summary> The tune that spawned this object. </summary>
+    public Tune tune {
+        get { return _tune; }
+        set { _tune = value; }
+    }
 
 	public void Crit (bool crit)
 	{
@@ -22,7 +30,7 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
         robes[0] = bardChild.FindChild("pCube2");
         robes[1] = bardChild.FindChild("pCube3");
 
-        Material robeMaterial = LevelManager.instance.playerDict[owner].transform.FindChild("bardmage_export").FindChild("pCube2").GetComponent<Renderer>().material;
+        Material robeMaterial = LevelManager.instance.playerDict[owner].GetRobeMaterial();
         foreach (Transform robe in robes) {
             robe.GetComponent<Renderer>().material = robeMaterial;
         }

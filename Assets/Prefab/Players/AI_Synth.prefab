@@ -481,13 +481,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011778977918}
+  - 114: {fileID: 114000012592683616}
   - 114: {fileID: 114000011727398508}
   - 114: {fileID: 114000010622804342}
   - 114: {fileID: 114000011543404506}
   - 143: {fileID: 143000010758887482}
   - 82: {fileID: 82000011270115214}
   - 195: {fileID: 195000014167142184}
-  - 114: {fileID: 114000011912109970}
   m_Layer: 0
   m_Name: AI_Synth
   m_TagString: Untagged
@@ -1393,7 +1393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fellOffMap: 0
   respawnTime: 4
+  lastHitTune: {fileID: 0}
+  lastHitPlayer: 0
 --- !u!114 &114000011023793356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1475,6 +1478,8 @@ MonoBehaviour:
   - {fileID: 114000011396993340, guid: 25da98d4970c849e1b5c668572a12180, type: 2}
   - {fileID: 114000012703513154, guid: 5d22fb4156c36fb46a9aefb74c92d3a6, type: 2}
   - {fileID: 114000011396993340, guid: d9ba94cbaae67480ba98808e11e597d6, type: 2}
+  - {fileID: 114000010569780618, guid: 4f08aca025183464fb343cb37ce8f587, type: 2}
+  randomizeTunes: 1
 --- !u!114 &114000011609680286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1510,17 +1515,6 @@ MonoBehaviour:
   player: 3
   speed: 10
   currentDirection: {x: 0, y: 0}
---- !u!114 &114000011912109970
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012983824296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd9e61c4818dd4ace809875ad9543062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000012208816278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1548,6 +1542,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 3
+--- !u!114 &114000012592683616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012983824296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ee3b1bbb2f24158983a56645e7b6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013673923182
 MonoBehaviour:
   m_ObjectHideFlags: 1

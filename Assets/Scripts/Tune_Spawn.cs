@@ -23,10 +23,18 @@ public class Tune_Spawn : Tune {
 			temp.GetComponent<FollowTarget>().target = ownerTransform;
 			temp.GetComponent<FollowTarget>().offset = Vector3.zero;
 		}
-		if(temp.GetComponent<Spawnable>() != null) {
-			temp.GetComponent<Spawnable>().Crit(crit);
+        Spawnable spawnable = temp.GetComponent<Spawnable>();
+        if(spawnable != null) {
             PlayerID ownerID = ownerTransform.GetComponent<BaseControl>().playerOwner;
-			temp.GetComponent<Spawnable>().Owner(ownerID);
+            spawnable.Owner(ownerID);
+            spawnable.Crit(crit);
+            if (ownerTransform.GetComponent<MinionTuneSpawn>() != null) {
+                BaseBard bard = LevelManager.instance.GetBardFromID(ownerID);
+                spawnable.tune = bard.GetTuneFromName("Minion");
+            }
+            if (spawnable.tune == null) {
+                spawnable.tune = this;
+            }
 		}
 	}
 }
