@@ -156,8 +156,10 @@ public class PlayerUIController : MonoBehaviour {
 	public virtual void UpdateHealth(float amount, bool died) {
 		if(healthBar) {
 			healthBar.fillAmount = amount;
-			deaths++;
-			if(died) deathCounter.text = deaths.ToString();
+            if(died) {
+                deaths++;
+                deathCounter.text = deaths.ToString();
+            }
 		}
 	}
 
