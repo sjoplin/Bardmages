@@ -47,6 +47,14 @@ namespace Bardmages.AI {
         }
 
         /// <summary>
+        /// Sets whether the bard's tunes are played by a human or an AI.
+        /// </summary>
+        /// <param name="tune">The tune to set.</param>
+        protected override void SetTuneHuman(Tune tune) {
+            tune.isHuman = false;
+        }
+
+        /// <summary>
         /// Picks random tunes for the bardmage to use during the battle.
         /// </summary>
         internal void RandomizeTunes() {
@@ -105,8 +113,8 @@ namespace Bardmages.AI {
                 buttonPressDelay = Mathf.Max(buttonPressDelayTimer, noteDelay);
 
                 modifiedThreshold = Tune.PERFECT_THRESHOLD;
-                if (Random.Range(0, 1) > timingAccuracy) {
-                    modifiedThreshold -= 0.1f;
+                if (Random.Range(0.0f, 1.0f) > timingAccuracy) {
+                    modifiedThreshold -= 0.2f;
                 }
             }
         }

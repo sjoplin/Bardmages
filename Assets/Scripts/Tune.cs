@@ -34,7 +34,7 @@ public class Tune : MonoBehaviour {
     public string tuneName;
 
     /// <summary> The percentage threshold for a note being considered on the beat. </summary>
-    public const float PERFECT_THRESHOLD = 0.75f;
+    public const float PERFECT_THRESHOLD = 0.8f;
 
     /// <summary> The maximum distance away from the enemy for the tune to be able to succeed. Used for AI. </summary>
     [SerializeField]
@@ -44,6 +44,10 @@ public class Tune : MonoBehaviour {
     [SerializeField]
     [Tooltip("The minimum distance away from the enemy for the tune to be able to succeed. Used for AI.")]
     public float minDistance = 0;
+
+    /// <summary> Whether the tune is being played by a human player. </summary>
+    [HideInInspector]
+    public bool isHuman;
 
 	/// <summary>
 	/// What should happen when the tune completes?
@@ -69,7 +73,11 @@ public class Tune : MonoBehaviour {
 	public bool IterateTune() {
 		tuneProgress++;
 
-        if(LevelManager.instance.PerfectTiming() < PERFECT_THRESHOLD) {
+        bool perfect = LevelManager.instance.PerfectTiming() >= PERFECT_THRESHOLD;
+        if (isHuman) {
+            LevelManager.instance.RegisterNote(perfect);
+        }
+        if(!perfect) {
 			perfectTiming = false;
 		}
 
