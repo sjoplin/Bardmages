@@ -6,8 +6,6 @@ public class Mine : Attack {
 	protected override void Start () {
         transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
 
-        //TODO: Color should depend on the color of the mine's owner
-
         base.Start();
 
         Renderer renderer = GetComponent<Renderer>();

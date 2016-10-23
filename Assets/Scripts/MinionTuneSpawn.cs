@@ -52,7 +52,6 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 	}
 	
 	// Update is called once per frame
-	//TODO add points to parent when minion kills
 	void Update () {
 		if (!(LevelManager.instance.playerDict [owner].GetComponent<PlayerLife> ().Alive)) {
 			Destroy (this.gameObject);
