@@ -6945,11 +6945,6 @@ Prefab:
       value: 
       objectReference: {fileID: 114000012703513154, guid: 5d22fb4156c36fb46a9aefb74c92d3a6,
         type: 2}
-    - target: {fileID: 114000010196897164, guid: 4466ed68c16994fc582b9e3f8ed20f9e,
-        type: 2}
-      propertyPath: randomizeTunes
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 4466ed68c16994fc582b9e3f8ed20f9e, type: 2}
