@@ -12,6 +12,8 @@ public class PlayerLife : MonoBehaviour {
 
 	protected Vector3 positionOfDeath;
 
+	public bool fellOffMap;
+
 	/// <summary>
 	/// The ui elements to be animated when the player is damaged
 	/// </summary>
@@ -53,8 +55,10 @@ public class PlayerLife : MonoBehaviour {
 		health -= amount;
 		bool died = false;
 		if(health <= 0) {
-			control.ClearMomentum();
-			EffectManager.instance.SpawnDeathEffect(transform.position);
+			GetComponent<BaseControl>().ClearMomentum();
+			if (this.GetComponent<BaseControl>().player != PlayerID.None) {
+				EffectManager.instance.SpawnDeathEffect (transform.position);
+			}
 			respawnTimer = respawnTime;
             control.enabled = false;
 			positionOfDeath = transform.position;
@@ -97,7 +101,9 @@ public class PlayerLife : MonoBehaviour {
 	/// <param name="hit">Hit.</param>
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 		if(hit.collider.gameObject.tag.Equals("Kill")) {
+			fellOffMap = true;
 			DealDamage(1f);
+
 		}
 	}
 
@@ -137,4 +143,12 @@ public class PlayerLife : MonoBehaviour {
 		}
 	}
 
+	public bool FellOffMap {
+		get {
+			return fellOffMap;
+		}
+		set {
+			fellOffMap = value;
+		}
+	}
 }
