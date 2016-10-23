@@ -10,12 +10,19 @@ public class Mine : Attack {
 
         base.Start();
 
+        Renderer renderer = GetComponent<Renderer>();
+        Color mineColor;
         if (this.crit)
         {
-            GetComponent<Renderer>().material.color = Color.magenta;
-            GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.magenta);
-            transform.GetChild(0).GetComponent<ParticleSystem>().startColor = Color.magenta;
+            mineColor = Color.magenta;
         }
+        else
+        {
+            mineColor = LevelManager.instance.playerDict[agressor].GetRobeMaterial().color;
+        }
+        renderer.material.color = mineColor;
+        renderer.material.SetColor("_EmissionColor", mineColor);
+        transform.GetChild(0).GetComponent<ParticleSystem>().startColor = mineColor;
     }
 
     protected override void OnTriggerEnter(Collider other)
