@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Animates the visual death effect.
+/// </summary>
 public class DeathEffectAnimator : MonoBehaviour {
 
 	// Use this for initialization
@@ -9,6 +12,9 @@ public class DeathEffectAnimator : MonoBehaviour {
 		StartCoroutine(AnimDeathEffect());
 	}
 	
+    /// <summary>
+    /// Animates the death effect growing and fading out.
+    /// </summary>
 	private IEnumerator AnimDeathEffect() {
 		float timer = 0f;
 
@@ -37,8 +43,6 @@ public class DeathEffectAnimator : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 		}
 
-		transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1,1,1,1f);
-
 		timer = 0f;
 
 		while(timer < 1f) {
@@ -46,7 +50,10 @@ public class DeathEffectAnimator : MonoBehaviour {
 
 			transform.localScale = Vector3.one*(1+timer);
 
-			transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1,0,0,1-timer);
+            SpriteRenderer topRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+            Color topColor = topRenderer.color;
+            topColor.a = 1 - timer;
+            topRenderer.color = topColor;
 			transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1,1,1,1-(timer*2f));
 			transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(1,1,1,1-(timer*2f));
 			transform.GetChild(3).GetComponent<SpriteRenderer>().color = new Color(1,1,1,1-(timer*2f));

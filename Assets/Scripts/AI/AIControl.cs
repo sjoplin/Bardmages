@@ -115,7 +115,7 @@ namespace Bardmages.AI {
         /// <param name="position">The position to move towards.</param>
         /// <param name="overrideCurrent">Whether to override the current action if already executing one.</param>
         internal void MoveToPosition(Vector3 position, bool overrideCurrent = false) {
-            if (overrideCurrent || !isBusy) {
+            if (navMeshAgent.isOnNavMesh && (overrideCurrent || !isBusy)) {
                 navMeshAgent.CalculatePath(position, currentPath);
                 if (currentPath.corners.Length > 0) {
                     currentNodeIndex = 0;

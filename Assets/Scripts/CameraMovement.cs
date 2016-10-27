@@ -21,19 +21,23 @@ public class CameraMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(targets.Length == 0) return;
+        if(targets.Length == 0) return;
 
 		Vector3 averagePosition = Vector3.zero;
 
 		int numDead = 0;
 
 		foreach(Transform t in targets) {
-			if(t.GetComponent<PlayerLife>().Alive) {
+            if(t.gameObject.activeSelf && t.GetComponent<PlayerLife>().Alive) {
 				averagePosition += t.position;
 			} else {
 				numDead++;
 			}
 		}
+
+        if (targets.Length <= numDead) {
+            return;
+        }
 
 		averagePosition /= (targets.Length - numDead);
 

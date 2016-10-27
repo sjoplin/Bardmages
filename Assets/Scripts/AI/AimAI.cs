@@ -48,8 +48,16 @@ namespace Bardmages.AI {
             }
 
             if (!bard.isPlayingTune) {
-                bard.StartTune(Random.Range(0, 3), false, enabledRhythms[Random.Range(0, enabledRhythms.Count)]);
+                bard.StartTune(ChooseTune(), false, enabledRhythms[Random.Range(0, enabledRhythms.Count)]);
             }
+        }
+
+        /// <summary>
+        /// Chooses a tune to start playing.
+        /// </summary>
+        /// <returns>The index of the tune to play next.</returns>
+        protected virtual int ChooseTune() {
+            return Random.Range(0, bard.tunes.Length);
         }
     }
 }
