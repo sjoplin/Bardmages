@@ -137,14 +137,16 @@ public class PlayerUIController : MonoBehaviour {
 
 		while(animatePressedButton < 1f) {
 			animatePressedButton += Time.deltaTime;
-			tuneKeys[index].transform.localScale = Vector3.one*(animatePressedButton+1);
-			tuneKeys[index].color = new Color(1,1,1,1-animatePressedButton);
-			for(int i = index + 1; i < tuneKeys.Length; i++) {
-				tuneKeys[i].GetComponent<RectTransform>().anchoredPosition =
-					Vector2.Lerp(tuneKeys[i].GetComponent<RectTransform>().anchoredPosition,
-						new Vector2(rightSideUI ? 30 + 40*(i-(index+1)) : -(30 + 40*(i-(index+1))),0f), animatePressedButton);
-				tuneKeys[i].color = new Color(1,1,1,1-((float)(i-(index+1))/(float)tuneKeys.Length));
-			}
+            if (index < tuneKeys.Length) {
+    			tuneKeys[index].transform.localScale = Vector3.one*(animatePressedButton+1);
+    			tuneKeys[index].color = new Color(1,1,1,1-animatePressedButton);
+    			for(int i = index + 1; i < tuneKeys.Length; i++) {
+    				tuneKeys[i].GetComponent<RectTransform>().anchoredPosition =
+    					Vector2.Lerp(tuneKeys[i].GetComponent<RectTransform>().anchoredPosition,
+    						new Vector2(rightSideUI ? 30 + 40*(i-(index+1)) : -(30 + 40*(i-(index+1))),0f), animatePressedButton);
+    				tuneKeys[i].color = new Color(1,1,1,1-((float)(i-(index+1))/(float)tuneKeys.Length));
+    			}
+            }
 			yield return new WaitForEndOfFrame();
 		}
 			
@@ -154,8 +156,10 @@ public class PlayerUIController : MonoBehaviour {
 	public virtual void UpdateHealth(float amount, bool died) {
 		if(healthBar) {
 			healthBar.fillAmount = amount;
-			deaths++;
-			if(died) deathCounter.text = deaths.ToString();
+            if(died) {
+                deaths++;
+                deathCounter.text = deaths.ToString();
+            }
 		}
 	}
 
