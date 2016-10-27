@@ -20,22 +20,23 @@ public class PlayerLife : MonoBehaviour {
     /// <summary>
     /// (DEPRECATED)Handles offsetting the respawn, if the player is allowed to respawn
     /// </summary>
-    //private float respawnTimer;
+    private float respawnTimer;
 
     /// <summary>
     /// (DEPRECATED)How much time should the player remain dead?
     /// Use -1 for game modes like elimination where players don't respawn automatically
     /// </summary>
-    //public float respawnTime;
+    public float respawnTime;
 
     /// <summary>
     /// Sets the player health to 1 and finds the appropriate UI elements
     /// </summary>
 
     public bool fellOffMap;
-
+    public bool roundHandler;
     protected virtual void Start() {
-		health = 1f;
+        roundHandler = Assets.Scripts.Data.RoundHandler.Instance != null;
+        health = 1f;
 		greenHealthBar = transform.FindChild("Canvas").FindChild("HealthBarRed").FindChild("HealthBarGreen").GetComponent<Image>();
 		freshRedHealthBar = transform.FindChild("Canvas").FindChild("HealthBarRed").FindChild("HealthBarFreshRed").GetComponent<Image>();
 	}
@@ -52,15 +53,16 @@ public class PlayerLife : MonoBehaviour {
 			if (this.GetComponent<BaseControl>().player != PlayerID.None) {
 				EffectManager.instance.SpawnDeathEffect (transform.position);
 			}
-			//respawnTimer = respawnTime;
 			GetComponent<BaseControl>().enabled = false;
 			positionOfDeath = transform.position;
 			transform.position = Vector3.up*100f;
 			died = true;
-            if(Assets.Scripts.Data.RoundHandler.Instance != null)
+            if(roundHandler)
                 Assets.Scripts.Data.RoundHandler.Instance.AddDeath();
-		}
-        if(health > 1) {
+            else
+                respawnTimer = respawnTime;
+        }
+        if (health > 1) {
             health = 1f;
         }
 
@@ -73,16 +75,19 @@ public class PlayerLife : MonoBehaviour {
 		}
 	}
 
-	//void Update() {
-	//	if(health <= 0f && respawnTimer > 0f) {
-	//		respawnTimer -= Time.deltaTime;
-	//		if(respawnTimer <= 0f) {
-	//			transform.position = Vector3.up*10f;
-	//			health = 1f;
-	//			GetComponent<BaseControl>().enabled = true;
-	//		}
-	//	}
-	//}
+    void Update()
+    {
+        if (!roundHandler && (health <= 0f && respawnTimer > 0f))
+        {
+            respawnTimer -= Time.deltaTime;
+            if (respawnTimer <= 0f)
+            {
+                transform.position = Vector3.up * 10f;
+                health = 1f;
+                GetComponent<BaseControl>().enabled = true;
+            }
+        }
+    }
 
     /// <summary> Re-initialize the player health and re-enable control. </summary>
     public void Respawn()

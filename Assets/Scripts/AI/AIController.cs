@@ -47,7 +47,6 @@ namespace Bardmages.AI {
                     otherPlayers.Add(otherPlayer);
                 }
             }
-
             InitializeAI();
     	}
 

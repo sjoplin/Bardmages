@@ -27,6 +27,8 @@ namespace Assets.Scripts.Data
                 if(instance == null)
                 {
                     instance = FindObjectOfType<RoundHandler>();
+                    if (instance == null)
+                        return null;
                     instance.Init();
                 }
                 return instance;
