@@ -59,4 +59,4 @@ MonoBehaviour:
   tuneName: Lazer
   maxDistance: 70
   minDistance: 0
-  attach: 0
+  attach: 1

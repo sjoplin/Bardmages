@@ -25,4 +25,12 @@ public class PlayerBard : BaseBard {
         return ControllerManager.instance.GetButton(button, control.player);
     }
 
+    /// <summary>
+    /// Sets whether the bard's tunes are played by a human or an AI.
+    /// </summary>
+    /// <param name="tune">The tune to set.</param>
+    protected override void SetTuneHuman(Tune tune) {
+        tune.isHuman = true;
+    }
+
 }

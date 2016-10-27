@@ -26,6 +26,14 @@ public class Heal : MonoBehaviour, Spawnable {
 
     protected bool crit;
 
+    /// <summary> The tune that spawned this object. </summary>
+    private Tune _tune;
+    /// <summary> The tune that spawned this object. </summary>
+    public Tune tune {
+        get { return _tune; }
+        set { _tune = value; }
+    }
+
 	protected virtual void Start ()
 	{
 
@@ -47,10 +55,10 @@ public class Heal : MonoBehaviour, Spawnable {
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.transform.root.GetComponent<PlayerControl>()
-            && other.transform.root.GetComponent<PlayerControl>().player == agressor)
+        BaseControl control = other.transform.root.GetComponent<BaseControl>();
+        if (control && control.player == agressor)
         {
-            other.transform.root.GetComponent<PlayerLife>().DealDamage(damage);
+            other.transform.root.GetComponent<PlayerLife>().DealDamage(damage, tune, agressor);
             //if (destroyOnImpact) Destroy(this.gameObject);
         }
         //else if (!other.transform.root.GetComponent<PlayerControl>())
