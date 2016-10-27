@@ -33,6 +33,9 @@ public class Tune : MonoBehaviour {
     /// <summary> The name of the tune. </summary>
     public string tuneName;
 
+	/// <summary> The description of the tune. </summary>
+	public string tuneDescription;
+
     /// <summary> The percentage threshold for a note being considered on the beat. </summary>
     public const float PERFECT_THRESHOLD = 0.75f;
 
