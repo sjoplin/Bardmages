@@ -17,6 +17,10 @@ public class MainMenuManager : MonoBehaviour {
 		GetComponent<Animator>().SetInteger("State",1);
 	}
 
+	public void GoToCharacterSelect() {
+		GetComponent<Animator>().SetInteger("State",2);
+	}
+
 	public void GoToPlayerSelect() {
 		foreach(MainMenuAI ai in mainMenuAI) {
 			ai.leaveArena = true;
