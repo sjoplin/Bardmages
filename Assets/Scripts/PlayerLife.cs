@@ -12,26 +12,26 @@ public class PlayerLife : MonoBehaviour {
 
 	protected Vector3 positionOfDeath;
 
-	/// <summary>
-	/// The ui elements to be animated when the player is damaged
-	/// </summary>
-	private Image greenHealthBar, freshRedHealthBar;
+    /// <summary>
+    /// The ui elements to be animated when the player is damaged
+    /// </summary>
+    private Image greenHealthBar, freshRedHealthBar;
 
-	/// <summary>
-	/// Handles offsetting the respawn, if the player is allowed to respawn
-	/// </summary>
-	private float respawnTimer;
+    /// <summary>
+    /// (DEPRECATED)Handles offsetting the respawn, if the player is allowed to respawn
+    /// </summary>
+    //private float respawnTimer;
 
-	/// <summary>
-	/// How much time should the player remain dead?
-	/// Use -1 for game modes like elimination where players don't respawn automatically
-	/// </summary>
-	public float respawnTime;
+    /// <summary>
+    /// (DEPRECATED)How much time should the player remain dead?
+    /// Use -1 for game modes like elimination where players don't respawn automatically
+    /// </summary>
+    //public float respawnTime;
 
-	/// <summary>
-	/// Sets the player health to 1 and finds the appropriate UI elements
-	/// </summary>
-	protected virtual void Start() {
+    /// <summary>
+    /// Sets the player health to 1 and finds the appropriate UI elements
+    /// </summary>
+    protected virtual void Start() {
 		health = 1f;
 		greenHealthBar = transform.FindChild("Canvas").FindChild("HealthBarRed").FindChild("HealthBarGreen").GetComponent<Image>();
 		freshRedHealthBar = transform.FindChild("Canvas").FindChild("HealthBarRed").FindChild("HealthBarFreshRed").GetComponent<Image>();
@@ -47,11 +47,13 @@ public class PlayerLife : MonoBehaviour {
 		if(health <= 0) {
 			GetComponent<BaseControl>().ClearMomentum();
 			EffectManager.instance.SpawnDeathEffect(transform.position);
-			respawnTimer = respawnTime;
+			//respawnTimer = respawnTime;
 			GetComponent<BaseControl>().enabled = false;
 			positionOfDeath = transform.position;
 			transform.position = Vector3.up*100f;
 			died = true;
+            if(Assets.Scripts.Data.RoundHandler.Instance != null)
+                Assets.Scripts.Data.RoundHandler.Instance.AddDeath();
 		}
         if(health > 1) {
             health = 1f;
@@ -66,16 +68,27 @@ public class PlayerLife : MonoBehaviour {
 		}
 	}
 
-	void Update() {
-		if(health <= 0f && respawnTimer > 0f) {
-			respawnTimer -= Time.deltaTime;
-			if(respawnTimer <= 0f) {
-				transform.position = Vector3.up*10f;
-				health = 1f;
-				GetComponent<BaseControl>().enabled = true;
-			}
-		}
-	}
+	//void Update() {
+	//	if(health <= 0f && respawnTimer > 0f) {
+	//		respawnTimer -= Time.deltaTime;
+	//		if(respawnTimer <= 0f) {
+	//			transform.position = Vector3.up*10f;
+	//			health = 1f;
+	//			GetComponent<BaseControl>().enabled = true;
+	//		}
+	//	}
+	//}
+
+    /// <summary> Re-initialize the player health and re-enable control. </summary>
+    public void Respawn()
+    {
+        health = 1f;
+        PlayerUIController uiController = LevelManager.instance.GetPlayerUI(GetComponent<BaseControl>().player);
+        if (uiController != null)
+        {
+            uiController.UpdateHealth(health, false);
+        }
+    }
 
 	/// <summary>
 	/// Raises the controller collider hit event.

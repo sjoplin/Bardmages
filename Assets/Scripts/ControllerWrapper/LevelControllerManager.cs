@@ -14,7 +14,7 @@ public class LevelControllerManager : MonoBehaviour {
 
 	private ControllerManager cm;
 
-	private PlayerControl[] players;
+	private BaseControl[] players;
 
     void Awake()
     {
@@ -27,8 +27,10 @@ public class LevelControllerManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
-		players = GameObject.FindObjectsOfType<PlayerControl>();
+        if (FindObjectOfType<Assets.Scripts.Data.RoundHandler>() == null)
+            players = GameObject.FindObjectsOfType<PlayerControl>();
+        else
+            players = Assets.Scripts.Data.RoundHandler.Instance.PlayerControl();
     }
 
 	void Update() {

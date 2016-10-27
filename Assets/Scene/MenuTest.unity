@@ -1228,7 +1228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 2
 --- !u!82 &62706003
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2576,7 +2575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 2
 --- !u!82 &155589850
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7801,7 +7799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 2
 --- !u!82 &745533679
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13466,7 +13463,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 2
 --- !u!82 &1282028270
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20690,6 +20686,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012159877738, guid: 67f1645d23a44d14686a45e064469b60,
+        type: 2}
+      propertyPath: characters.Array.data[0]
+      value: 
+      objectReference: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67f1645d23a44d14686a45e064469b60, type: 2}
   m_IsPrefabParent: 0

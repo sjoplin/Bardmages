@@ -4301,7 +4301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 4
 --- !u!114 &578383716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4573,11 +4572,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 584881058}
---- !u!4 &587795675 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4000013529069566, guid: 79f9bcf772674475c8dce8b345322f97,
-    type: 2}
-  m_PrefabInternal: {fileID: 678042543}
 --- !u!1 &592726221
 GameObject:
   m_ObjectHideFlags: 0
@@ -4991,6 +4985,10 @@ Prefab:
         type: 2}
       propertyPath: respawnTime
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012993668686, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79f9bcf772674475c8dce8b345322f97, type: 2}
@@ -5978,7 +5976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 4
 --- !u!114 &801893282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6274,10 +6271,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
-  - {fileID: 464674546}
-  - {fileID: 587795675}
-  - {fileID: 416242764}
-  - {fileID: 379344941}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &822239613
 GameObject:
   m_ObjectHideFlags: 0
@@ -14877,7 +14874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 4
 --- !u!114 &1916897189
 MonoBehaviour:
   m_ObjectHideFlags: 0
