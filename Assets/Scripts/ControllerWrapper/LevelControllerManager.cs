@@ -27,7 +27,7 @@ public class LevelControllerManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        if (FindObjectOfType<Assets.Scripts.Data.RoundHandler>() == null)
+        if (Assets.Scripts.Data.RoundHandler.Instance == null)
             players = GameObject.FindObjectsOfType<PlayerControl>();
         else
             players = Assets.Scripts.Data.RoundHandler.Instance.PlayerControl();

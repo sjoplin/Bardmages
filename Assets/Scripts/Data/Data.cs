@@ -34,6 +34,9 @@ namespace Assets.Scripts.Data
         /// <summary> The level to async load. </summary>
         internal string level;
 
+        private bool isElimination;
+        public bool IsElimination { get { return isElimination; } set { isElimination = value; } }
+
         void Awake()
         {
             if (Instance == null)
@@ -46,7 +49,7 @@ namespace Assets.Scripts.Data
                 Destroy(this.gameObject);
                 return;
             }
-
+            isElimination = true;
             level = "Test";
             tunes = new Tune[4][];
             for (int i = 0; i < tunes.Length; i++)

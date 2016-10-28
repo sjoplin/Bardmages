@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Data
@@ -34,7 +35,6 @@ namespace Assets.Scripts.Data
                 return instance;
             }
         }
-
         /// <summary> Count down timer for round start. </summary>
         private float countDown;
         /// <summary> Reference to all the bards. </summary>
@@ -50,7 +50,19 @@ namespace Assets.Scripts.Data
         }
         /// <summary> Number of players that have died this round. </summary>
         private int deathCount;
+        /// <summary> The score for each bard. </summary>
+        private int[] scores;
+        public int[] Scores { get { return scores; } }
+        /// <summary> Bool array for tracking who is dead. </summary>
+        private bool[] isDead;
+        /// <summary> Vector for resetting camera postion. </summary>
+        private Vector3 cameraPos;
+        /// <summary> Quaternion for resetting camera rotation. </summary>
+        private Quaternion cameraRot;
+        /// <summary> Pointer to the camera to reset it. </summary>
+        private CameraMovement cm;
         
+        /// <summary> Initializes this object. </summary>
         void Init()
         {
             bards = new PlayerLife[4];
@@ -66,6 +78,8 @@ namespace Assets.Scripts.Data
             timerText.text = "3";
             canvas.SetActive(true);
             countDown = 3f;
+            scores = new int[4];
+            isDead = new bool[4];
             if (bards == null)
                 Init();
             Transform[] targets = new Transform[4];
@@ -73,7 +87,10 @@ namespace Assets.Scripts.Data
             {
                 targets[i] = Bards[i].transform;
             }
-            GameObject.FindObjectOfType<CameraMovement>().targets = targets;
+            cm = GameObject.FindObjectOfType<CameraMovement>();
+            cm.targets = targets;
+            cameraPos = cm.transform.position;
+            cameraRot = cm.transform.localRotation;
             ResetRound();
         }
 
@@ -85,6 +102,15 @@ namespace Assets.Scripts.Data
                 canvas.SetActive(true);
                 ResetRound();
                 deathCount = 0;
+                for(int i = 0; i < isDead.Length; i++)
+                {
+                    if (!isDead[i])
+                        AddScore((PlayerID)(i+1));
+                    isDead[i] = false;
+                }
+                cm.transform.position = cameraPos;
+                cm.transform.localRotation = cameraRot;
+                Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
             }
             if (countDown > -2)
             {
@@ -116,12 +142,76 @@ namespace Assets.Scripts.Data
                     countDown = -5000;
                 }
             }
+            bool done = false;
+            for(int i = 0; i < scores.Length; i++)
+            {
+                if(Data.Instance.IsElimination)
+                {
+                    if (scores[i] > 2)
+                        done = true;
+                }
+                else
+                {
+                    if (scores[i] > 29)
+                        done = true;
+                }
+            }
+            if (done)
+            {
+                countDown = -5000;
+                canvas.SetActive(true);
+                ResetRound();
+                timerText.text = "Finish!";
+            }
         }
 
-        /// <summary> Increments the death count for this round. </summary>
-        public void AddDeath()
+        /// <summary> Increments the death count for this round or sets the given player to respawn. </summary>
+        /// <param name="id"> The player that died. </param>
+        public void AddDeath(PlayerID id)
         {
-            deathCount++;
+            if (id != PlayerID.None)
+            {
+                if (Data.Instance.IsElimination)
+                {
+                    deathCount++;
+                    isDead[((int)id) - 1] = true;
+                }
+                else
+                {
+                    StartCoroutine(Respawn(((int)id) - 1));
+                }
+            }
+        }
+
+        /// <summary> Increments the score of the given player. </summary>
+        /// <param name="id"> The player to increment. </param>
+        public void AddScore(PlayerID id)
+        {
+            if (id != PlayerID.None)
+            {
+                scores[((int)id) - 1]++;
+            }
+        }
+
+        /// <summary> Co-routine for respawning players in king of the hill. </summary>
+        /// <param name="player"> The player to respawn. </param>
+        /// <returns> Nothing. </returns>
+        private IEnumerator Respawn(int player)
+        {
+            Bards[player].GetComponent<BaseControl>().enabled = false;
+            Bards[player].GetComponent<BaseBard>().enabled = false;
+            Bards[player].GetComponent<CharacterController>().enabled = false;
+            if (Bards[player].GetComponent<NavMeshAgent>())
+                Bards[player].GetComponent<NavMeshAgent>().enabled = false;
+            yield return new WaitForSeconds(3);
+            Bards[player].GetComponent<BaseControl>().enabled = true;
+            Bards[player].GetComponent<BaseBard>().enabled = true;
+            Bards[player].GetComponent<CharacterController>().enabled = true;
+            if (Bards[player].GetComponent<NavMeshAgent>())
+                Bards[player].GetComponent<NavMeshAgent>().enabled = true;
+            Bards[player].Respawn();
+            Bards[player].transform.position = spawnPoints[player].position;
+            yield return null;
         }
 
         /// <summary> Reset all of the bards. </summary>
@@ -152,12 +242,9 @@ namespace Assets.Scripts.Data
                 Bards[i].transform.position = spawnPoints[i].position;
             }
         }
-
-        //public GameObject Bards(PlayerID bard)
-        //{
-        //    return Bards[(int)bard - 1].gameObject;
-        //}
-
+        
+        /// <summary> Used to retrieve all non-AI bards. </summary>
+        /// <returns> an array of non-AI bards. </returns>
         public PlayerControl[] PlayerControl()
         {
             System.Collections.Generic.List<PlayerControl> bc = new System.Collections.Generic.List<PlayerControl>();
@@ -167,6 +254,8 @@ namespace Assets.Scripts.Data
             return bc.Count > 0 ? bc.ToArray() : null;
         }
 
+        /// <summary> Used to retrieve all the bards in the game. </summary>
+        /// <returns> An array of all the bards. </returns>
         public BaseControl[] Control()
         {
             BaseControl[] bc = new BaseControl[4];

@@ -87,7 +87,7 @@ public class PlayerLife : MonoBehaviour {
 			transform.position = Vector3.up*100f;
 			died = true;
             if(roundHandler)
-                Assets.Scripts.Data.RoundHandler.Instance.AddDeath();
+                Assets.Scripts.Data.RoundHandler.Instance.AddDeath(control.player);
             else
                 respawnTimer = respawnTime;
         }
