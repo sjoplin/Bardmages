@@ -28,7 +28,7 @@ namespace Assets.Scripts.Data
 
         void Start()
         {
-            data = Data.instance;
+            data = Data.Instance;
             op = SceneManager.LoadSceneAsync(data.level);
             op.allowSceneActivation = false;
             time = waitTime;

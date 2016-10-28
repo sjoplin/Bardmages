@@ -23,7 +23,7 @@ namespace Bardmages.AI {
         protected override void UpdateAI() {
             if (transform.position.y > targetY) {
                 // Prevent pile-up at the spawn point by moving forward.
-                control.currentDirection = VectorUtil.GetDirection2D(transform.forward);
+				control.currentDirection = VectorUtil.GetDirection2D(transform.forward);
             } else {
                 // Check if the current move has distance constraints.
                 Vector3 targetPosition = GetClosestPlayer().transform.position;
@@ -44,12 +44,15 @@ namespace Bardmages.AI {
                     control.MoveToPosition(targetPosition + targetOffset);
                 } else {
                     control.FacePosition(targetPosition, true);
+					control.MoveToPosition(targetPosition);
                 }
+
             }
 
             if (!bard.isPlayingTune) {
                 bard.StartTune(ChooseTune(), false, enabledRhythms[Random.Range(0, enabledRhythms.Count)]);
             }
+
         }
 
         /// <summary>

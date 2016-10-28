@@ -13,23 +13,24 @@ public class PlayerLife : MonoBehaviour {
 
 	protected Vector3 positionOfDeath;
 
-	public bool fellOffMap;
+    public bool fellOffMap;
+    public bool roundHandler;
 
-	/// <summary>
-	/// The ui elements to be animated when the player is damaged
-	/// </summary>
-	private Image greenHealthBar, freshRedHealthBar;
+    /// <summary>
+    /// The ui elements to be animated when the player is damaged
+    /// </summary>
+    private Image greenHealthBar, freshRedHealthBar;
 
-	/// <summary>
-	/// Handles offsetting the respawn, if the player is allowed to respawn
-	/// </summary>
-	private float respawnTimer;
+    /// <summary>
+    /// (DEPRECATED)Handles offsetting the respawn, if the player is allowed to respawn
+    /// </summary>
+    private float respawnTimer;
 
-	/// <summary>
-	/// How much time should the player remain dead?
-	/// Use -1 for game modes like elimination where players don't respawn automatically
-	/// </summary>
-	public float respawnTime;
+    /// <summary>
+    /// (DEPRECATED)How much time should the player remain dead?
+    /// Use -1 for game modes like elimination where players don't respawn automatically
+    /// </summary>
+    public float respawnTime;
 
     /// <summary> The movement component of the player. </summary>
     private BaseControl control;
@@ -47,7 +48,9 @@ public class PlayerLife : MonoBehaviour {
 	/// <summary>
 	/// Sets the player health to 1 and finds the appropriate UI elements
 	/// </summary>
-	protected virtual void Start() {
+	protected virtual void Start()
+    {
+        roundHandler = Assets.Scripts.Data.RoundHandler.Instance != null;
         control = GetComponent<BaseControl>();
         uiController = LevelManager.instance.GetPlayerUI(control.player);
 		health = 1f;
@@ -79,14 +82,16 @@ public class PlayerLife : MonoBehaviour {
             if (control.player != PlayerID.None) {
                 EffectManager.instance.SpawnDeathEffect (transform.position, control.GetRobeMaterial().color);
 			}
-			respawnTimer = respawnTime;
-            control.enabled = false;
+			GetComponent<BaseControl>().enabled = false;
 			positionOfDeath = transform.position;
 			transform.position = Vector3.up*100f;
 			died = true;
-		}
-        if(health > 1) {
-            amount += health - 1;
+            if(roundHandler)
+                Assets.Scripts.Data.RoundHandler.Instance.AddDeath(control.player);
+            else
+                respawnTimer = respawnTime;
+        }
+        if (health > 1) {
             health = 1f;
         }
 
@@ -119,26 +124,36 @@ public class PlayerLife : MonoBehaviour {
         }
 	}
 
+    void Update()
+    {
+        if (!roundHandler && (health <= 0f && respawnTimer > 0f))
+        {
+            respawnTimer -= Time.deltaTime;
+            if (respawnTimer <= 0f)
+            {
+                transform.position = Vector3.up * 10f;
+                health = 1f;
+                GetComponent<BaseControl>().enabled = true;
+            }
+        }
+    }
+
+    /// <summary> Re-initialize the player health and re-enable control. </summary>
+    public void Respawn()
+    {
+        health = 1f;
+        PlayerUIController uiController = LevelManager.instance.GetPlayerUI(GetComponent<BaseControl>().player);
+        if (uiController != null)
+        {
+            uiController.UpdateHealth(health, false);
+        }
+    }
+
     /// <summary> Updates the health bar around the player with the player's current health. </summary>
     private void updateHealthBar() {
         greenHealthBar.fillAmount = health/2f + 0.5f;
         StartCoroutine(HealthBarCatchup());
     }
-
-	void Update() {
-		if(health <= 0f && respawnTimer > 0f) {
-			respawnTimer -= Time.deltaTime;
-			if(respawnTimer <= 0f) {
-				transform.position = Vector3.up*10f;
-				health = 1f;
-                GetComponent<BaseControl>().enabled = true;
-                uiController.UpdateHealth(health, false);
-                updateHealthBar();
-                lastHitTune = null;
-                lastHitPlayer = PlayerID.None;
-			}
-		}
-	}
 
 	/// <summary>
 	/// Raises the controller collider hit event.
