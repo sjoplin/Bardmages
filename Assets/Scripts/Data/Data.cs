@@ -21,7 +21,8 @@ namespace Assets.Scripts.Data
         private AudioClip[] defaultClips;
 
         /// <summary> internal reference fo ensuring singleton. </summary>
-        public static Data instance;
+        private static Data instance;
+        public static Data Instance { get { return instance; } }
 
         /// <summary> The tunes for each bard. </summary>
         private Tune[][] tunes;
@@ -33,21 +34,23 @@ namespace Assets.Scripts.Data
         /// <summary> The level to async load. </summary>
         internal string level;
 
+        private bool isElimination;
+        public bool IsElimination { get { return isElimination; } set { isElimination = value; } }
+
         void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
                 DontDestroyOnLoad(this.gameObject);
                 instance = this;
             }
-            else if (this != instance)
+            else if (this != Instance)
             {
                 Destroy(this.gameObject);
                 return;
             }
-
+            isElimination = true;
             level = "Test";
-            instance = this;
             tunes = new Tune[4][];
             for (int i = 0; i < tunes.Length; i++)
             {
@@ -78,18 +81,16 @@ namespace Assets.Scripts.Data
             SceneManager.LoadScene("Load");
         }
 
-        /// <summary> Spawn the bards in the scene. </summary>
-        public void Spawn()
+        /// <summary> Spawns a bard in the scene. </summary>
+        public GameObject Spawn(int character, Transform spawn)
         {
-            GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
-            for(int i = 0; i < characters.Length; i++)
-            {
-                BaseBard b = Instantiate(characters[i]);
-                b.transform.position = spawnPoints[i % spawnPoints.Length].transform.position;
-                b.tunes = tunes[i];
-                b.instrumentSound = clips[i];
-                //TODO: spawn instrument 
-            }
+            BaseBard b = Instantiate(characters[character]);
+            b.GetComponent<BaseControl>().player = (PlayerID)(character + 1);
+            b.transform.position = spawn.position;
+            b.tunes = tunes[character];
+            b.instrumentSound = clips[character];
+            //TODO: spawn instrument 
+            return b.gameObject;
         }
 
         /// <summary> Clear the saved bard data. </summary>
@@ -108,7 +109,7 @@ namespace Assets.Scripts.Data
         /// <param name="index"> The index of this tune. 1-3. Determines order in UI. </param>
         public void AddTuneToPlayer(PlayerID id, Tune tune, int index)
         {
-            tunes[(int)id + 1][index] = tune;
+            tunes[(int)id - 1][index] = tune;
         }
 
         /// <summary> Associate a specific sound with a bard. </summary>
@@ -116,7 +117,7 @@ namespace Assets.Scripts.Data
         /// <param name="instrumentSound"> The sound to add. </param>
         public void AddSoundToPlayer(PlayerID id, AudioClip instrumentSound)
         {
-            clips[(int)id + 1] = instrumentSound;
+            clips[(int)id - 1] = instrumentSound;
         }
 
         /// <summary> Associate an instrument model with a bard. </summary>
@@ -124,7 +125,7 @@ namespace Assets.Scripts.Data
         /// <param name="instrument"> The model to add. </param>
         public void AddInstrumentToPlayer(PlayerID id, GameObject instrument)
         {
-            instruments[(int)id + 1] = instrument;
+            instruments[(int)id - 1] = instrument;
         }
 
 
