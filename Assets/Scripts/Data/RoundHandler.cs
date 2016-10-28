@@ -61,6 +61,8 @@ namespace Assets.Scripts.Data
         private Quaternion cameraRot;
         /// <summary> Pointer to the camera to reset it. </summary>
         private CameraMovement cm;
+
+		private bool roundActive;
         
         /// <summary> Initializes this object. </summary>
         void Init()
@@ -114,10 +116,13 @@ namespace Assets.Scripts.Data
             }
             if (countDown > -2)
             {
-                countDown -= Time.deltaTime;
+                countDown -= Time.deltaTime/2f;
+				timerText.transform.localScale = Vector3.one*(Mathf.Abs(Mathf.Sin(countDown*3f))+Mathf.Abs(3-countDown));
+				timerText.GetComponent<RectTransform>().anchoredPosition = new Vector2((0.5f-Random.value)*(3-countDown),(0.5f-Random.value)*(3-countDown))*timerText.transform.localScale.magnitude;
                 if (countDown > 2)
                 {
                     timerText.text = "3";
+					timerText.color = Color.white;
                     //text effects
                 }
                 else if (countDown > 1)
@@ -132,12 +137,14 @@ namespace Assets.Scripts.Data
                 }
                 else if (countDown > -1)
                 {
+					if(!roundActive) StartRound();
                     timerText.text = "Start!";
+					timerText.color = Color.red;
+					timerText.CrossFadeAlpha(0f,1f,false);
                     //text effects
                 }
                 else
                 {
-                    StartRound();
                     canvas.SetActive(false);
                     countDown = -5000;
                 }
@@ -217,6 +224,9 @@ namespace Assets.Scripts.Data
         /// <summary> Reset all of the bards. </summary>
         private void ResetRound()
         {
+			roundActive = false;
+			GetComponent<AudioSource>().Play();
+			LevelManager.instance.music.Stop();
             for (int i = 0; i < Bards.Length; i++)
             {
                 Bards[i].GetComponent<BaseControl>().enabled = false;
@@ -231,6 +241,8 @@ namespace Assets.Scripts.Data
         /// <summary> Spawn all of the bards so they can begin. </summary>
         private void StartRound()
         {
+			roundActive = true;
+			LevelManager.instance.music.Play();
             for (int i = 0; i < Bards.Length; i++)
             {
                 Bards[i].GetComponent<BaseControl>().enabled = true;
