@@ -14,6 +14,20 @@ public abstract class BaseControl : MonoBehaviour {
     private Vector2 knockback;
 
     /// <summary>
+    /// The main player who owns this control.
+    /// If this is a minion, returns the player who spawned the minion instead of None.
+    /// </summary>
+    public PlayerID playerOwner {
+        get { 
+            if (player == PlayerID.None) {
+                return GetComponent<MinionTuneSpawn>().owner;
+            } else {
+                return player;
+            }
+        }
+    }
+
+    /// <summary>
     /// Use this for initialization.
     /// </summary>
     protected virtual void Start () {
@@ -41,8 +55,20 @@ public abstract class BaseControl : MonoBehaviour {
         }
     }
 
-    public void Knockback(Vector2 direction) {
+    /// <summary>
+    /// Adds knockback to the player's movement.
+    /// </summary>
+    /// <param name="direction">The direction of the knockback.</param>
+    /// <param name="tune">The tune that caused the knockback.</param>
+    /// <param name="owner">The player who caused the knockback.</param>
+    public void Knockback(Vector2 direction, Tune tune = null, PlayerID owner = PlayerID.None) {
+        if (owner == PlayerID.None) {
+            owner = player;
+        }
         move += direction;
+        PlayerLife life = GetComponent<PlayerLife>();
+        life.lastHitTune = tune;
+        life.lastHitPlayer = owner;
     }
 
 	public void ClearMomentum() {
@@ -60,4 +86,12 @@ public abstract class BaseControl : MonoBehaviour {
     /// </summary>
     /// <returns>Whether the bardmage turns gradually.</returns>
     protected abstract bool GetGradualTurn();
+
+    /// <summary>
+    /// Gets the material that makes up the bardmage's robe.
+    /// </summary>
+    /// <returns>The material that makes up the bardmage's robe..</returns>
+    public Material GetRobeMaterial() {
+        return transform.FindChild("bardmage_export").FindChild("pCube2").GetComponent<Renderer>().material;
+    }
 }

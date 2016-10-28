@@ -7,7 +7,7 @@ public class MainMenuButton : PhysicalButton {
 
 	private Vector3 initialPos;
 
-    void Start() {
+    new void Start() {
         base.Start();
         initialPos = transform.position;
     }

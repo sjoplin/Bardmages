@@ -11,6 +11,8 @@ namespace Bardmages.AI {
         protected AIBard bard;
         /// <summary> The AI component for moving. </summary>
         protected AIControl control;
+        /// <summary> The health component of the bardmage. </summary>
+        protected PlayerLife life;
 
         /// <summary> The rhythms that are recognized for perfect attacks. </summary>
         protected List<LevelManager.RhythmType> enabledRhythms;
@@ -19,14 +21,22 @@ namespace Bardmages.AI {
         protected List<BaseControl> otherPlayers;
 
         /// <summary>
+        /// Generates random tunes for the bard if needed.
+        /// </summary>
+        private void Awake() {
+            bard = GetComponent<AIBard>();
+            bard.RandomizeTunes();
+        }
+
+        /// <summary>
         /// Registers the AI in the level and finds the other players.
         /// </summary>
     	private void Start() {
-            bard = GetComponent<AIBard>();
             control = GetComponent<AIControl>();
+            life = GetComponent<PlayerLife>();
             enabledRhythms = LevelManager.instance.EnabledRhythms;
             LevelControllerManager.instance.AddPlayer(control.player, control);
-            bard.timingVariance = 0.1f;
+            bard.timingAccuracy = 0.9f;
 
             MinionTuneSpawn minion = GetComponent<MinionTuneSpawn>();
             PlayerID selfID;
@@ -37,13 +47,16 @@ namespace Bardmages.AI {
             }
 
             otherPlayers = new List<BaseControl>();
-            BaseControl[] otherPlayersArray = FindObjectsOfType<BaseControl>();
+            BaseControl[] otherPlayersArray;
+            if (Assets.Scripts.Data.RoundHandler.Instance != null)
+                otherPlayersArray = Assets.Scripts.Data.RoundHandler.Instance.Control();
+            else
+                otherPlayersArray = FindObjectsOfType<BaseControl>();
             foreach (BaseControl otherPlayer in otherPlayersArray) {
                 if (otherPlayer.player != selfID && otherPlayer.GetComponent<MinionTuneSpawn>() == null) {
                     otherPlayers.Add(otherPlayer);
                 }
             }
-
             InitializeAI();
     	}
 
@@ -57,9 +70,11 @@ namespace Bardmages.AI {
         /// Updates the controller.
         /// </summary>
         private void Update() {
-            bard.UpdateTune();
-            control.UpdateControl();
-            UpdateAI();
+            if (life.Alive) {
+                bard.UpdateTune();
+                control.UpdateControl();
+                UpdateAI();
+            }
         }
 
         /// <summary>

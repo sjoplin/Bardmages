@@ -33,5 +33,13 @@ public class Land_Spawn : MonoBehaviour, Spawnable {
 	public void Owner (PlayerID owner) {
 		this.owner = owner;
 	}
+
+	// <summary> The tune that spawned this object. </summary>
+	private Tune _tune;
+	// <summary> The tune that spawned this object. </summary>
+	public Tune tune {
+		get { return _tune; }
+		set { _tune = value; }
+	}
 }
 
