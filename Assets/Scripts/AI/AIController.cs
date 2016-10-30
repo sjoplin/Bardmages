@@ -47,13 +47,16 @@ namespace Bardmages.AI {
             }
 
             otherPlayers = new List<BaseControl>();
-            BaseControl[] otherPlayersArray = FindObjectsOfType<BaseControl>();
+            BaseControl[] otherPlayersArray;
+            if (Assets.Scripts.Data.RoundHandler.Instance != null)
+                otherPlayersArray = Assets.Scripts.Data.RoundHandler.Instance.Control();
+            else
+                otherPlayersArray = FindObjectsOfType<BaseControl>();
             foreach (BaseControl otherPlayer in otherPlayersArray) {
                 if (otherPlayer.player != selfID && otherPlayer.GetComponent<MinionTuneSpawn>() == null) {
                     otherPlayers.Add(otherPlayer);
                 }
             }
-
             InitializeAI();
     	}
 
