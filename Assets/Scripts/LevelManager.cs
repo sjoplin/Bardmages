@@ -69,6 +69,7 @@ public class LevelManager : MonoBehaviour {
         GameObject nullUIObject = new GameObject();
         nullUI = nullUIObject.AddComponent<NullUIController>();
         nullUIObject.transform.parent = playerUI[0].transform.parent;
+        nullUIObject.name = "NullUI";
 
 		StartCoroutine(ChangeKey());
 	}
