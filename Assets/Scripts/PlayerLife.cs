@@ -132,7 +132,7 @@ public class PlayerLife : MonoBehaviour {
             if (respawnTimer <= 0f)
             {
                 transform.position = Vector3.up * 10f;
-                health = 1f;
+                Respawn();
                 GetComponent<BaseControl>().enabled = true;
             }
         }
@@ -142,6 +142,7 @@ public class PlayerLife : MonoBehaviour {
     public void Respawn()
     {
         health = 1f;
+        greenHealthBar.fillAmount = 1f;
         PlayerUIController uiController = LevelManager.instance.GetPlayerUI(GetComponent<BaseControl>().player);
         if (uiController != null)
         {
