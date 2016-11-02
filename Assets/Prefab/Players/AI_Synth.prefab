@@ -488,9 +488,10 @@ GameObject:
   - 143: {fileID: 143000010758887482}
   - 82: {fileID: 82000011270115214}
   - 195: {fileID: 195000014167142184}
+  - 114: {fileID: 114000010937158024}
   m_Layer: 0
   m_Name: AI_Synth
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1394,9 +1395,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fellOffMap: 0
+  roundHandler: 0
   respawnTime: 4
   lastHitTune: {fileID: 0}
   lastHitPlayer: 0
+--- !u!114 &114000010937158024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012983824296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610a9f56269c3ab4996c6f35fee49716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000011023793356
 MonoBehaviour:
   m_ObjectHideFlags: 1

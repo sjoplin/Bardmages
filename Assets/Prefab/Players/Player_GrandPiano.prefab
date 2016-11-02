@@ -97,9 +97,10 @@ GameObject:
   - 114: {fileID: 114000012167077208}
   - 114: {fileID: 114000011538716360}
   - 114: {fileID: 114000011455325482}
+  - 114: {fileID: 114000012521065556}
   m_Layer: 0
   m_Name: Player_GrandPiano
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1468,6 +1469,8 @@ MonoBehaviour:
   instrumentSound: {fileID: 8300000, guid: cd9dc34c25ce74f928558143f6385938, type: 3}
   buttonPressDelay: 0.1
   volumeOverride: 0.1
+  randomTuneChoices: []
+  randomizeTunes: 0
 --- !u!114 &114000011538716360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1504,6 +1507,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fellOffMap: 0
+  roundHandler: 0
+  respawnTime: 0
+  lastHitTune: {fileID: 0}
+  lastHitPlayer: 0
+--- !u!114 &114000012521065556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010789581362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610a9f56269c3ab4996c6f35fee49716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114000012806175540
