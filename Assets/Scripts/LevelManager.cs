@@ -14,8 +14,6 @@ public class LevelManager : MonoBehaviour {
 	private PlayerUIController[] playerUI;
 
     /// <summary> The placeholder UI controller for minions. </summary>
-    [SerializeField]
-    [Tooltip("The placeholder UI controller for minions.")]
     private NullUIController nullUI;
 
 	public Dictionary<PlayerID, BaseControl> playerDict;
@@ -66,6 +64,11 @@ public class LevelManager : MonoBehaviour {
 		buttonPitchMap.Add(ControllerInputWrapper.Buttons.B, Mathf.Pow(2,2/12f));
 		buttonPitchMap.Add(ControllerInputWrapper.Buttons.Y, Mathf.Pow(2,4/12f));
 		buttonPitchMap.Add(ControllerInputWrapper.Buttons.X, Mathf.Pow(2,7/12f));
+
+        // Used for minions.
+        GameObject nullUIObject = new GameObject();
+        nullUI = nullUIObject.AddComponent<NullUIController>();
+        nullUIObject.transform.parent = playerUI[0].transform.parent;
 
 		StartCoroutine(ChangeKey());
 	}
