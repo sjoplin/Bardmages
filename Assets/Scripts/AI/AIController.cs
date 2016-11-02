@@ -38,6 +38,15 @@ namespace Bardmages.AI {
             LevelControllerManager.instance.AddPlayer(control.player, control);
             bard.timingAccuracy = 0.9f;
 
+            FindOtherPlayers();
+
+            InitializeAI();
+    	}
+
+        /// <summary>
+        /// Registers the other players in the scene.
+        /// </summary>
+        public void FindOtherPlayers() {
             MinionTuneSpawn minion = GetComponent<MinionTuneSpawn>();
             PlayerID selfID;
             if (minion != null) {
@@ -57,8 +66,7 @@ namespace Bardmages.AI {
                     otherPlayers.Add(otherPlayer);
                 }
             }
-            InitializeAI();
-    	}
+        }
 
         /// <summary>
         /// Changes any needed settings for the AI.
