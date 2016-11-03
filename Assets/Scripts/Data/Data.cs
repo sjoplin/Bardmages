@@ -43,7 +43,7 @@ namespace Assets.Scripts.Data
         void Awake()
         {
             if (Instance == null)
-            {
+			{
                 DontDestroyOnLoad(this.gameObject);
                 instance = this;
             }

@@ -25,7 +25,7 @@ public class Grenade : Attack {
 			GetComponents<SphereCollider>(cols);
 			foreach(SphereCollider s in cols) s.enabled = true;
 			transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-			Destroy(transform.GetChild(0).gameObject,1f);
+			Destroy(transform.GetChild(0).gameObject,5f);
 			transform.GetChild(0).parent = null;
 			Destroy(this.gameObject,0.1f);
 			timer = 9999f;

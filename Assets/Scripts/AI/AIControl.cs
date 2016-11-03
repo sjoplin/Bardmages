@@ -39,6 +39,11 @@ namespace Bardmages.AI {
             get { return isMoving || _isTurning; }
         }
 
+        /// <summary> The radius or the bardmage's capsule collider. </summary>
+        private float radius;
+        /// <summary> The character controller controlling the bardmage's movement. </summary>
+        private CharacterController characterController;
+
         /// <summary>
         /// Use this for initialization.
         /// </summary>
@@ -47,6 +52,8 @@ namespace Bardmages.AI {
             navMeshAgent.updatePosition = false;
             navMeshAgent.updateRotation = false;
             currentPath = new NavMeshPath();
+            characterController = GetComponent<CharacterController>();
+            radius = characterController.radius;
             base.Start();
         }
 
@@ -74,7 +81,21 @@ namespace Bardmages.AI {
                 _isTurning = false;
                 currentDirection = Vector3.zero;
             } else if (isMoving) {
-                currentDirection = GetFacingDirection(currentNode);
+                bool groundInFront = false;
+                Vector3 front = transform.position + transform.forward * radius * 2;
+                RaycastHit hit;
+                if (Physics.Raycast(front, Vector3.down, out hit, 50)) {
+                    groundInFront = hit.collider.tag != "Kill" && hit.collider.tag != "Player";
+                }
+
+                // Attempt to not walk off the map.
+                if (groundInFront) {
+                    currentDirection = GetFacingDirection(currentNode);
+                } else if (Vector3.Magnitude(characterController.velocity) > speed / 2) {
+                    currentDirection = -GetFacingDirection(currentNode);
+                } else {
+                    currentDirection = Vector3.zero;
+                }
 
                 if (GetDistance2D(currentNode) < 0.1f) {
                     if (++currentNodeIndex >= currentPath.corners.Length) {

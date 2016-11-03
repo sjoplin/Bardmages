@@ -20,6 +20,12 @@ namespace Bardmages.AI {
         /// <summary> All players in the scene. </summary>
         protected List<BaseControl> otherPlayers;
 
+        /// <summary> The hill in the scene, if any. </summary>
+        protected KingofHill hill;
+
+        /// <summary> Whether the AI is a minion. </summary>
+        protected bool isMinion;
+
         /// <summary>
         /// Generates random tunes for the bard if needed.
         /// </summary>
@@ -38,10 +44,20 @@ namespace Bardmages.AI {
             LevelControllerManager.instance.AddPlayer(control.player, control);
             bard.timingAccuracy = 0.9f;
 
+            FindOtherPlayers();
+
+            InitializeAI();
+    	}
+
+        /// <summary>
+        /// Registers the other players in the scene.
+        /// </summary>
+        public void FindOtherPlayers() {
             MinionTuneSpawn minion = GetComponent<MinionTuneSpawn>();
             PlayerID selfID;
             if (minion != null) {
                 selfID = minion.owner;
+                isMinion = true;
             } else {
                 selfID = control.player;
             }
@@ -57,8 +73,9 @@ namespace Bardmages.AI {
                     otherPlayers.Add(otherPlayer);
                 }
             }
-            InitializeAI();
-    	}
+
+            hill = FindObjectOfType<KingofHill>();
+        }
 
         /// <summary>
         /// Changes any needed settings for the AI.
@@ -97,6 +114,21 @@ namespace Bardmages.AI {
                 }
             }
             return closestPlayer;
+        }
+
+        /// <summary>
+        /// Gets the object that the AI should target.
+        /// </summary>
+        /// <returns>The object that the AI should target.</returns>
+        protected GameObject GetTarget() {
+            if (hill != null && !isMinion) {
+                if (hill.king == null) {
+                    return hill.gameObject;
+                } else if (hill.king.gameObject != gameObject) {
+                    return hill.king.gameObject;
+                }
+            }
+            return GetClosestPlayer().gameObject;
         }
     }
 }
