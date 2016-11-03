@@ -1527,7 +1527,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 643888921}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &263555538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,7 +2176,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 643888921}
-  m_RootOrder: 6
+  m_RootOrder: 0
 --- !u!82 &379239630
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2262,13 +2262,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01991ea8caa8b2b4893016623da99191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  timerText: {fileID: 0}
+  canvas: {fileID: 1214198473}
+  timerText: {fileID: 1214198475}
   spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 790828349}
+  - {fileID: 854902917}
+  - {fileID: 573169217}
+  - {fileID: 597592551}
 --- !u!1 &385843025
 GameObject:
   m_ObjectHideFlags: 0
@@ -3183,7 +3183,7 @@ RectTransform:
   - {fileID: 1921781249}
   - {fileID: 1214198474}
   m_Father: {fileID: 643888921}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -3457,6 +3457,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012159877738, guid: 67f1645d23a44d14686a45e064469b60,
+        type: 2}
+      propertyPath: characters.Array.data[0]
+      value: 
+      objectReference: {fileID: 114000014196847522, guid: 79f9bcf772674475c8dce8b345322f97,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67f1645d23a44d14686a45e064469b60, type: 2}
   m_IsPrefabParent: 0
@@ -3490,7 +3496,7 @@ Transform:
   m_Children:
   - {fileID: 816186757}
   m_Father: {fileID: 643888921}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &584881058
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,13 +3712,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 379239629}
   - {fileID: 1233733378}
   - {fileID: 1871297552}
   - {fileID: 251419063}
   - {fileID: 1459665844}
   - {fileID: 545629476}
   - {fileID: 583784201}
-  - {fileID: 379239629}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!1 &652321159 stripped
@@ -6994,7 +7000,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 643888921}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &1233733379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8253,8 +8259,8 @@ MonoBehaviour:
   playerUI:
   - {fileID: 1942549266}
   - {fileID: 1266686750}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 392539135}
+  - {fileID: 1921781250}
   nullUI: {fileID: 0}
   music: {fileID: 302904548}
   enableQuarter: 1
@@ -8280,7 +8286,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 643888921}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1480895432
 GameObject:
   m_ObjectHideFlags: 0
@@ -10175,7 +10181,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 643888921}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &1883320196
 GameObject:
   m_ObjectHideFlags: 0
