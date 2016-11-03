@@ -1,14 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The target object for King of the Hill.
+/// </summary>
 public class KingofHill : MonoBehaviour {
 
 	public BaseControl king = null;
-	private float nextUpdate = 1;
 
-	// Use this for initialization
+    /// <summary> The position of the hill at the start of the game. </summary>
+    private Vector3 spawnPosition;
+
+	/// <summary>
+    /// Initializes the hill.
+    /// </summary>
 	void Start () {
 		this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
+        spawnPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -36,16 +44,20 @@ public class KingofHill : MonoBehaviour {
 	}
 
 	void UpdateEverySecond(BaseControl k) {
-		Debug.Log ("hello");
+		//Debug.Log ("hello");
 		Assets.Scripts.Data.RoundHandler.Instance.AddScore (k.player);
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit) {
-		Debug.Log ("HERE");
+		//Debug.Log ("HERE");
 	}
 
+	/// <summary>
+    /// Allows players to pick up the hill.
+    /// </summary>
+    /// <param name="other">The collider that hit the hill.</param>
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.GetComponent<BaseControl>() != null && king == null) {
+		if (other.gameObject.GetComponent<BaseControl>() != null && king == null && other.GetComponent<MinionTuneSpawn>() == null) {
 			king = other.gameObject.GetComponent<BaseControl> ();
 			this.GetComponentInChildren<MeshRenderer> ().enabled = false;
 			transform.parent = king.transform;

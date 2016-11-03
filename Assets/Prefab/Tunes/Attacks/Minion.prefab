@@ -142,9 +142,10 @@ GameObject:
   - 195: {fileID: 195000011577621276}
   - 114: {fileID: 114000011066181362}
   - 114: {fileID: 114000012380890056}
+  - 114: {fileID: 114000013890040046}
   m_Layer: 0
   m_Name: Minion
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1313,6 +1314,8 @@ MonoBehaviour:
   instrumentSound: {fileID: 8300000, guid: cd9dc34c25ce74f928558143f6385938, type: 3}
   buttonPressDelay: 0.1
   volumeOverride: 0.25
+  randomTuneChoices: []
+  randomizeTunes: 0
 --- !u!114 &114000010280693802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1428,6 +1431,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e6f22f1f7134c3ba4a9b8709478291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fellOffMap: 0
+  roundHandler: 0
+  respawnTime: 0
+  lastHitTune: {fileID: 0}
+  lastHitPlayer: 0
 --- !u!114 &114000012753768472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1476,6 +1484,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 1
   copy: 0
+--- !u!114 &114000013890040046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010805917098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610a9f56269c3ab4996c6f35fee49716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &143000012417821496
 CharacterController:
   m_ObjectHideFlags: 1

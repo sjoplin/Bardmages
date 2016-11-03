@@ -62,13 +62,13 @@ public class Attack : MonoBehaviour, Spawnable {
     /// <param name="other">The collider that was hit.</param>
 	protected virtual void OnTriggerEnter(Collider other) {
 		PlayerID player = PlayerID.None;
-        BaseControl control = other.transform.root.GetComponent<BaseControl> ();
+        BaseControl control = other.transform.GetComponent<BaseControl> ();
 		if (control) {
             player = control.playerOwner;
 		} else return;
 		if(impacted) return;
 		if (player != agressor) {
-            other.transform.root.GetComponent<PlayerLife>().DealDamage(damage, tune, agressor);
+            other.transform.GetComponent<PlayerLife>().DealDamage(damage, tune, agressor);
 			if(destroyOnImpact) Destroy(this.gameObject);
         } else if (!control) {
             if(player != agressor && destroyOnImpact) {
