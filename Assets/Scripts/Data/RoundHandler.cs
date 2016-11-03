@@ -65,7 +65,7 @@ namespace Assets.Scripts.Data
         /// <summary> Initializes this object. </summary>
         void Init()
         {
-            bards = new PlayerLife[4];
+            bards = new PlayerLife[Data.Instance.numOfPlayers];
             for (int i = 0; i < Bards.Length; i++)
             {
                 Bards[i] = Data.Instance.Spawn(i, spawnPoints[i]).GetComponent<PlayerLife>();
@@ -78,11 +78,11 @@ namespace Assets.Scripts.Data
             timerText.text = "3";
             canvas.SetActive(true);
             countDown = 3f;
-            scores = new int[4];
-            isDead = new bool[4];
+            scores = new int[Data.Instance.numOfPlayers];
+            isDead = new bool[Data.Instance.numOfPlayers];
             if (bards == null)
                 Init();
-            Transform[] targets = new Transform[4];
+            Transform[] targets = new Transform[Data.Instance.numOfPlayers];
             for (int i = 0; i < targets.Length; i++)
             {
                 targets[i] = Bards[i].transform;
@@ -110,7 +110,7 @@ namespace Assets.Scripts.Data
                 }
                 cm.transform.position = cameraPos;
                 cm.transform.localRotation = cameraRot;
-                Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
+                //Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
             }
             if (countDown > -2)
             {
@@ -258,7 +258,7 @@ namespace Assets.Scripts.Data
         /// <returns> An array of all the bards. </returns>
         public BaseControl[] Control()
         {
-            BaseControl[] bc = new BaseControl[4];
+            BaseControl[] bc = new BaseControl[Data.Instance.numOfPlayers];
             for (int i = 0; i < Bards.Length; i++)
                 bc[i] = Bards[i].GetComponent<BaseControl>();
             return bc;
