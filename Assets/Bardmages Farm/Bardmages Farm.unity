@@ -8809,6 +8809,12 @@ Prefab:
       value: 
       objectReference: {fileID: 114000010358254282, guid: 19ecb27eb5ef544068dbfc1b4413ef66,
         type: 2}
+    - target: {fileID: 114000012159877738, guid: 67f1645d23a44d14686a45e064469b60,
+        type: 2}
+      propertyPath: defaultTunes.Array.data[0]
+      value: 
+      objectReference: {fileID: 114000013812798790, guid: d087c3677327c3849b8272a40c21ea0e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67f1645d23a44d14686a45e064469b60, type: 2}
   m_IsPrefabParent: 0
