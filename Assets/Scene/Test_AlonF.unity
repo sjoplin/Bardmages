@@ -89,7 +89,7 @@ NavMeshSettings:
     minRegionArea: 2
     cellSize: 0.16666667
     manualCellSize: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 4d3aa024be5bd44fb97fe88f63e93dc5, type: 2}
 --- !u!1 &8005406
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +951,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.1717646
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
   m_IsPrefabParent: 0
@@ -1383,6 +1387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d377c10d671c4c07b764cc5cd058885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testing: 0
   XBOX_A: {fileID: 21300000, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
   PS4_A: {fileID: 21300008, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
   KEY_A: {fileID: 21300086, guid: d94192d228ed04f3ab5bdd4e9bbd8d7a, type: 3}
@@ -3681,6 +3686,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.0000007
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
   m_IsPrefabParent: 0
@@ -4368,6 +4377,10 @@ Prefab:
     - target: {fileID: 400000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
       propertyPath: m_LocalScale.z
       value: 1.1181304
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
@@ -7141,6 +7154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1595f422c71c14e85a14f8711ba18a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inMainMenu: 0
   playerUI:
   - {fileID: 1942549266}
   - {fileID: 1266686750}
@@ -7525,6 +7539,10 @@ Prefab:
     - target: {fileID: 400000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0.24200001
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
@@ -9105,6 +9123,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90.242004
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
   m_IsPrefabParent: 0
@@ -9259,6 +9281,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fellOffMap: 0
+  roundHandler: 0
+  respawnTime: 0
+  lastHitTune: {fileID: 0}
+  lastHitPlayer: 0
 --- !u!114 &1901289484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9471,6 +9498,10 @@ Prefab:
     - target: {fileID: 400000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0.24200001
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 2}
