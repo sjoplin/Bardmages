@@ -7,7 +7,7 @@ namespace Bardmages.AI {
     /// </summary>
     class AimAI : AIController {
 
-        /// <summary> The radius of the bardmage's collider.. </summary>
+        /// <summary> The radius of the bardmage's collider. </summary>
         private float radius;
 
         /// <summary>
@@ -22,14 +22,22 @@ namespace Bardmages.AI {
         /// </summary>
         protected override void UpdateAI() {
             // Check if the current move has distance constraints.
-            Vector3 targetPosition = GetClosestPlayer().transform.position;
+            GameObject target = GetTarget();
+            Vector3 targetPosition = target.transform.position;
             float moveDistance = 0;
             if (bard.isPlayingTune) {
                 float targetDistance = control.GetDistance2D(targetPosition);
-                // Stay at least a diameter away from the target to avoid pile-up/"dancing".
-                float minDistance = Mathf.Max(radius * 2, bard.currentTune.minDistance);
-                if (targetDistance > bard.currentTune.maxDistance) {
-                    moveDistance = bard.currentTune.maxDistance;
+                float maxDistance = bard.currentTune.maxDistance;
+                float minDistance = bard.currentTune.minDistance;
+                if (target.GetComponent<BaseControl>() == null) {
+                    maxDistance = 0.1f;
+                    minDistance = 0.1f;
+                } else {
+                    // Stay at least a diameter away from the target to avoid pile-up/"dancing".
+                    minDistance = Mathf.Max(radius * 2, minDistance);
+                }
+                if (targetDistance > maxDistance) {
+                    moveDistance = maxDistance;
                 } else if (targetDistance < minDistance) {
                     moveDistance = minDistance;
                 }
