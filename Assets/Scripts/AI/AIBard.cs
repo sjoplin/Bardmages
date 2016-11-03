@@ -35,13 +35,11 @@ namespace Bardmages.AI {
         /// <summary>
         /// The possible tunes that the AI can randomly bring into battle.
         /// </summary>
-        [SerializeField]
         [Tooltip("The possible tunes that the AI can randomly bring into battle.")]
-        private Tune[] randomTuneChoices;
+        public Tune[] randomTuneChoices;
         /// <summary> Whether to randomize the bardmage's tunes. </summary>
-        [SerializeField]
         [Tooltip("Whether to randomize the bardmage's tunes.")]
-        private bool randomizeTunes;
+        public bool randomizeTunes;
 
         /// <summary>
         /// Calculates the time delay between notes.

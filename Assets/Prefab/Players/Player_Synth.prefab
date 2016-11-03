@@ -28,9 +28,10 @@ GameObject:
   - 114: {fileID: 114000011583056984}
   - 114: {fileID: 114000013873823350}
   - 114: {fileID: 114000013499624662}
+  - 114: {fileID: 114000013315007494}
   m_Layer: 0
   m_Name: Player_Synth
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1474,6 +1475,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179d48806b17d48db85d282ec2e468cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fellOffMap: 0
+  roundHandler: 0
+  respawnTime: 0
+  lastHitTune: {fileID: 0}
+  lastHitPlayer: 0
 --- !u!114 &114000011784748428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1522,6 +1528,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114000013315007494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010045893058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610a9f56269c3ab4996c6f35fee49716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013499624662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1540,6 +1557,8 @@ MonoBehaviour:
   instrumentSound: {fileID: 8300000, guid: feb9fff28441e439593cd28709b6666d, type: 3}
   buttonPressDelay: 0.1
   volumeOverride: 0.3
+  randomTuneChoices: []
+  randomizeTunes: 0
 --- !u!114 &114000013507229136
 MonoBehaviour:
   m_ObjectHideFlags: 1
