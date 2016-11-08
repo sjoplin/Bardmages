@@ -30,6 +30,9 @@ namespace Assets.Scripts.Data
         internal AudioClip[] clips;
         /// <summary> The instrument model to spawn for each bard. </summary>
         private GameObject[] instruments;
+        /// <summary> Count of the number of players to spawn. </summary>
+        internal int numOfPlayers;
+        public int NumOfPlayers { get { return numOfPlayers; } set { numOfPlayers = value; } }
 
         /// <summary> The level to async load. </summary>
         internal string level;
@@ -52,6 +55,7 @@ namespace Assets.Scripts.Data
             isElimination = true;
             level = "Test";
             tunes = new Tune[4][];
+            numOfPlayers = 4;
             for (int i = 0; i < tunes.Length; i++)
             {
                 tunes[i] = new Tune[3];
