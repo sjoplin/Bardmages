@@ -128,7 +128,7 @@ public class LevelManager : MonoBehaviour {
 
 	public float BeatValue(float offset) {
 		int samplesInTempo = (int)(music.clip.frequency*tempo);
-		int samplesPastBeat = (music.timeSamples+(int)(offset*music.clip.frequency))%(samplesInTempo);
+		int samplesPastBeat = (music.timeSamples+(int)offset+(int)(music.clip.frequency))%(samplesInTempo);
 
 		float value = 1f-((float)samplesPastBeat/(float)samplesInTempo);
 

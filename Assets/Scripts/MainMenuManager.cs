@@ -15,7 +15,7 @@ public class MainMenuManager : MonoBehaviour {
 	/// <summary>
 	/// A list of all the tunes in the game.
 	/// </summary>
-	public Tune[] tunes;
+	private Tune[] tunes;
 
 	/// <summary>
 	/// The array of the boxes that hold the tunes for each player
@@ -26,6 +26,7 @@ public class MainMenuManager : MonoBehaviour {
 	/// The various visuals to communicate the tunes to the players
 	/// </summary>
 	private GameObject[] playerTuneDescriptions, playerTuneName, upIcons, downIcons, acceptIcons, rejectIcons;
+	private GameObject[] playerReadyText, pressStart;
 
 	/// <summary>
 	/// The selected tunes for each player.
@@ -61,6 +62,11 @@ public class MainMenuManager : MonoBehaviour {
 		inPlayerSelect = true;
 		GetComponent<Animator>().SetInteger("State",2);
 	}
+
+	public void GoToGame() {
+		Assets.Scripts.Data.Data.Instance.NumOfPlayers = ControllerManager.instance.NumPlayers;
+		Assets.Scripts.Data.Data.Instance.loadScene("Bardmages Farm");
+	}
 	#endregion
 		
 
@@ -71,7 +77,7 @@ public class MainMenuManager : MonoBehaviour {
 		for(int i = 0; i < 4; i++) {
 			nextTune[i] = 0;
 			for(int j = 0; j < 3; j++) {
-				selectedTune[i,j] = -1;
+				selectedTune[i,j] = j;
 			}
 		}
 
@@ -79,6 +85,8 @@ public class MainMenuManager : MonoBehaviour {
 
 		playerTunes = new GameObject[4,3];
 		playerTuneDescriptions = new GameObject[4];
+		playerReadyText = new GameObject[4];
+		pressStart = new GameObject[4];
 		upIcons = new GameObject[4];
 		downIcons = new GameObject[4];
 		acceptIcons = new GameObject[4];
@@ -92,11 +100,15 @@ public class MainMenuManager : MonoBehaviour {
 
 		for(int i = 0; i < 4; i++) {
 			playerTuneDescriptions[i] = playerBlocks[i].transform.FindChild("TuneDescription").gameObject;
+			playerReadyText[i] = playerBlocks[i].transform.FindChild("Player" + (i+1) + "Ready").gameObject;
+			pressStart[i] = playerBlocks[i].transform.FindChild("Player1Join_Text").gameObject;
 			upIcons[i] = playerBlocks[i].transform.FindChild("UpIcon").gameObject;
 			downIcons[i] = playerBlocks[i].transform.FindChild("DownIcon").gameObject;
 			acceptIcons[i] = playerBlocks[i].transform.FindChild("ControlDescription").FindChild("Button_A").gameObject;
 			rejectIcons[i] = playerBlocks[i].transform.FindChild("ControlDescription").FindChild("Button_B").gameObject;
 		}
+
+		tunes = Assets.Scripts.Data.Data.Instance.GetAllTunes();
 	}
 
 	void Update() {
@@ -124,15 +136,24 @@ public class MainMenuManager : MonoBehaviour {
 					}
 					if(ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.A, (PlayerID)(i+1))) {
 						nextTune[i]++;
-						StartCoroutine(UpdateNextTune(i));
+						if(nextTune[i] == 3) {
+							StartCoroutine(PlayerReady(i));
+							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,0]], 0);
+							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,1]], 1);
+							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,2]], 2);
+						} else {
+							StartCoroutine(UpdateNextTune(i));
+						}
 					}
 				}
 				if(ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.B, (PlayerID)(i+1))) {
 					if(nextTune[i] > 0) {
+						if(nextTune[i] == 3) {
+							StartCoroutine(PlayerUnready(i));
+						}
 						nextTune[i]--;
 						StartCoroutine(UpdateNextTune(i));
-					}
-					else {
+					} else {
 						if(ControllerManager.instance.AllowPlayerRemoval(ControllerInputWrapper.Buttons.B) != 0) {
 							StopAllCoroutines();
 							StartCoroutine(AddPlayerAnim());
@@ -146,6 +167,41 @@ public class MainMenuManager : MonoBehaviour {
 
 
 	#region Animation_Coroutines
+	private IEnumerator PlayerReady(int player) {
+		float timer = 0f;
+
+		while(timer < 1f) {
+			timer += Time.deltaTime;
+
+			playerBlocks[player].transform.localRotation = Quaternion.Lerp(playerBlocks[player].transform.localRotation,
+				Quaternion.Euler(new Vector3(0f,0f,0f)),
+				timer);
+			playerTuneDescriptions[player].GetComponent<Renderer>().enabled = false;
+			playerReadyText[player].GetComponent<Renderer>().enabled = true;
+			pressStart[player].GetComponent<Renderer>().enabled = false;
+
+			yield return new WaitForEndOfFrame();
+		}
+
+		yield return null;
+	}
+
+	private IEnumerator PlayerUnready(int player) {
+		float timer = 0f;
+
+		while(timer < 1f) {
+			timer += Time.deltaTime;
+
+			playerBlocks[player].transform.localRotation = Quaternion.Lerp(playerBlocks[player].transform.localRotation,
+				Quaternion.Euler(new Vector3(-180f,0f,0f)),
+				timer);
+			playerTuneDescriptions[player].GetComponent<Renderer>().enabled = true;
+			yield return new WaitForEndOfFrame();
+		}
+
+		yield return null;
+	}
+
 	private IEnumerator UpdateNextTune(int player) {
 		float timer = 0f;
 
@@ -226,6 +282,8 @@ public class MainMenuManager : MonoBehaviour {
 					Quaternion.Euler(new Vector3(0f,0f,0f)),
 					timer);
 				playerTuneDescriptions[i].GetComponent<Renderer>().enabled = false;
+				playerReadyText[i].GetComponent<Renderer>().enabled = false;
+				pressStart[i].GetComponent<Renderer>().enabled = true;
 			}
 			yield return new WaitForEndOfFrame();
 		}

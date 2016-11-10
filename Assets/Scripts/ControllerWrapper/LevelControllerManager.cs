@@ -22,6 +22,7 @@ public class LevelControllerManager : MonoBehaviour {
         {
             instance = this;
             cm = new ControllerManager();
+			DontDestroyOnLoad(this.gameObject);
         }
         else if (instance != this)
         {

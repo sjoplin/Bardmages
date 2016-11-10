@@ -9,8 +9,6 @@ public class KingofHill : MonoBehaviour {
 	public BaseControl king = null;
 	float nextUpdate = 0;
 
-	//private float nextUpdate;
-
     /// <summary> The position of the hill at the start of the game. </summary>
     private Vector3 spawnPosition;
 

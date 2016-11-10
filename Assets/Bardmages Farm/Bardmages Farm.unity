@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.50216264, g: 0.54371274, b: 0.63235295, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44583184, g: 0.49552953, b: 0.57434225, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ LightmapSettings:
   m_LightmapEditorSettings:
     serializedVersion: 4
     m_Resolution: 2
-    m_BakeResolution: 10
+    m_BakeResolution: 1
     m_TextureWidth: 1024
     m_TextureHeight: 1024
     m_AO: 1
@@ -336,7 +336,6 @@ MonoBehaviour:
   - {fileID: 587168117}
   - {fileID: 134106725}
   - {fileID: 1978888949}
-  nullUI: {fileID: 0}
   music: {fileID: 302904548}
   enableQuarter: 1
   enableEighth: 0
@@ -432,6 +431,22 @@ Prefab:
       propertyPath: m_Materials.Array.data[4]
       value: 
       objectReference: {fileID: 2100000, guid: d7caaa0dda4770047b0a6058c93f387b, type: 2}
+    - target: {fileID: 1000013842436456, guid: 7b8c2173f8923b447ad65717ae887602, type: 2}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012813796118, guid: 7b8c2173f8923b447ad65717ae887602, type: 2}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014265314286, guid: 7b8c2173f8923b447ad65717ae887602, type: 2}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014051787648, guid: 7b8c2173f8923b447ad65717ae887602, type: 2}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b8c2173f8923b447ad65717ae887602, type: 2}
   m_IsPrefabParent: 0
@@ -1497,7 +1512,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 40153a9372225473ca7747f7f0389734, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4964e58df750d4616bbb95bc343e64b4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -8789,25 +8804,25 @@ Prefab:
         type: 2}
       propertyPath: characters.Array.data[0]
       value: 
-      objectReference: {fileID: 114000010615686736, guid: 0c3f9b78c967145e2ada93b7aeb44d7e,
+      objectReference: {fileID: 114000010214859306, guid: fc15929aee65e4f86a101ad69ff7ce09,
         type: 2}
     - target: {fileID: 114000012159877738, guid: 67f1645d23a44d14686a45e064469b60,
         type: 2}
       propertyPath: characters.Array.data[1]
       value: 
-      objectReference: {fileID: 114000010196897164, guid: 4466ed68c16994fc582b9e3f8ed20f9e,
+      objectReference: {fileID: 114000010247992654, guid: fb99b534a41b24817bbd5bf6372997d1,
         type: 2}
     - target: {fileID: 114000012159877738, guid: 67f1645d23a44d14686a45e064469b60,
         type: 2}
       propertyPath: characters.Array.data[2]
       value: 
-      objectReference: {fileID: 114000011543404506, guid: 9bf658ed3e5a34906a13a3fca1a21802,
+      objectReference: {fileID: 114000013480088168, guid: a381b8b01a2554adeb361351cf81932b,
         type: 2}
     - target: {fileID: 114000012159877738, guid: 67f1645d23a44d14686a45e064469b60,
         type: 2}
       propertyPath: characters.Array.data[3]
       value: 
-      objectReference: {fileID: 114000010358254282, guid: 19ecb27eb5ef544068dbfc1b4413ef66,
+      objectReference: {fileID: 114000013082542062, guid: ee9343b46a08345b8a96978a8ca0d157,
         type: 2}
     - target: {fileID: 114000012159877738, guid: 67f1645d23a44d14686a45e064469b60,
         type: 2}
@@ -8815,6 +8830,10 @@ Prefab:
       value: 
       objectReference: {fileID: 114000013812798790, guid: d087c3677327c3849b8272a40c21ea0e,
         type: 2}
+    - target: {fileID: 1000012351134322, guid: 67f1645d23a44d14686a45e064469b60, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67f1645d23a44d14686a45e064469b60, type: 2}
   m_IsPrefabParent: 0
