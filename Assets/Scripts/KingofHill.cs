@@ -7,6 +7,7 @@ using System.Collections;
 public class KingofHill : MonoBehaviour {
 
 	public BaseControl king = null;
+	float nextUpdate = 0;
 
     /// <summary> The position of the hill at the start of the game. </summary>
     private Vector3 spawnPosition;
@@ -44,12 +45,7 @@ public class KingofHill : MonoBehaviour {
 	}
 
 	void UpdateEverySecond(BaseControl k) {
-		//Debug.Log ("hello");
 		Assets.Scripts.Data.RoundHandler.Instance.AddScore (k.player);
-	}
-
-	void OnControllerColliderHit(ControllerColliderHit hit) {
-		//Debug.Log ("HERE");
 	}
 
 	/// <summary>
@@ -62,7 +58,6 @@ public class KingofHill : MonoBehaviour {
 			this.GetComponentInChildren<MeshRenderer> ().enabled = false;
 			transform.parent = king.transform;
 			this.GetComponent<Rigidbody> ().isKinematic = true;
-			//TODO change color of particle emission
 			this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
 			this.GetComponentInChildren<ParticleSystem> ().startColor = king.GetComponentInChildren<Renderer>().material.color;
 		}
