@@ -20,7 +20,8 @@ public class MainMenuButton : PhysicalButton {
 
     protected override void HandleNormal ()
     {
-		transform.position = Vector3.MoveTowards(transform.position, initialPos, Time.deltaTime*15f);
+		float temp = LevelManager.instance.BeatValue((transform.GetSiblingIndex()%2)*5512f);
+		transform.position = Vector3.MoveTowards(transform.position, initialPos + transform.up*temp, Time.deltaTime*15f);
         base.HandleNormal ();
     }
 

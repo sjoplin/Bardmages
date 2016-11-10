@@ -71,6 +71,7 @@ namespace Assets.Scripts.Data
             for (int i = 0; i < Bards.Length; i++)
             {
                 Bards[i] = Data.Instance.Spawn(i, spawnPoints[i]).GetComponent<PlayerLife>();
+				LevelControllerManager.instance.AddPlayer((PlayerID)(i+1), Bards[i].GetComponent<BaseControl>());
             }
         }
 
@@ -98,7 +99,7 @@ namespace Assets.Scripts.Data
 
         void Update()
         {
-            if(deathCount > 2)
+			if(deathCount >= (Data.Instance.NumOfPlayers-1))
             {
                 countDown = 3f;
                 canvas.SetActive(true);
