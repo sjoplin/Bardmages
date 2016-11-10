@@ -9,6 +9,7 @@ public class KingofHill : MonoBehaviour {
 	public BaseControl king = null;
 	float nextUpdate = 0;
 
+
     /// <summary> The position of the hill at the start of the game. </summary>
     private Vector3 spawnPosition;
 
@@ -59,7 +60,7 @@ public class KingofHill : MonoBehaviour {
 			transform.parent = king.transform;
 			this.GetComponent<Rigidbody> ().isKinematic = true;
 			this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
-			this.GetComponentInChildren<ParticleSystem> ().startColor = king.transform.GetChild(2).GetChild(3).GetComponent<Renderer>().material.color;
+			this.GetComponentInChildren<ParticleSystem> ().startColor = king.transform.FindChild("bardmage_export").FindChild("pCube2").GetComponent<Renderer>().material.color;
 		}
 	}
 
