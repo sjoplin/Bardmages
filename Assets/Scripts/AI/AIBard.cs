@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Assets.Scripts.Data;
 
 namespace Bardmages.AI {
     /// <summary>
@@ -73,9 +74,12 @@ namespace Bardmages.AI {
                     }
                 }
 
+                PlayerID playerID = GetComponent<BaseControl>().player;
                 for (int i = 0; i < tunes.Length; i++) {
                     int randomIndex = Random.Range(0, indexChoices.Count);
-                    tunes[i] = randomTuneChoices[indexChoices[randomIndex]];
+                    Tune randomTune = randomTuneChoices[indexChoices[randomIndex]];
+                    tunes[i] = randomTune;
+                    Data.Instance.AddTuneToPlayer(playerID, randomTune, i);
                     indexChoices.RemoveAt(randomIndex);
                 }
             }

@@ -161,6 +161,15 @@ public class LevelManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Checks if a player is registered in a 
+    /// </summary>
+    /// <returns><c>true</c> if this instance has player the specified playerID; otherwise, <c>false</c>.</returns>
+    /// <param name="playerID">Player I.</param>
+    public bool HasPlayer(PlayerID playerID) {
+        return playerID == PlayerID.None || playerDict.ContainsKey(playerID);
+    }
+
+    /// <summary>
     /// Gets the player UI corresponding to the given player ID.
     /// </summary>
     /// <param name="player">The player ID to get a player UI for.</param>
