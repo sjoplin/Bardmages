@@ -78,7 +78,7 @@ public class Tune : MonoBehaviour {
 
         bool perfect = LevelManager.instance.PerfectTiming() >= PERFECT_THRESHOLD;
         if (isHuman) {
-            LevelManager.instance.RegisterNote(perfect);
+            LevelManager.instance.RegisterPerfectNote(perfect);
         }
         if(!perfect) {
 			perfectTiming = false;
