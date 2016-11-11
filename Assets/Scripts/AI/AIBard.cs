@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Assets.Scripts.Data;
 
 namespace Bardmages.AI {
     /// <summary>
@@ -22,6 +23,9 @@ namespace Bardmages.AI {
         internal bool isPlayingTune {
             get { return currentTune != null; }
         }
+        internal bool isTuneAlmostFinished {
+            get { return currentTune != null && tuneProgress >= currentTune.tune.Length - 1; }
+        }
 
         /// <summary> The minimum time delay between notes being played. </summary>
         private float noteDelay;
@@ -31,6 +35,9 @@ namespace Bardmages.AI {
         internal float timingAccuracy;
         /// <summary> The percentage threshold of beat correctness for which the bardmage will make a note at. </summary>
         private float modifiedThreshold = Tune.PERFECT_THRESHOLD;
+
+        /// <summary> The bardmage's accuracy for playing the correct notes. </summary>
+        internal float noteAccuracy = 1;
 
         /// <summary>
         /// The possible tunes that the AI can randomly bring into battle.
@@ -73,9 +80,12 @@ namespace Bardmages.AI {
                     }
                 }
 
+                PlayerID playerID = GetComponent<BaseControl>().player;
                 for (int i = 0; i < tunes.Length; i++) {
                     int randomIndex = Random.Range(0, indexChoices.Count);
-                    tunes[i] = randomTuneChoices[indexChoices[randomIndex]];
+                    Tune randomTune = randomTuneChoices[indexChoices[randomIndex]];
+                    tunes[i] = randomTune;
+                    Data.Instance.AddTuneToPlayer(playerID, randomTune, i);
                     indexChoices.RemoveAt(randomIndex);
                 }
             }
@@ -108,10 +118,12 @@ namespace Bardmages.AI {
 
             // Plays the tune on the beat.
             if (currentTune != null && buttonPressDelayTimer < 0f && LevelManager.instance.PerfectTiming(rhythmType) >= modifiedThreshold) {
-                pressedButton = currentTune.tune[tuneProgress];
-                if (++tuneProgress >= currentTune.tune.Length) {
-                    tuneProgress = 0;
-                    currentTune = null;
+                if (Random.Range(0f, 1f) < noteAccuracy) {
+                    pressedButton = currentTune.tune[tuneProgress];
+                    if (++tuneProgress >= currentTune.tune.Length) {
+                        tuneProgress = 0;
+                        currentTune = null;
+                    }
                 }
                 buttonPressDelay = Mathf.Max(buttonPressDelayTimer, noteDelay);
 

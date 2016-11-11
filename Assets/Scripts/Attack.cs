@@ -38,10 +38,21 @@ public class Attack : MonoBehaviour, Spawnable {
         set { _tune = value; }
     }
 
+    /// <summary> The time that the attack was spawned at. </summary>
+    private float startTime;
+    /// <summary> The amount of time that the object was active for. </summary>
+    public float timeActive {
+        get { return Time.time - startTime; }
+    }
+
+    /// <summary>
+    /// Sets the time that the attack was spawned at.
+    /// </summary>
 	protected virtual void Start() {
 		if(destroyAfterTime > 0) {
 			Destroy(this.gameObject, destroyAfterTime);
 		}
+        startTime = Time.time;
 	}
 
 	public virtual void Crit(bool value) {

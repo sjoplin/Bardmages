@@ -33,4 +33,11 @@ public class PlayerBard : BaseBard {
         tune.isHuman = true;
     }
 
+    /// <summary>
+    /// Checks if a note was played correctly.
+    /// </summary>
+    /// <param name="correct">Whether a note was played correctly.</param>
+    protected override void RegisterNoteCorrect(bool correct) {
+        LevelManager.instance.RegisterCorrectNote(correct);
+    }
 }

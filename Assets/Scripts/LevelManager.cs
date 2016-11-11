@@ -38,11 +38,15 @@ public class LevelManager : MonoBehaviour {
 	private int beatCounter;
 	private float prevBeat = 0f;
 
-    /// <summary> The chance that a notes is played perfectly based on history. </summary>
-    private float _perfectNoteChance = 0.75f;
-    /// <summary> The chance that a notes is played perfectly based on history. </summary>
+    /// <summary> The chance that a note is played perfectly based on history. </summary>
     public float perfectNoteChance {
-        get { return _perfectNoteChance; }
+        get;
+        private set;
+    }
+    /// <summary> The chance that a tune note is played correctly. </summary>
+    public float correctNoteChance {
+        get;
+        private set;
     }
     /// <summary> The growth rate of the note chance. </summary>
     private const float NOTE_CHANCE_GROWTH = 100;
@@ -53,6 +57,8 @@ public class LevelManager : MonoBehaviour {
     private void Awake() {
         instance = this;
         playerDict = new Dictionary<PlayerID, BaseControl>();
+        perfectNoteChance = 0.75f;
+        correctNoteChance = 0.9f;
     }
 
     /// <summary>
@@ -161,6 +167,15 @@ public class LevelManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Checks if a player is registered in a 
+    /// </summary>
+    /// <returns><c>true</c> if this instance has player the specified playerID; otherwise, <c>false</c>.</returns>
+    /// <param name="playerID">Player I.</param>
+    public bool HasPlayer(PlayerID playerID) {
+        return playerID == PlayerID.None || playerDict.ContainsKey(playerID);
+    }
+
+    /// <summary>
     /// Gets the player UI corresponding to the given player ID.
     /// </summary>
     /// <param name="player">The player ID to get a player UI for.</param>
@@ -176,15 +191,36 @@ public class LevelManager : MonoBehaviour {
     /// Increments the number of notes that were played.
     /// </summary>
     /// <param name="perfect">Whether the note was played on the beat.</param>
-    public void RegisterNote(bool perfect) {
+    public void RegisterPerfectNote(bool perfect) {
+        float noteChance = perfectNoteChance;
+        RegisterNote(ref noteChance, perfect);
+        perfectNoteChance = noteChance;
+    }
+
+    /// <summary>
+    /// Logs a note as correctly or incorrectly played.
+    /// </summary>
+    /// <param name="correct">Whether the note was correct for a tune.</param>
+    public void RegisterCorrectNote(bool correct) {
+        float noteChance = correctNoteChance;
+        RegisterNote(ref noteChance, correct);
+        correctNoteChance = noteChance;
+    }
+
+    /// <summary>
+    /// Changes a note chance positively or negatively.
+    /// </summary>
+    /// <param name="noteChance">The note chance variable to change.</param>
+    /// <param name="positive">Whether to increase the chance.</param>
+    private void RegisterNote(ref float noteChance, bool positive) {
         float difference;
-        if (perfect) {
+        if (positive) {
             difference = 1;
         } else {
             difference = -1;
         }
-        _perfectNoteChance *= (NOTE_CHANCE_GROWTH + difference) / NOTE_CHANCE_GROWTH;
-        _perfectNoteChance = Mathf.Clamp(_perfectNoteChance, 0, 1);
+        noteChance *= (NOTE_CHANCE_GROWTH + difference) / NOTE_CHANCE_GROWTH;
+        noteChance = Mathf.Clamp(noteChance, 0, 1);
     }
 
     /// <summary>
