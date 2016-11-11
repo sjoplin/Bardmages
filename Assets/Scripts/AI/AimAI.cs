@@ -13,8 +13,12 @@ namespace Bardmages.AI {
         /// <summary> The current deviation of the bardmage's aim angle from straight-on. </summary>
         private float inaccuracyAngle;
         /// <summary> The maximum deviation of the bardmage's aim angle from straight-on. </summary>
+        [SerializeField]
+        [Tooltip("The maximum deviation of the bardmage's aim angle from straight-on.")]
         private float inaccuracyMax = 20;
         /// <summary> The chance that the AI will not aim correctly. </summary>
+        [SerializeField]
+        [Tooltip("The chance that the AI will not aim correctly.")]
         private float inaccuracyRate = 0.5f;
 
         /// <summary>
@@ -73,7 +77,6 @@ namespace Bardmages.AI {
                 control.FacePosition(targetPosition, true);
 				control.MoveToPosition(targetPosition);
             }
-
         }
 
         /// <summary>
