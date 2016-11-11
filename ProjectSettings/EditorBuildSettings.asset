@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scene/Load.unity
   - enabled: 1
     path: Assets/Scene/Test.unity
+  - enabled: 1
+    path: Assets/Bardmages Farm/Bardmages Farm.unity

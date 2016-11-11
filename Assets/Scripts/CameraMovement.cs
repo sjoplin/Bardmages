@@ -21,11 +21,16 @@ public class CameraMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(targets.Length == 0) return;
-
 		Vector3 averagePosition = Vector3.zero;
 
 		int numDead = 0;
+		float maxDistance = 0f;
+
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 4; j++) {
+
+			}
+		}
 
 		foreach(Transform t in targets) {
             if(t.gameObject.activeSelf && t.GetComponent<PlayerLife>().Alive) {

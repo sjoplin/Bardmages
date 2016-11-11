@@ -7,8 +7,8 @@ using System.Collections;
 public class KingofHill : MonoBehaviour {
 
 	public BaseControl king = null;
+	float nextUpdate = 0;
 
-	private float nextUpdate;
 
     /// <summary> The position of the hill at the start of the game. </summary>
     private Vector3 spawnPosition;
@@ -46,12 +46,7 @@ public class KingofHill : MonoBehaviour {
 	}
 
 	void UpdateEverySecond(BaseControl k) {
-		//Debug.Log ("hello");
 		Assets.Scripts.Data.RoundHandler.Instance.AddScore (k.player);
-	}
-
-	void OnControllerColliderHit(ControllerColliderHit hit) {
-		//Debug.Log ("HERE");
 	}
 
 	/// <summary>
@@ -64,9 +59,20 @@ public class KingofHill : MonoBehaviour {
 			this.GetComponentInChildren<MeshRenderer> ().enabled = false;
 			transform.parent = king.transform;
 			this.GetComponent<Rigidbody> ().isKinematic = true;
-			//TODO change color of particle emission
 			this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
-			this.GetComponentInChildren<ParticleSystem> ().startColor = king.GetComponentInChildren<Renderer>().material.color;
+			this.GetComponentInChildren<ParticleSystem> ().startColor = king.transform.FindChild("bardmage_export").FindChild("pCube2").GetComponent<Renderer>().material.color;
+		}
+	}
+
+	void ResetRound() {
+		if (king != null) {
+			transform.parent = null;
+			this.GetComponentInChildren<MeshRenderer> ().enabled = true;
+			transform.position = new Vector3(0,1,0);
+			king = null;
+			this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
+			this.GetComponent<Rigidbody> ().velocity.Set (0, 0, 0);
+			this.GetComponent<Rigidbody> ().isKinematic = false;
 		}
 	}
 }

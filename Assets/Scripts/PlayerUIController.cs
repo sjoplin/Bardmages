@@ -23,7 +23,7 @@ public class PlayerUIController : MonoBehaviour {
     /// Initializes UI fields to track the player.
     /// </summary>
 	public virtual void SetupUI () {
-		tunes = LevelManager.instance.playerDict[player].GetComponent<BaseBard>().tunes;
+		tunes = Assets.Scripts.Data.Data.Instance.GetPlayerTunes(player);
 		tune1Keys = new Image[tunes[0].tune.Length];
 		tune2Keys = new Image[tunes[1].tune.Length];
 		tune3Keys = new Image[tunes[2].tune.Length];
