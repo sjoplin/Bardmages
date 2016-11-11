@@ -132,6 +132,14 @@ namespace Assets.Scripts.Data
             instruments[(int)id - 1] = instrument;
         }
 
+		public Tune[] GetAllTunes() {
+			return defaultTunes;
+		}
+
+		public Tune[] GetPlayerTunes(PlayerID player) {
+			return tunes[((int)player)-1];
+		}
+
 
     }
 }
