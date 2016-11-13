@@ -110,6 +110,7 @@ namespace Assets.Scripts.Data
             b.transform.position = spawn.position;
             b.tunes = tunes[character];
             b.instrumentSound = clips[character];
+            b.GetComponent<UpdateParentFloor>().enabled = LevelManager.instance.hasMovingPlatforms;
 
             GameObject instrumentPrefab = instrumentPrefabs[clipInstrumentMap[clips[character]]];
             Transform modelParent = b.transform.FindChild("bardmage_export");
