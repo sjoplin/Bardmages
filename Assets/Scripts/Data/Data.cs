@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Data
 {
@@ -7,12 +8,16 @@ namespace Assets.Scripts.Data
     {
         /// <summary> Reference to the player prefabs for each character. </summary>
         [SerializeField]
-        [Tooltip("Reference to the player prefabs for each character.  4 expected")]
+        [Tooltip("Reference to the player prefabs for each character. 4 expected")]
         private BaseBard[] characters;
         /// <summary> Reference to the AI prefabs for each character. </summary>
         [SerializeField]
-        [Tooltip("Reference to the AI prefabs for each character.  4 expected")]
+        [Tooltip("Reference to the AI prefabs for each character. 4 expected")]
         private BaseBard[] aiPrefabs;
+        /// <summary> Reference to the instrument prefabs. </summary>
+        [SerializeField]
+        [Tooltip("Reference to the instrument prefabs. 4 expected")]
+        private GameObject[] instrumentPrefabs;
 
         /// <summary> Default tunes for testing. </summary>
         [SerializeField]
@@ -21,8 +26,10 @@ namespace Assets.Scripts.Data
 
         /// <summary> Default sounds for testing. </summary>
         [SerializeField]
-        [Tooltip("Default sounds for testing.  4 expected")]
+        [Tooltip("Default sounds for testing. 4 expected")]
         private AudioClip[] defaultClips;
+        /// <summary> Maps audio clips to their array indices. </summary>
+        private Dictionary<AudioClip, int> clipInstrumentMap;
 
         /// <summary> internal reference fo ensuring singleton. </summary>
         private static Data instance;
@@ -69,12 +76,17 @@ namespace Assets.Scripts.Data
             clips = new AudioClip[4];
             for (int i = 0; i < clips.Length; i++)
                 clips[i] = defaultClips[i];
+            clipInstrumentMap = new Dictionary<AudioClip, int>(defaultClips.Length);
+            for (int i = 0; i < defaultClips.Length; i++)
+            {
+                clipInstrumentMap.Add(defaultClips[i], i);
+            }
             instruments = new GameObject[4];
             DontDestroyOnLoad(this.gameObject);
             
         }
 
-        // TEST CODE REMOVE
+        // TODO TEST CODE REMOVE
         void Update()
         {
             if (Input.GetKeyUp(KeyCode.P))
@@ -98,6 +110,13 @@ namespace Assets.Scripts.Data
             b.transform.position = spawn.position;
             b.tunes = tunes[character];
             b.instrumentSound = clips[character];
+
+            GameObject instrumentPrefab = instrumentPrefabs[clipInstrumentMap[clips[character]]];
+            Transform modelParent = b.transform.FindChild("bardmage_export");
+            GameObject instrument = (GameObject)Instantiate(instrumentPrefab, modelParent.position, modelParent.rotation);
+            instrument.transform.parent = modelParent;
+            instrument.transform.localScale = Vector3.one;
+
             return b.gameObject;
         }
 

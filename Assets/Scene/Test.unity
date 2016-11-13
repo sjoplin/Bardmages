@@ -2265,12 +2265,12 @@ Prefab:
         type: 2}
       propertyPath: spawnPoints.Array.data[1]
       value: 
-      objectReference: {fileID: 93588235}
+      objectReference: {fileID: 1344317446}
     - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
         type: 2}
       propertyPath: spawnPoints.Array.data[2]
       value: 
-      objectReference: {fileID: 1344317446}
+      objectReference: {fileID: 93588235}
     - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
         type: 2}
       propertyPath: spawnPoints.Array.data[3]
@@ -2281,6 +2281,26 @@ Prefab:
       propertyPath: music
       value: 
       objectReference: {fileID: 302904548}
+    - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
+        type: 2}
+      propertyPath: isAIPlayer.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
+        type: 2}
+      propertyPath: isAIPlayer.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
+        type: 2}
+      propertyPath: isAIPlayer.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
+        type: 2}
+      propertyPath: isAIPlayer.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
   m_IsPrefabParent: 0
