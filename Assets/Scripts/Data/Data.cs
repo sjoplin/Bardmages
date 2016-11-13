@@ -5,10 +5,14 @@ namespace Assets.Scripts.Data
 {
     class Data : MonoBehaviour
     {
-        /// <summary> Reference to the prefabs for each character. </summary>
+        /// <summary> Reference to the player prefabs for each character. </summary>
         [SerializeField]
-        [Tooltip("Reference to the prefabs for each character.  4 expected")]
+        [Tooltip("Reference to the player prefabs for each character.  4 expected")]
         private BaseBard[] characters;
+        /// <summary> Reference to the AI prefabs for each character. </summary>
+        [SerializeField]
+        [Tooltip("Reference to the AI prefabs for each character.  4 expected")]
+        private BaseBard[] aiPrefabs;
 
         /// <summary> Default tunes for testing. </summary>
         [SerializeField]
@@ -86,14 +90,14 @@ namespace Assets.Scripts.Data
         }
 
         /// <summary> Spawns a bard in the scene. </summary>
-        public GameObject Spawn(int character, Transform spawn)
+        public GameObject Spawn(int character, Transform spawn, bool isAI = false)
         {
-            BaseBard b = Instantiate(characters[character]);
+            BaseBard[] prefabArray = isAI ? aiPrefabs : characters;
+            BaseBard b = Instantiate(prefabArray[character]);
             b.GetComponent<BaseControl>().player = (PlayerID)(character + 1);
             b.transform.position = spawn.position;
             b.tunes = tunes[character];
             b.instrumentSound = clips[character];
-            //TODO: spawn instrument 
             return b.gameObject;
         }
 
