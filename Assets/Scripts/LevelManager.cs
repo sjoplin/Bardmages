@@ -51,6 +51,9 @@ public class LevelManager : MonoBehaviour {
     /// <summary> The growth rate of the note chance. </summary>
     private const float NOTE_CHANCE_GROWTH = 100;
 
+    /// <summary> Whether the level has moving platforms. </summary>
+    public bool hasMovingPlatforms;
+
     /// <summary>
     /// Initializes the singleton instance of the level manager.
     /// </summary>
