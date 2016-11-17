@@ -1254,7 +1254,7 @@ MonoBehaviour:
   - {fileID: 114000011396993340, guid: d9ba94cbaae67480ba98808e11e597d6, type: 2}
   - {fileID: 114000010569780618, guid: 4f08aca025183464fb343cb37ce8f587, type: 2}
   - {fileID: 114000013812798790, guid: d087c3677327c3849b8272a40c21ea0e, type: 2}
-  randomizeTunes: 1
+  randomizeTunes: 0
 --- !u!114 &114000010522687928
 MonoBehaviour:
   m_ObjectHideFlags: 1

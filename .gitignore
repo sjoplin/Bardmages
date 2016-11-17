@@ -31,3 +31,5 @@ ProjectSettings/ProjectVersion.txt
 
 *.DS_Store
 ./*/*/LightingData.asset
+
+Assets/Scene/MenuTest/LightingData.asset
