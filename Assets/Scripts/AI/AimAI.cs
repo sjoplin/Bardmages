@@ -60,7 +60,7 @@ namespace Bardmages.AI {
                 minDistance = 0.1f;
             } else {
                 // Stay at least a diameter away from the target to avoid pile-up/"dancing".
-                minDistance = Mathf.Max(radius * 2, minDistance);
+                minDistance = Mathf.Max(radius * 4, minDistance);
             }
             if (targetDistance > maxDistance) {
                 moveDistance = maxDistance;
