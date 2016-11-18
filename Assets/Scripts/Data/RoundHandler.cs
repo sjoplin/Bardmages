@@ -102,6 +102,7 @@ namespace Assets.Scripts.Data
                 hillObject = Instantiate(hill);
                 hillObject.transform.position = spawnPoints[4].transform.position;
             }
+            Data.Instance.CanPause = false;
         }
 
         void Update()
@@ -119,6 +120,7 @@ namespace Assets.Scripts.Data
 					}
                     isDead[i] = false;
                 }
+                Data.Instance.CanPause = false;
                 //Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
             }
             if (countDown > -2)
@@ -154,6 +156,7 @@ namespace Assets.Scripts.Data
                 {
                     canvas.SetActive(false);
                     countDown = -5000;
+                    Data.Instance.CanPause = true;
                 }
             }
             bool done = false;
@@ -176,6 +179,7 @@ namespace Assets.Scripts.Data
                 canvas.SetActive(true);
                 ResetRound();
                 timerText.text = "Finish!";
+                Data.Instance.CanPause = false;
             }
         }
 
