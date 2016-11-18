@@ -51,9 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8f9fa10e30e497c90ec1091b3836fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tune: 00000000020000000100000001000000
+  tune: 00000000020000000300000003000000
   spawnObject: {fileID: 1000011442633334, guid: 12c65efc5af107042b79e00f4420964b,
     type: 2}
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Knockback
+  tuneDescription: Regular\n+ Knocks the enemy back a \nfair distance and deals 10%
+    damage \n\nCrit\n+The attack now tracks enemies
+  maxDistance: Infinity
+  minDistance: 0
+  isHuman: 0

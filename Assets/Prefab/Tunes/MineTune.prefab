@@ -57,7 +57,8 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Mine
-  tuneDescription: Regular\n+ Heal yourself for 10% \n\nCrit\n+ Heal yourself for
-    25%
+  tuneDescription: Regular\n+ Spawns a mine behind \nthe player that deals 25% damage\nCrit\n+
+    Spawns four mines.
   maxDistance: Infinity
   minDistance: 0
+  isHuman: 0
