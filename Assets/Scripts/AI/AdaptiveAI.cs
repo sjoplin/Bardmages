@@ -28,6 +28,7 @@ namespace Bardmages.AI {
         /// </summary>
         protected override void UpdateAI() {
             bard.timingAccuracy = LevelManager.instance.perfectNoteChance;
+            bard.noteAccuracy = LevelManager.instance.correctNoteChance;
             base.UpdateAI();
         }
 

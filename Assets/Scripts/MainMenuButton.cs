@@ -9,19 +9,19 @@ public class MainMenuButton : PhysicalButton {
 
     new void Start() {
         base.Start();
-        initialPos = transform.position;
+		initialPos = transform.localPosition;
     }
 
     protected override void HandleHover ()
     {
-		transform.position = Vector3.MoveTowards(transform.position, initialPos + transform.up*raisedHeight, Time.deltaTime*15f);
+		transform.localPosition = Vector3.MoveTowards(transform.localPosition, initialPos + Vector3.up*raisedHeight, Time.deltaTime*15f);
         base.HandleHover ();
     }
 
     protected override void HandleNormal ()
     {
 		float temp = LevelManager.instance.BeatValue((transform.GetSiblingIndex()%2)*5512f);
-		transform.position = Vector3.MoveTowards(transform.position, initialPos + transform.up*temp, Time.deltaTime*15f);
+		transform.localPosition = Vector3.MoveTowards(transform.localPosition, initialPos + Vector3.up*temp, Time.deltaTime*15f);
         base.HandleNormal ();
     }
 

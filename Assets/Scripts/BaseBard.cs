@@ -98,7 +98,9 @@ public abstract class BaseBard : MonoBehaviour {
             } else {
                 foreach(Tune t in tunes) {
                     if(GetButtonDown(t.NextButton())) {
-                        if(!currentTunes.Contains(t)) currentTunes.Add(t);
+                        if(!currentTunes.Contains(t)) {
+                            currentTunes.Add(t);
+                        }
                         if(!soundPlayed) {
                             GetComponent<AudioSource>().pitch = LevelManager.instance.buttonPitchMap[t.NextButton()];
                             GetComponent<AudioSource>().PlayOneShot(instrumentSound, volumeOverride);
@@ -116,6 +118,7 @@ public abstract class BaseBard : MonoBehaviour {
                         x.ResetTune();
                         LevelManager.instance.GetPlayerUI(control.player).TuneReset();
                     }
+                    break;
                 }
             }
             buttonPressDelayTimer -= Time.deltaTime;
@@ -138,6 +141,9 @@ public abstract class BaseBard : MonoBehaviour {
 
     private IEnumerator TuneTimeOut() {
         yield return new WaitForSeconds(LevelManager.instance.Tempo*2f);
+        if (currentTunes.Count != 0) {
+            RegisterNoteCorrect(false);
+        }
         foreach (Tune x in tunes) {
             x.ResetTune();
             LevelManager.instance.GetPlayerUI(control.player).TuneReset();
@@ -155,6 +161,7 @@ public abstract class BaseBard : MonoBehaviour {
         StartCoroutine(TuneTimeOut());
 
         if(t.IterateTune()) {
+            RegisterNoteCorrect(true);
             foreach (Tune x in tunes) {
                 x.ResetTune();
                 LevelManager.instance.GetPlayerUI(control.player).TuneReset();
@@ -202,5 +209,12 @@ public abstract class BaseBard : MonoBehaviour {
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Checks if a note was played correctly.
+    /// </summary>
+    /// <param name="correct">Whether a note was played correctly.</param>
+    protected virtual void RegisterNoteCorrect(bool correct) {
     }
 }

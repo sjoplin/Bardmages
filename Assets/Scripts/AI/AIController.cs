@@ -41,7 +41,9 @@ namespace Bardmages.AI {
             control = GetComponent<AIControl>();
             life = GetComponent<PlayerLife>();
             enabledRhythms = LevelManager.instance.EnabledRhythms;
-//            LevelControllerManager.instance.AddPlayer(control.player, control);
+            if (!LevelManager.instance.HasPlayer(control.player)) {
+                LevelControllerManager.instance.AddPlayer(control.player, control);
+            }
             bard.timingAccuracy = 0.9f;
 
             FindOtherPlayers();

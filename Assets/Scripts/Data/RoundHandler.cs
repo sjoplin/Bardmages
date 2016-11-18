@@ -18,6 +18,7 @@ namespace Assets.Scripts.Data
         [SerializeField]
         [Tooltip("Spawn Points for this stage.  4 expected.")]
         private Transform[] spawnPoints;
+        
 
         /// <summary> internal reference for ensuring singleton. </summary>
         private static RoundHandler instance;
@@ -252,7 +253,7 @@ namespace Assets.Scripts.Data
                 if (Bards[i].GetComponent<NavMeshAgent>())
                     Bards[i].GetComponent<NavMeshAgent>().enabled = true;
                 Bards[i].Respawn();
-                Bards[i].transform.position = spawnPoints[i].position;
+                //Bards[i].transform.position = spawnPoints[i].position;
             }
         }
         

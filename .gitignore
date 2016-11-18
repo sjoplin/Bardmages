@@ -30,4 +30,6 @@ ProjectSettings/ProjectSettings.asset
 ProjectSettings/ProjectVersion.txt
 
 *.DS_Store
-Assets/Bardmages Farm/LightingData.asset
+./*/*/LightingData.asset
+
+Assets/Scene/MenuTest/LightingData.asset
