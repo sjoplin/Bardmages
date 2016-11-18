@@ -105,7 +105,6 @@ public class MainMenuManager : MonoBehaviour {
 		} else {
 			numAI--;
 			ControllerManager.instance.AllowAIRemoval(true, (PlayerID)(num+1));
-			Debug.Log((PlayerID)(num+1) + " " + ControllerManager.instance.IsAI((PlayerID)(num+1)));
 			StartCoroutine(AddPlayerAnim());
 		}
 	}

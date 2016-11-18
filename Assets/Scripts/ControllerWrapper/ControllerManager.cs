@@ -180,7 +180,6 @@ public class ControllerManager  {
 				ControllerInputWrapper controller = playerControls[currentID];
 				playerControls.Remove(currentID);
 				playerControls.Add((PlayerID)(i - 1), controller);
-				Debug.Log("Updated: " + (PlayerID)(i - 1));
 			}
 		}
 	}
