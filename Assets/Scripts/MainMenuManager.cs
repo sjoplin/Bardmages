@@ -68,7 +68,7 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void GoToGame() {
 		Assets.Scripts.Data.Data.Instance.NumOfPlayers = ControllerManager.instance.NumPlayers;
-		Assets.Scripts.Data.Data.Instance.loadScene("Bardmages Farm");
+		Assets.Scripts.Data.Data.Instance.loadScene(levelImages[curLevel].name);
 	}
 
 	public void ToggleAI(int num) {
@@ -99,7 +99,15 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void SwitchLevel(int delta) {
+		curLevel += delta;
+		if(curLevel < 0) curLevel = levelImages.Length;
+		curLevel %= levelImages.Length;
+		StartCoroutine(ChangeSelectedLevel(delta > 0 ? true : false));
+	}
 
+	public void GoToLevelSelect() {
+		inPlayerSelect = false;
+		GetComponent<Animator>().SetInteger("State",3);
 	}
 	#endregion
 		
@@ -344,16 +352,16 @@ public class MainMenuManager : MonoBehaviour {
 		float timer = 0f;
 
 		while (timer < 1f) {
-			timer += Time.deltaTime;
+			timer += Time.deltaTime * 4f;
 			levelSelectFrame.transform.localEulerAngles = new Vector3(0f,0f,Mathf.Lerp(0f,increase ? 180f : -180f,timer));
 			levelSelectFrame.transform.localPosition = new Vector3(0f,Mathf.Lerp(0f,-2f,0f),0f);
 			yield return new WaitForEndOfFrame();
 		}
 		timer = 0f;
 		levelSelectFrame.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = levelImages[curLevel];
-		nameFrame.GetComponent<TextMesh>().text = levelImages[curLevel].name;
+		nameFrame.transform.GetChild(0).GetComponent<TextMesh>().text = levelImages[curLevel].name;
 		while (timer < 1f) {
-			timer += Time.deltaTime;
+			timer += Time.deltaTime * 4f;
 			levelSelectFrame.transform.localEulerAngles = new Vector3(0f,0f,Mathf.Lerp(increase ? 180f : -180f,increase ? 360f : -360f,timer));
 			levelSelectFrame.transform.localPosition = new Vector3(0f,Mathf.Lerp(0f,0f,0f),0f);
 			yield return new WaitForEndOfFrame();
