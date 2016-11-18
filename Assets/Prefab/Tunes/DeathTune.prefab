@@ -57,8 +57,9 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: DEATH
-  tuneDescription: Regular\n+ You immediately die\n\nCrit\n+ Everyone else immediately
+  tuneDescription: Regular\n+ You take 75% damage\n\nCrit\n+ Everyone else immediately
     dies
   maxDistance: Infinity
   minDistance: 0
+  isHuman: 0
   attach: 0

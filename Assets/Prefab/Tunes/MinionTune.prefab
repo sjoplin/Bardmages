@@ -51,14 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592c3effaa6e7464f8b778a724ce5699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tune: 010000000100000001000000
+  tune: 000000000200000001000000000000000200000001000000
   spawnObject: {fileID: 1000010805917098, guid: 73e259361755d49bf832a42509548318,
     type: 2}
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Minion
-  tuneDescription: Regular\n+ Throw grenade that deals 50% damage\n to nearby enemies\n\nCrit\n+
-    Throw further
+  tuneDescription: Regular\n+ Spawns a minion that has\n Snipe, Grenade, and Bubble\n\nCrit\n+
+    Minions last longer.
   maxDistance: Infinity
   minDistance: 0
+  isHuman: 0
   attach: 0
