@@ -72,11 +72,16 @@ namespace Assets.Scripts.Data
         void Init()
         {
             bards = new PlayerLife[Data.Instance.numOfPlayers];
-            for (int i = 0; i < Bards.Length; i++)
+			int i = 0;
+            for (; i < Bards.Length; i++)
             {
                 Bards[i] = Data.Instance.Spawn(i, spawnPoints[i]).GetComponent<PlayerLife>();
 				LevelControllerManager.instance.AddPlayer((PlayerID)(i+1), Bards[i].GetComponent<BaseControl>());
             }
+
+			for(; i < 4; i++) {
+				LevelManager.instance.DisableUI(i);
+			}
         }
 
         void Start()
