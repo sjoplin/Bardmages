@@ -365,6 +365,12 @@ public class MainMenuManager : MonoBehaviour {
 						timer);
                     if (timer > 0.25f) {
 					    playerTuneDescriptions[i].GetComponent<Renderer>().enabled = true;
+                    } else {
+                        for (int j = 0; j < 3; j++) {
+                            playerTunes[i, j].transform.localRotation = Quaternion.identity;
+                            playerTunes[i, j].transform.GetChild(0).GetComponent<TextMesh>().text = tunes[selectedTune[i, j]].tuneName;
+                        }
+                        playerTuneDescriptions[i].transform.localRotation = Quaternion.Euler(-90, 0, 0);
                     }
                     UpdateTuneDescription(i);
 				}
