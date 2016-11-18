@@ -18,10 +18,7 @@ namespace Assets.Scripts.Data
         [SerializeField]
         [Tooltip("Spawn Points for this stage.  4 expected.")]
         private Transform[] spawnPoints;
-        /// <summary> Whether each of the players is computer-controlled. </summary>
-        [SerializeField]
-        [Tooltip("Whether each of the players is computer-controlled.")]
-        private bool[] isAIPlayer;
+        
 
         /// <summary> internal reference for ensuring singleton. </summary>
         private static RoundHandler instance;
@@ -74,7 +71,7 @@ namespace Assets.Scripts.Data
             bards = new PlayerLife[Data.Instance.numOfPlayers];
             for (int i = 0; i < Bards.Length; i++)
             {
-                Bards[i] = Data.Instance.Spawn(i, spawnPoints[i], isAIPlayer[i]).GetComponent<PlayerLife>();
+                Bards[i] = Data.Instance.Spawn(i, spawnPoints[i]).GetComponent<PlayerLife>();
 				LevelControllerManager.instance.AddPlayer((PlayerID)(i+1), Bards[i].GetComponent<BaseControl>());
             }
         }
