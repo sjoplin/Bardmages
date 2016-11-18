@@ -57,6 +57,7 @@ public class KingofHill : MonoBehaviour {
 		if (other.gameObject.GetComponent<BaseControl>() != null && king == null && other.GetComponent<MinionTuneSpawn>() == null) {
 			king = other.gameObject.GetComponent<BaseControl> ();
 			//this.GetComponentInChildren<MeshRenderer> ().enabled = false;
+            transform.rotation = Quaternion.identity;
 			transform.parent = king.transform;
 			transform.position = king.transform.position + new Vector3 (-0.129f, 2.5f, .054f);
 			this.GetComponent<Rigidbody> ().isKinematic = true;
