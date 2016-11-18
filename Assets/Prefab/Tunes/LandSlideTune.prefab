@@ -57,8 +57,8 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Landslide
-  tuneDescription: Regular\n+Spawns a landslide that deals\n 20% damage and shoves
-    enemies back\nCrit\n+ 1.5X wider
+  tuneDescription: Regular\n+Landslide deals 20% damage\n + shoves enemies back\nCrit\n+
+    1.5X wider
   maxDistance: Infinity
   minDistance: 0
   isHuman: 0

@@ -57,8 +57,8 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Lazer
-  tuneDescription: Regular\n+Shoots a lazer that deals \n 20% damage.\nCrit\n+ does
-    70% damage and lasts longer.
+  tuneDescription: Regular\n+Lazer deals 20% damage.\n\nCrit\n+ does 70% damage\n
+    and lasts longer.
   maxDistance: 70
   minDistance: 0
   isHuman: 0
