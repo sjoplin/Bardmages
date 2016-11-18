@@ -23,8 +23,8 @@ namespace Assets.Scripts.Data
         [Tooltip("Prefab for the king of the hill hill.")]
         private GameObject hill;
 
-		public delegate void OpenMidRoundUI(int player);
-        private OpenMidRoundUI uiCaller;
+        public delegate void OpenMidRoundUI(int player);
+        private OpenMidRoundUI uiCaller, coliseum;
 
         /// <summary> internal reference for ensuring singleton. </summary>
         private static RoundHandler instance;
@@ -117,6 +117,8 @@ namespace Assets.Scripts.Data
                         AddScore((PlayerID)(i+1));
 						if (uiCaller != null)
 							uiCaller(i);
+                        if (coliseum != null)
+                            coliseum(i);
 					}
                     isDead[i] = false;
                 }
@@ -201,6 +203,13 @@ namespace Assets.Scripts.Data
         public void RegisterUI(OpenMidRoundUI function)
         {
             uiCaller = function;
+        }
+
+        /// <summary> Register the function to turn the mid round score display. </summary>
+        /// <param name="function"> A function that turn the UI on. </param>
+        public void RegisterReset(OpenMidRoundUI function)
+        {
+            coliseum = function;
         }
 
         /// <summary> Increments the death count for this round or sets the given player to respawn. </summary>

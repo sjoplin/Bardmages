@@ -3,16 +3,22 @@ using System.Collections;
 
 public class AddCPUButton : MainMenuButton {
 
-	private bool opened = false;
+	[HideInInspector]
+	public bool opened = false;
+
 	private Coroutine flipAndChange;
 	private Color initialColor;
 
-    protected override void HandlePressed ()
-    {
+    protected override void HandlePressed () {
         base.HandlePressed ();
 		if(flipAndChange != null) StopCoroutine(flipAndChange);
 		flipAndChange = StartCoroutine(FlipAndChange());
     }
+
+	public void Animate() {
+		if(flipAndChange != null) StopCoroutine(flipAndChange);
+		flipAndChange = StartCoroutine(FlipAndChange());
+	}
 
     private IEnumerator FlipAndChange() {
         float timer = 0f;

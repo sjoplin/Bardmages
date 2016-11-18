@@ -53,6 +53,8 @@ public class MainMenuManager : MonoBehaviour {
 	private int numAI;
 	private bool playerJoining;
 
+	private Coroutine playerReadyAnim;
+
 	#region State_Changing
     public void GoToMainMenu() {
         if (!IsTransitioning()) {
@@ -66,10 +68,12 @@ public class MainMenuManager : MonoBehaviour {
         }
 	}
 
-	public void GoToPlayerSelect() {
+    public void GoToPlayerSelect(int mode) {
         if (!IsTransitioning()) {
-    		inPlayerSelect = true;
-    		GetComponent<Animator>().SetInteger("State",2);
+			inPlayerSelect = true;
+			if(mode == 0) Assets.Scripts.Data.Data.Instance.IsElimination = true;
+			if(mode == 1) Assets.Scripts.Data.Data.Instance.IsElimination = false;
+			GetComponent<Animator>().SetInteger("State",2);
         }
 	}
 
@@ -102,7 +106,8 @@ public class MainMenuManager : MonoBehaviour {
 			Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(num+1), tunes[aiTunes[2]], 2);
 			numAI++;
 			ControllerManager.instance.AddAI(true);
-			StartCoroutine(PlayerReady(num));
+			if(playerReadyAnim != null) StopCoroutine(playerReadyAnim);
+			playerReadyAnim = StartCoroutine(PlayerReady(num));
 		} else {
 			numAI--;
 			ControllerManager.instance.AllowAIRemoval(true);
@@ -202,7 +207,8 @@ public class MainMenuManager : MonoBehaviour {
 					if(ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.A, (PlayerID)(i+1))) {
 						nextTune[i]++;
 						if(nextTune[i] == 3) {
-							StartCoroutine(PlayerReady(i));
+							if(playerReadyAnim != null) StopCoroutine(playerReadyAnim);
+							playerReadyAnim = StartCoroutine(PlayerReady(i));
 							playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(false);
 							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,0]], 0);
 							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,1]], 1);
@@ -238,9 +244,11 @@ public class MainMenuManager : MonoBehaviour {
 
 	#region Animation_Coroutines
     private IEnumerator PlayerReady(int player) {
-        playerReadyText[player].GetComponent<Renderer>().enabled = true;
-        pressStart[player].GetComponent<Renderer>().enabled = false;
-        if(player < 3) playerBlocks[player+1].transform.FindChild("CPU").gameObject.SetActive(true);
+		playerReadyText[player].GetComponent<Renderer>().enabled = true;
+		pressStart[player].GetComponent<Renderer>().enabled = false;
+		if(ControllerManager.instance.NumPlayers < 4) {
+			playerBlocks[ControllerManager.instance.NumPlayers].transform.FindChild("CPU").gameObject.SetActive(true);
+		}
 
 		float timer = 0f;
 
@@ -355,6 +363,8 @@ public class MainMenuManager : MonoBehaviour {
 	private IEnumerator AddPlayerAnim() {
 		float timer = 0f;
 
+		bool openedAI = false;
+
 		while(timer < 1f) {
 			timer += Time.deltaTime;
 			int i = 0;
@@ -375,7 +385,14 @@ public class MainMenuManager : MonoBehaviour {
                     UpdateTuneDescription(i);
 				}
 			}
-			if(i < 4) playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(true);
+			if(i < 4 && !openedAI) {
+				GameObject cpuButton = playerBlocks[i].transform.FindChild("CPU").gameObject;
+				openedAI = true;
+				if(!cpuButton.GetComponent<AddCPUButton>().opened){
+					cpuButton.GetComponent<AddCPUButton>().Animate();
+				}
+				cpuButton.SetActive(true);
+			}
 			for(; i < 4; i++) {
 				playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
 					Quaternion.Euler(new Vector3(0f,0f,0f)),

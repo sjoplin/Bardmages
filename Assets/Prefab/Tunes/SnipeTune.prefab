@@ -57,8 +57,8 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Snipe
-  tuneDescription: Regular\n+ Fires a shot that does 25% damage. \n\nCrit\n+ Does
-    50% damage
+  tuneDescription: Regular\n+ Fires shot that\n does 25% damage \n\nCrit\n+ Does 50%
+    damage
   maxDistance: Infinity
   minDistance: 0
   isHuman: 0
