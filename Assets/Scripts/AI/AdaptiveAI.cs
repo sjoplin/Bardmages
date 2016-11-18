@@ -9,8 +9,6 @@ namespace Bardmages.AI {
 
         /// <summary> Weights for how effective each tune has been. </summary>
         private float[] tuneWeights;
-        /// <summary> The sum of all tune weights. </summary>
-        private float totalTuneWeights;
 
         /// <summary>
         /// Changes any needed settings for the AI.
@@ -37,10 +35,23 @@ namespace Bardmages.AI {
         /// </summary>
         /// <returns>The index of the tune to play next.</returns>
         protected override int ChooseTune() {
+            float totalTuneWeights = 0;
+            float[] modifiedTuneWeights = new float[tuneWeights.Length];
+            for (int i = 0; i < tuneWeights.Length; i++) {
+                Tune tune = bard.tunes[i];
+                if (tune.IsTuneUseless()) {
+                    modifiedTuneWeights[i] = 0;
+                } else {
+                    modifiedTuneWeights[i] = tuneWeights[i];
+                }
+                totalTuneWeights += modifiedTuneWeights[i];
+            }
+
             float random = Random.Range(0, totalTuneWeights);
             float counter = 0;
-            for (int i = 0; i < tuneWeights.Length - 1; i++) {
-                counter += tuneWeights[i];
+
+            for (int i = 0; i < modifiedTuneWeights.Length - 1; i++) {
+                counter += modifiedTuneWeights[i];
                 if (random < counter) {
                     return i;
                 }
@@ -56,7 +67,6 @@ namespace Bardmages.AI {
         public void AddTuneWeight(int index, float weight) {
             weight = Mathf.Max(weight, -tuneWeights[index] + 1);
             tuneWeights[index] += weight;
-            totalTuneWeights += weight;
         }
 
         /// <summary>

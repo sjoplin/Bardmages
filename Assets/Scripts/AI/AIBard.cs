@@ -129,7 +129,7 @@ namespace Bardmages.AI {
 
                 modifiedThreshold = Tune.PERFECT_THRESHOLD;
                 if (Random.Range(0.0f, 1.0f) > timingAccuracy) {
-                    modifiedThreshold -= 0.2f;
+                    modifiedThreshold -= 0.5f;
                 }
             }
         }

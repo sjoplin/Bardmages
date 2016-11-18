@@ -108,4 +108,13 @@ public class Tune : MonoBehaviour {
     public bool Equals(Tune other) {
         return other != null && tuneName.Equals(other.tuneName);
     }
+
+    /// <summary>
+    /// Determines if the tune will have no current effect.
+    /// </summary>
+    /// <returns>Whether the tune is useless.</returns>
+    /// <param name="control">Control.</param>
+    public virtual void IsTuneUseless(BaseControl control) {
+        return false;
+    }
 }
