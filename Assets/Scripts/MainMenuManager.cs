@@ -131,6 +131,10 @@ public class MainMenuManager : MonoBehaviour {
 	public void GoToCredits() {
 		GetComponent<Animator>().SetInteger("State",4);
 	}
+
+	public void GoToControls() {
+		GetComponent<Animator>().SetInteger("State",5);
+	}
 	#endregion
 		
 
