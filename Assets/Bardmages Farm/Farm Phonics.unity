@@ -961,6 +961,34 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &208540144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 208540145}
+  m_Layer: 0
+  m_Name: HillSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &208540145
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 208540144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20, y: 1.5, z: -15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1 &260778813
 GameObject:
   m_ObjectHideFlags: 0
@@ -3094,6 +3122,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
+        type: 2}
+      propertyPath: spawnPoints.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011850582198, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3124,7 +3157,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011850582198, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
         type: 2}
@@ -3155,6 +3188,17 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
+        type: 2}
+      propertyPath: hill
+      value: 
+      objectReference: {fileID: 1000014039333836, guid: 009208edb72844537b8cb0b76fdb45c9,
+        type: 2}
+    - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
+        type: 2}
+      propertyPath: spawnPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 208540145}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
   m_IsPrefabParent: 0
@@ -4063,7 +4107,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!1 &1207545524
 GameObject:
   m_ObjectHideFlags: 0
