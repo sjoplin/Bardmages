@@ -225,6 +225,13 @@ namespace Assets.Scripts.Data
                 }
                 else
                 {
+                    KingofHill k = bards[(((int)id) - 1)].gameObject.GetComponentInChildren<KingofHill>();
+                    if (k != null)
+                    {
+                        k.ResetRound();
+                        hill.transform.parent = null;
+                        hill.transform.position = spawnPoints[4].transform.position;
+                    }
                     StartCoroutine(Respawn(((int)id) - 1));
                 }
             }
@@ -257,6 +264,7 @@ namespace Assets.Scripts.Data
             if (Bards[player].GetComponent<NavMeshAgent>())
                 Bards[player].GetComponent<NavMeshAgent>().enabled = true;
             Bards[player].transform.position = spawnPoints[player].position;
+            Bards[player].Respawn();
             yield return null;
         }
 
