@@ -261,9 +261,9 @@ namespace Assets.Scripts.Data
             Bards[player].GetComponent<BaseControl>().enabled = true;
             Bards[player].GetComponent<BaseBard>().enabled = true;
             Bards[player].GetComponent<CharacterController>().enabled = true;
+            Bards[player].transform.position = spawnPoints[player].position;
             if (Bards[player].GetComponent<NavMeshAgent>())
                 Bards[player].GetComponent<NavMeshAgent>().enabled = true;
-            Bards[player].transform.position = spawnPoints[player].position;
             Bards[player].Respawn();
             yield return null;
         }
