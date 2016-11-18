@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1707501890}
-  m_IndirectSpecularColor: {r: 0.5276019, g: 0.5184187, b: 0.483809, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -449,6 +449,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010308400846, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
+      propertyPath: m_TagString
+      value: MovingFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
   m_IsPrefabParent: 0
@@ -578,6 +582,10 @@ Prefab:
     - target: {fileID: 1000010308400846, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010308400846, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
+      propertyPath: m_TagString
+      value: MovingFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
@@ -5883,6 +5891,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010308400846, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
+      propertyPath: m_TagString
+      value: MovingFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
   m_IsPrefabParent: 0
@@ -9308,6 +9320,10 @@ Prefab:
     - target: {fileID: 1000010308400846, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010308400846, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
+      propertyPath: m_TagString
+      value: MovingFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d888736737be5a6468e15955a5c16bd3, type: 2}
