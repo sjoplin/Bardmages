@@ -26,8 +26,8 @@ public class KingofHill : MonoBehaviour {
 		if (king != null) {
 			if (!king.GetComponent<PlayerLife> ().Alive) {
 				transform.parent = null;
-				this.GetComponentInChildren<MeshRenderer> ().enabled = true;
-				transform.position = king.GetComponent<PlayerLife> ().PositionOfDeath;
+				//this.GetComponentInChildren<MeshRenderer> ().enabled = true;
+				transform.position = king.GetComponent<PlayerLife> ().PositionOfDeath - new Vector3 (-0.129f, 2.5f, .054f);
 				if (king.GetComponent<PlayerLife> ().FellOffMap) {
 					transform.position = Vector3.up;
 					king.GetComponent<PlayerLife> ().FellOffMap = false;
@@ -56,8 +56,9 @@ public class KingofHill : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.GetComponent<BaseControl>() != null && king == null && other.GetComponent<MinionTuneSpawn>() == null) {
 			king = other.gameObject.GetComponent<BaseControl> ();
-			this.GetComponentInChildren<MeshRenderer> ().enabled = false;
+			//this.GetComponentInChildren<MeshRenderer> ().enabled = false;
 			transform.parent = king.transform;
+			transform.position = king.transform.position + new Vector3 (-0.129f, 2.5f, .054f);
 			this.GetComponent<Rigidbody> ().isKinematic = true;
 			this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
 			this.GetComponentInChildren<ParticleSystem> ().startColor = king.transform.FindChild("bardmage_export").FindChild("pCube2").GetComponent<Renderer>().material.color;
@@ -67,7 +68,7 @@ public class KingofHill : MonoBehaviour {
 	void ResetRound() {
 		if (king != null) {
 			transform.parent = null;
-			this.GetComponentInChildren<MeshRenderer> ().enabled = true;
+			//this.GetComponentInChildren<MeshRenderer> ().enabled = true;
 			transform.position = new Vector3(0,1,0);
 			king = null;
 			this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;

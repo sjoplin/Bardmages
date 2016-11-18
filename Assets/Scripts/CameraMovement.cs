@@ -29,8 +29,8 @@ public class CameraMovement : MonoBehaviour {
 		int numDead = 0;
 		float maxDistance = 0f;
 
-		for(int i = 0; i < 4; i++) {
-			for(int j = 0; j < 4; j++) {
+		for(int i = 0; i < targets.Length; i++) {
+			for(int j = 0; j < targets.Length; j++) {
 				if(targets[i].GetComponent<PlayerLife>().Alive && targets[j].GetComponent<PlayerLife>().Alive) {
 					if(Vector3.Distance(targets[i].position,targets[j].position) > maxDistance) {
 						maxDistance = Vector3.Distance(targets[i].position,targets[j].position);
