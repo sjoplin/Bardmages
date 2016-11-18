@@ -218,11 +218,14 @@ public class MainMenuManager : MonoBehaviour {
 
 
 	#region Animation_Coroutines
-	private IEnumerator PlayerReady(int player) {
+    private IEnumerator PlayerReady(int player) {
 		float timer = 0f;
 
 		while(timer < 1f) {
 			timer += Time.deltaTime;
+            if (timer > 0.25f) {
+                playerTuneDescriptions[player].GetComponent<Renderer>().enabled = false;
+            }
 
 			playerBlocks[player].transform.localRotation = Quaternion.Lerp(playerBlocks[player].transform.localRotation,
 				Quaternion.Euler(new Vector3(0f,0f,0f)),
@@ -231,7 +234,6 @@ public class MainMenuManager : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 		}
 
-		playerTuneDescriptions[player].GetComponent<Renderer>().enabled = false;
 		playerReadyText[player].GetComponent<Renderer>().enabled = true;
 		pressStart[player].GetComponent<Renderer>().enabled = false;
 		if(player < 3) playerBlocks[player+1].transform.FindChild("CPU").gameObject.SetActive(true);
@@ -248,14 +250,17 @@ public class MainMenuManager : MonoBehaviour {
 			playerBlocks[player].transform.localRotation = Quaternion.Lerp(playerBlocks[player].transform.localRotation,
 				Quaternion.Euler(new Vector3(-180f,0f,0f)),
 				timer);
-			playerTuneDescriptions[player].GetComponent<Renderer>().enabled = true;
+            if (timer > 0.25f) {
+			    playerTuneDescriptions[player].GetComponent<Renderer>().enabled = true;
+            }
 			yield return new WaitForEndOfFrame();
 		}
 
 		yield return null;
 	}
 
-	private IEnumerator UpdateNextTune(int player) {
+    private IEnumerator UpdateNextTune(int player) {
+        UpdateTuneDescription(player);
 		float timer = 0f;
 
 		while(timer < 1f) {
@@ -299,7 +304,7 @@ public class MainMenuManager : MonoBehaviour {
 
 		timer = 0f;
 		playerTunes[player, nextTune[player]].transform.GetChild(0).GetComponent<TextMesh>().text = tunes[tuneIndex].tuneName;
-		playerTuneDescriptions[player].GetComponent<TextMesh>().text = tunes[tuneIndex].tuneDescription.Replace("\\n","\n");
+        UpdateTuneDescription(player, tuneIndex);
 
 		while (timer < 1f) {
 			timer += Time.deltaTime*8f;
@@ -318,6 +323,16 @@ public class MainMenuManager : MonoBehaviour {
 		yield return null;
 	}
 
+    /// <summary>
+    /// Updates the currently selected tune description for a certain player.
+    /// </summary>
+    /// <param name="player">The player number to update.</param>
+    /// <param name="tuneIndex">The index of the tune to set the description to.</param>
+    private void UpdateTuneDescription(int player, int tuneIndex = -1) {
+        tuneIndex = tuneIndex == -1 ? selectedTune[player,nextTune[player]] : tuneIndex;
+        playerTuneDescriptions[player].GetComponent<TextMesh>().text = tunes[tuneIndex].tuneDescription.Replace("\\n","\n");
+    }
+
 	private IEnumerator AddPlayerAnim() {
 		float timer = 0f;
 
@@ -329,15 +344,20 @@ public class MainMenuManager : MonoBehaviour {
 					playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
 						Quaternion.Euler(new Vector3(-180f,0f,0f)),
 						timer);
-					playerTuneDescriptions[i].GetComponent<Renderer>().enabled = true;
+                    if (timer > 0.25f) {
+					    playerTuneDescriptions[i].GetComponent<Renderer>().enabled = true;
+                    }
+                    UpdateTuneDescription(i);
 				}
 			}
 			if(i < 4) playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(true);
 			for(; i < 4; i++) {
 				playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
 					Quaternion.Euler(new Vector3(0f,0f,0f)),
-					timer);
-				playerTuneDescriptions[i].GetComponent<Renderer>().enabled = false;
+                    timer);
+                if (timer > 0.25f) {
+				    playerTuneDescriptions[i].GetComponent<Renderer>().enabled = false;
+                }
 				playerReadyText[i].GetComponent<Renderer>().enabled = false;
 				pressStart[i].GetComponent<Renderer>().enabled = true;
 				if(i+1 < 4) playerBlocks[i+1].transform.FindChild("CPU").gameObject.SetActive(false);
