@@ -117,15 +117,18 @@ namespace Bardmages.AI {
             pressedButton = ControllerInputWrapper.Buttons.Start;
 
             // Plays the tune on the beat.
-            if (currentTune != null && buttonPressDelayTimer < 0f && LevelManager.instance.PerfectTiming(rhythmType) >= modifiedThreshold) {
-                if (Random.Range(0f, 1f) < noteAccuracy) {
-                    pressedButton = currentTune.tune[tuneProgress];
-                    if (++tuneProgress >= currentTune.tune.Length) {
-                        tuneProgress = 0;
-                        currentTune = null;
+            if (currentTune != null && buttonPressDelayTimer < 0f) {
+                float currentTiming = LevelManager.instance.PerfectTiming(rhythmType);
+                if (currentTiming > modifiedThreshold) {
+                    if (Random.Range(0f, 1f) < noteAccuracy) {
+                        pressedButton = currentTune.tune[tuneProgress];
+                        if (++tuneProgress >= currentTune.tune.Length) {
+                            tuneProgress = 0;
+                            currentTune = null;
+                        }
                     }
+                    buttonPressDelay = Mathf.Max(buttonPressDelayTimer, noteDelay);
                 }
-                buttonPressDelay = Mathf.Max(buttonPressDelayTimer, noteDelay);
 
                 modifiedThreshold = Tune.PERFECT_THRESHOLD;
                 if (Random.Range(0.0f, 1.0f) > timingAccuracy) {
