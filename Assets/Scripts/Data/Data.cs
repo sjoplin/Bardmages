@@ -45,6 +45,11 @@ namespace Assets.Scripts.Data
         internal int numOfPlayers;
         public int NumOfPlayers { get { return numOfPlayers; } set { numOfPlayers = value; } }
 
+		/// <summary> Whether each of the players is computer-controlled. </summary>
+		[HideInInspector]
+		[Tooltip("Whether each of the players is computer-controlled.")]
+		public bool[] isAIPlayer;
+
         /// <summary> The level to async load. </summary>
         internal string level;
 
@@ -83,7 +88,7 @@ namespace Assets.Scripts.Data
             }
             instruments = new GameObject[4];
             DontDestroyOnLoad(this.gameObject);
-            
+			isAIPlayer = new bool[4];
         }
 
         // TODO TEST CODE REMOVE
@@ -102,15 +107,14 @@ namespace Assets.Scripts.Data
         }
 
         /// <summary> Spawns a bard in the scene. </summary>
-        public GameObject Spawn(int character, Transform spawn, bool isAI = false)
+        public GameObject Spawn(int character, Transform spawn)
         {
-            BaseBard[] prefabArray = isAI ? aiPrefabs : characters;
+			BaseBard[] prefabArray = isAIPlayer[character] ? aiPrefabs : characters;
             BaseBard b = Instantiate(prefabArray[character]);
             b.GetComponent<BaseControl>().player = (PlayerID)(character + 1);
             b.transform.position = spawn.position;
             b.tunes = tunes[character];
             b.instrumentSound = clips[character];
-            b.GetComponent<UpdateParentFloor>().enabled = LevelManager.instance.hasMovingPlatforms;
 
             GameObject instrumentPrefab = instrumentPrefabs[clipInstrumentMap[clips[character]]];
             Transform modelParent = b.transform.FindChild("bardmage_export");

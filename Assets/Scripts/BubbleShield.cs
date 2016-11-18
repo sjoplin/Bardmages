@@ -44,7 +44,7 @@ public class BubbleShield : MonoBehaviour, Spawnable {
 			foreach (Collider c in colliders) {
                 BaseControl control = c.transform.root.GetComponent<BaseControl>();
                 if(control && control.player != owner) {
-					control.Knockback((c.transform.root.position - transform.position).normalized*2f);
+					control.Knockback((c.transform.root.position - transform.position).normalized*1f);
 				}
 			}
 		}

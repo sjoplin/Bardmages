@@ -145,7 +145,7 @@ GameObject:
   - 114: {fileID: 114000013890040046}
   m_Layer: 0
   m_Name: Minion
-  m_TagString: Player
+  m_TagString: TuneSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1420,6 +1420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9e61c4818dd4ace809875ad9543062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inaccuracyMax: 20
+  inaccuracyRate: 0.5
 --- !u!114 &114000012380890056
 MonoBehaviour:
   m_ObjectHideFlags: 0

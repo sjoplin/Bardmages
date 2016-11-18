@@ -4,13 +4,13 @@ using Bardmages.AI;
 
 public class MainMenuManager : MonoBehaviour {
 
-	[SerializeField]
-	private MainMenuAI[] mainMenuAI;
-
 	/// <summary>
 	/// The blocks that animate when you add a new player
 	/// </summary>
 	public GameObject[] playerBlocks;
+
+	public Sprite[] levelImages;
+	private int curLevel;
 
 	/// <summary>
 	/// A list of all the tunes in the game.
@@ -28,6 +28,8 @@ public class MainMenuManager : MonoBehaviour {
 	private GameObject[] playerTuneDescriptions, playerTuneName, upIcons, downIcons, acceptIcons, rejectIcons;
 	private GameObject[] playerReadyText, pressStart;
 
+	private GameObject levelSelectFrame, nameFrame;
+
 	/// <summary>
 	/// The selected tunes for each player.
 	/// </summary>
@@ -41,13 +43,14 @@ public class MainMenuManager : MonoBehaviour {
 	/// <summary>
 	/// Silly state variable
 	/// </summary>
-	private bool inPlayerSelect;
+	private bool inPlayerSelect, inLevelSelect;
 
 	/// <summary>
 	/// Ensures repeat input doesn't occurr accidentally
 	/// </summary>
 	private float[] inputDelay;
 
+	private int numAI;
 
 	#region State_Changing
 	public void GoToMainMenu() {
@@ -65,7 +68,46 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void GoToGame() {
 		Assets.Scripts.Data.Data.Instance.NumOfPlayers = ControllerManager.instance.NumPlayers;
-		Assets.Scripts.Data.Data.Instance.loadScene("Bardmages Farm");
+		Assets.Scripts.Data.Data.Instance.loadScene(levelImages[curLevel].name);
+	}
+
+	public void ToggleAI(int num) {
+		bool isAi = Assets.Scripts.Data.Data.Instance.isAIPlayer[num];
+		Assets.Scripts.Data.Data.Instance.isAIPlayer[num] = !isAi;
+		if(!isAi) {
+			int[] aiTunes = new int[3];
+			for(int i = 0; i < 3; i++) {
+				aiTunes[i] = Random.Range(0,tunes.Length-2);
+				for(int j = 0; j < i; j++) {
+					while(aiTunes[i] == aiTunes[j]) {
+						aiTunes[i]++;
+						aiTunes[i] %= (tunes.Length-2);
+					}
+				}
+			}
+			Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(num+1), tunes[aiTunes[0]], 0);
+			Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(num+1), tunes[aiTunes[1]], 1);
+			Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(num+1), tunes[aiTunes[2]], 2);
+			numAI++;
+			ControllerManager.instance.AddAI(true);
+			StartCoroutine(PlayerReady(num));
+		} else {
+			numAI--;
+			ControllerManager.instance.AllowAIRemoval(true);
+			StartCoroutine(AddPlayerAnim());
+		}
+	}
+
+	public void SwitchLevel(int delta) {
+		curLevel += delta;
+		if(curLevel < 0) curLevel = levelImages.Length;
+		curLevel %= levelImages.Length;
+		StartCoroutine(ChangeSelectedLevel(delta > 0 ? true : false));
+	}
+
+	public void GoToLevelSelect() {
+		inPlayerSelect = false;
+		GetComponent<Animator>().SetInteger("State",3);
 	}
 	#endregion
 		
@@ -106,9 +148,13 @@ public class MainMenuManager : MonoBehaviour {
 			downIcons[i] = playerBlocks[i].transform.FindChild("DownIcon").gameObject;
 			acceptIcons[i] = playerBlocks[i].transform.FindChild("ControlDescription").FindChild("Button_A").gameObject;
 			rejectIcons[i] = playerBlocks[i].transform.FindChild("ControlDescription").FindChild("Button_B").gameObject;
+			if (i > 0) playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(false);
 		}
 
 		tunes = Assets.Scripts.Data.Data.Instance.GetAllTunes();
+
+		levelSelectFrame = transform.FindChild("LevelSelect/LevelSelectContainer/Frame").gameObject;
+		nameFrame = transform.FindChild("LevelSelect/LevelSelectContainer/MapBoxContainer/MapNameBox").gameObject;
 	}
 
 	void Update() {
@@ -138,6 +184,7 @@ public class MainMenuManager : MonoBehaviour {
 						nextTune[i]++;
 						if(nextTune[i] == 3) {
 							StartCoroutine(PlayerReady(i));
+							playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(false);
 							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,0]], 0);
 							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,1]], 1);
 							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,2]], 2);
@@ -154,6 +201,7 @@ public class MainMenuManager : MonoBehaviour {
 						nextTune[i]--;
 						StartCoroutine(UpdateNextTune(i));
 					} else {
+						playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(false);
 						if(ControllerManager.instance.AllowPlayerRemoval(ControllerInputWrapper.Buttons.B) != 0) {
 							StopAllCoroutines();
 							StartCoroutine(AddPlayerAnim());
@@ -161,6 +209,9 @@ public class MainMenuManager : MonoBehaviour {
 					}
 				}
 			}
+		}
+		if(inLevelSelect) {
+			
 		}
 	}
 	#endregion
@@ -176,12 +227,14 @@ public class MainMenuManager : MonoBehaviour {
 			playerBlocks[player].transform.localRotation = Quaternion.Lerp(playerBlocks[player].transform.localRotation,
 				Quaternion.Euler(new Vector3(0f,0f,0f)),
 				timer);
-			playerTuneDescriptions[player].GetComponent<Renderer>().enabled = false;
-			playerReadyText[player].GetComponent<Renderer>().enabled = true;
-			pressStart[player].GetComponent<Renderer>().enabled = false;
 
 			yield return new WaitForEndOfFrame();
 		}
+
+		playerTuneDescriptions[player].GetComponent<Renderer>().enabled = false;
+		playerReadyText[player].GetComponent<Renderer>().enabled = true;
+		pressStart[player].GetComponent<Renderer>().enabled = false;
+		if(player < 3) playerBlocks[player+1].transform.FindChild("CPU").gameObject.SetActive(true);
 
 		yield return null;
 	}
@@ -272,11 +325,14 @@ public class MainMenuManager : MonoBehaviour {
 			timer += Time.deltaTime;
 			int i = 0;
 			for(; i < ControllerManager.instance.NumPlayers; i++) {
-				playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
-					Quaternion.Euler(new Vector3(-180f,0f,0f)),
-					timer);
-				playerTuneDescriptions[i].GetComponent<Renderer>().enabled = true;
+				if(nextTune[i] != 3 && !Assets.Scripts.Data.Data.Instance.isAIPlayer[i]) {
+					playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
+						Quaternion.Euler(new Vector3(-180f,0f,0f)),
+						timer);
+					playerTuneDescriptions[i].GetComponent<Renderer>().enabled = true;
+				}
 			}
+			if(i < 4) playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(true);
 			for(; i < 4; i++) {
 				playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
 					Quaternion.Euler(new Vector3(0f,0f,0f)),
@@ -284,7 +340,30 @@ public class MainMenuManager : MonoBehaviour {
 				playerTuneDescriptions[i].GetComponent<Renderer>().enabled = false;
 				playerReadyText[i].GetComponent<Renderer>().enabled = false;
 				pressStart[i].GetComponent<Renderer>().enabled = true;
+				if(i+1 < 4) playerBlocks[i+1].transform.FindChild("CPU").gameObject.SetActive(false);
 			}
+			yield return new WaitForEndOfFrame();
+		}
+
+		yield return null;
+	}
+
+	private IEnumerator ChangeSelectedLevel(bool increase) {
+		float timer = 0f;
+
+		while (timer < 1f) {
+			timer += Time.deltaTime * 4f;
+			levelSelectFrame.transform.localEulerAngles = new Vector3(0f,0f,Mathf.Lerp(0f,increase ? 180f : -180f,timer));
+			levelSelectFrame.transform.localPosition = new Vector3(0f,Mathf.Lerp(0f,-2f,0f),0f);
+			yield return new WaitForEndOfFrame();
+		}
+		timer = 0f;
+		levelSelectFrame.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = levelImages[curLevel];
+		nameFrame.transform.GetChild(0).GetComponent<TextMesh>().text = levelImages[curLevel].name;
+		while (timer < 1f) {
+			timer += Time.deltaTime * 4f;
+			levelSelectFrame.transform.localEulerAngles = new Vector3(0f,0f,Mathf.Lerp(increase ? 180f : -180f,increase ? 360f : -360f,timer));
+			levelSelectFrame.transform.localPosition = new Vector3(0f,Mathf.Lerp(0f,0f,0f),0f);
 			yield return new WaitForEndOfFrame();
 		}
 
