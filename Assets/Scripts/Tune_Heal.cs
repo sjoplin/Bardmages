@@ -33,7 +33,7 @@ public class Tune_Heal : Tune {
     /// </summary>
     /// <returns>Whether the tune is useless.</returns>
     /// <param name="control">Control.</param>
-    public override void IsTuneUseless(BaseControl control) {
+    public override bool IsTuneUseless(BaseControl control) {
         return control.GetComponent<PlayerLife>().Health == 1f;
     }
 }

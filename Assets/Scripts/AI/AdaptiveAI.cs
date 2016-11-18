@@ -39,7 +39,7 @@ namespace Bardmages.AI {
             float[] modifiedTuneWeights = new float[tuneWeights.Length];
             for (int i = 0; i < tuneWeights.Length; i++) {
                 Tune tune = bard.tunes[i];
-                if (tune.IsTuneUseless()) {
+                if (tune.IsTuneUseless(control)) {
                     modifiedTuneWeights[i] = 0;
                 } else {
                     modifiedTuneWeights[i] = tuneWeights[i];

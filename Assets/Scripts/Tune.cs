@@ -114,7 +114,7 @@ public class Tune : MonoBehaviour {
     /// </summary>
     /// <returns>Whether the tune is useless.</returns>
     /// <param name="control">Control.</param>
-    public virtual void IsTuneUseless(BaseControl control) {
+    public virtual bool IsTuneUseless(BaseControl control) {
         return false;
     }
 }
