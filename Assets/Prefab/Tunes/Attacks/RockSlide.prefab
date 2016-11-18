@@ -41,7 +41,7 @@ GameObject:
   - 114: {fileID: 114000011159251046}
   m_Layer: 0
   m_Name: RockSlide
-  m_TagString: Untagged
+  m_TagString: TuneSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -304,3 +304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68957b9cf4de748848387068a1de72b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  destroyOnImpact: 0
+  destroyAfterTime: 0
+  agressor: 0
+  victim: 0
+  impacted: 0
+  rock2: {fileID: 0}
+  rock3: {fileID: 0}
