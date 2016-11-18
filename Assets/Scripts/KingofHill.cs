@@ -25,17 +25,17 @@ public class KingofHill : MonoBehaviour {
 	void Update () {
 		if (king != null) {
 			if (!king.GetComponent<PlayerLife> ().Alive) {
-				transform.parent = null;
-				//this.GetComponentInChildren<MeshRenderer> ().enabled = true;
-				transform.position = king.GetComponent<PlayerLife> ().PositionOfDeath - new Vector3 (-0.129f, 2.5f, .054f);
-				if (king.GetComponent<PlayerLife> ().FellOffMap) {
-					transform.position = Vector3.up;
-					king.GetComponent<PlayerLife> ().FellOffMap = false;
-				}
-				king = null;
-				this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
-				this.GetComponent<Rigidbody> ().velocity.Set (0, 0, 0);
-				this.GetComponent<Rigidbody> ().isKinematic = false;
+				//transform.parent = null;
+				////this.GetComponentInChildren<MeshRenderer> ().enabled = true;
+				//transform.position = king.GetComponent<PlayerLife> ().PositionOfDeath - new Vector3 (-0.129f, 2.5f, .054f);
+				//if (king.GetComponent<PlayerLife> ().FellOffMap) {
+				//	transform.position = Vector3.up;
+				//	king.GetComponent<PlayerLife> ().FellOffMap = false;
+				//}
+				//king = null;
+				//this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
+				//this.GetComponent<Rigidbody> ().velocity.Set (0, 0, 0);
+				//this.GetComponent<Rigidbody> ().isKinematic = false;
 			} else {
 				if (Time.time >= nextUpdate) {
 					nextUpdate = Time.time + 1;
@@ -65,7 +65,7 @@ public class KingofHill : MonoBehaviour {
 		}
 	}
 
-	void ResetRound() {
+	public void ResetRound() {
 		if (king != null) {
 			transform.parent = null;
 			//this.GetComponentInChildren<MeshRenderer> ().enabled = true;

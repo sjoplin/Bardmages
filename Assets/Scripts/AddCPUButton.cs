@@ -6,6 +6,7 @@ public class AddCPUButton : MainMenuButton {
 	[HideInInspector]
 	public bool opened = false;
 
+	private bool recentChange = false;
 	private Coroutine flipAndChange;
 	private Color initialColor;
 
@@ -23,7 +24,14 @@ public class AddCPUButton : MainMenuButton {
     private IEnumerator FlipAndChange() {
         float timer = 0f;
 		if(initialColor == null && !opened) initialColor = transform.GetChild(0).GetComponent<Renderer>().material.color;
-		opened = !opened;
+		if(recentChange) {
+			recentChange = false;
+			yield return null;
+		} else {
+			recentChange = true;
+			opened = !opened;
+//			Debug.Log("Changed open to: " + opened);
+		}
         while (timer < 1f) {
             timer += Time.deltaTime*2f;
 			if(opened) {
@@ -35,6 +43,7 @@ public class AddCPUButton : MainMenuButton {
 			}
             yield return new WaitForEndOfFrame();
         }
+		recentChange = false;
 		yield return null;
     }
 }
