@@ -56,6 +56,14 @@ namespace Assets.Scripts.Data
         private bool isElimination;
         public bool IsElimination { get { return isElimination; } set { isElimination = value; } }
 
+
+		private int[] finalScores;
+		public int[] FinalScores { get { return finalScores; } set{ finalScores = value; } }
+
+        private bool canPause;
+        public bool CanPause { get { return canPause; } set { canPause = value; } }
+
+
         void Awake()
         {
             if (Instance == null)
@@ -69,6 +77,7 @@ namespace Assets.Scripts.Data
                 return;
             }
             isElimination = true;
+            canPause = false;
             level = "Test";
             tunes = new Tune[4][];
             numOfPlayers = 4;
@@ -97,12 +106,14 @@ namespace Assets.Scripts.Data
         {
             level = name;
             SceneManager.LoadScene("Load");
+            canPause = false;
         }
 
         /// <summary> Reloads a level. </summary>
         public void loadScene()
         {
             SceneManager.LoadScene("Load");
+            canPause = false;
         }
 
         /// <summary> Spawns a bard in the scene. </summary>

@@ -37,7 +37,7 @@ public class Tune : MonoBehaviour {
 	public string tuneDescription;
 
     /// <summary> The percentage threshold for a note being considered on the beat. </summary>
-    public const float PERFECT_THRESHOLD = 0.8f;
+    public const float PERFECT_THRESHOLD = 0.75f;
 
     /// <summary> The maximum distance away from the enemy for the tune to be able to succeed. Used for AI. </summary>
     [SerializeField]
