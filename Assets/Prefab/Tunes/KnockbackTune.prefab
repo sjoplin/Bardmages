@@ -57,8 +57,8 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Knockback
-  tuneDescription: Regular\n+ Knocks the enemy back a \nfair distance and deals 10%
-    damage \n\nCrit\n+The attack now tracks enemies
+  tuneDescription: Regular\n+ Knocks enemy back\n + Deals 10% damage \n\nCrit\n+The
+    attack now tracks enemies
   maxDistance: Infinity
   minDistance: 0
   isHuman: 0

@@ -57,8 +57,8 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Mine
-  tuneDescription: Regular\n+ Spawns a mine behind \nthe player that deals 25% damage\nCrit\n+
-    Spawns four mines.
+  tuneDescription: Regular\n+ Places mine behind player\n dealing 25% damage\nCrit\n+
+    Places four mines.
   maxDistance: Infinity
   minDistance: 0
   isHuman: 0

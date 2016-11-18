@@ -318,6 +318,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
+      propertyPath: m_TagString
+      value: MovingFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
   m_IsPrefabParent: 0
@@ -902,6 +906,10 @@ Prefab:
     - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
+      propertyPath: m_TagString
+      value: MovingFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
@@ -1575,6 +1583,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f7080129506cf4f828e82d3ffd431d2a, type: 3}
+      propertyPath: m_TagString
+      value: MovingFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7080129506cf4f828e82d3ffd431d2a, type: 3}
   m_IsPrefabParent: 0
@@ -2092,6 +2104,10 @@ Prefab:
     - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
+      propertyPath: m_TagString
+      value: MovingFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
@@ -3247,6 +3263,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
+      propertyPath: m_TagString
+      value: MovingFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
   m_IsPrefabParent: 0
@@ -3474,6 +3494,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
+      propertyPath: m_TagString
+      value: MovingFloor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
   m_IsPrefabParent: 0
@@ -3555,6 +3579,10 @@ Prefab:
     - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
+      propertyPath: m_TagString
+      value: MovingFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54937f684d8024a21a068635c288d1c7, type: 3}
@@ -4022,6 +4050,10 @@ Prefab:
     - target: {fileID: 100000, guid: 61e0e1afbd48c4ee39b58101111a68c1, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 61e0e1afbd48c4ee39b58101111a68c1, type: 3}
+      propertyPath: m_TagString
+      value: MovingFloor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61e0e1afbd48c4ee39b58101111a68c1, type: 3}
