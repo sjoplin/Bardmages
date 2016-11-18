@@ -62,10 +62,6 @@ namespace Assets.Scripts.Data
         public int[] Scores { get { return scores; } }
         /// <summary> Bool array for tracking who is dead. </summary>
         private bool[] isDead;
-        /// <summary> Vector for resetting camera postion. </summary>
-        private Vector3 cameraPos;
-        /// <summary> Quaternion for resetting camera rotation. </summary>
-        private Quaternion cameraRot;
         /// <summary> Pointer to the camera to reset it. </summary>
         private CameraMovement cm;
         private GameObject hillObject;
@@ -100,8 +96,6 @@ namespace Assets.Scripts.Data
             }
             cm = GameObject.FindObjectOfType<CameraMovement>();
             cm.targets = targets;
-            cameraPos = cm.transform.position;
-            cameraRot = cm.transform.localRotation;
             ResetRound();
             if (!Data.Instance.IsElimination)
             {
@@ -125,8 +119,6 @@ namespace Assets.Scripts.Data
 					}
                     isDead[i] = false;
                 }
-                cm.transform.position = cameraPos;
-				cm.transform.localRotation = cameraRot;
                 //Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
             }
             if (countDown > -2)
@@ -169,7 +161,7 @@ namespace Assets.Scripts.Data
             {
                 if(Data.Instance.IsElimination)
                 {
-                    if (scores[i] > 10)
+                    if (scores[i] > 9)
                         done = true;
                 }
                 else
@@ -192,6 +184,9 @@ namespace Assets.Scripts.Data
         {
 			canvas.SetActive(true);
 			GetComponent<AudioSource>().Play();
+			for(int i = 0; i < scores.Length; i++) {
+				Bards[i].Respawn();
+			}
             countDown = 3f;
         }
 
@@ -246,7 +241,6 @@ namespace Assets.Scripts.Data
             Bards[player].GetComponent<CharacterController>().enabled = true;
             if (Bards[player].GetComponent<NavMeshAgent>())
                 Bards[player].GetComponent<NavMeshAgent>().enabled = true;
-            Bards[player].Respawn();
             Bards[player].transform.position = spawnPoints[player].position;
             yield return null;
         }
@@ -265,6 +259,9 @@ namespace Assets.Scripts.Data
                     Bards[i].GetComponent<NavMeshAgent>().enabled = false;
                 Bards[i].transform.position = spawnPoints[i].position;
             }
+            GameObject[] tunes = GameObject.FindGameObjectsWithTag("TuneSpawn");
+            foreach (GameObject g in tunes)
+                Destroy(g);
         }
 
         /// <summary> Spawn all of the bards so they can begin. </summary>

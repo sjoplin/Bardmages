@@ -51,6 +51,7 @@ public class MainMenuManager : MonoBehaviour {
 	private float[] inputDelay;
 
 	private int numAI;
+	private bool playerJoining;
 
 	#region State_Changing
 	public void GoToMainMenu() {
@@ -100,23 +101,16 @@ public class MainMenuManager : MonoBehaviour {
 
 	public void SwitchLevel(int delta) {
 		curLevel += delta;
-		if(curLevel < 0) curLevel = levelImages.Length;
+		if(curLevel < 0) curLevel = levelImages.Length-1;
 		curLevel %= levelImages.Length;
 		StartCoroutine(ChangeSelectedLevel(delta > 0 ? true : false));
 	}
 
 	public void GoToLevelSelect() {
-        int numPlayers = ControllerManager.instance.NumPlayers;
-        if (numPlayers >= 2) {
-            // Check if everyone has finished choosing tunes.
-            for (int i = 0; i < numPlayers; i++) {
-                if (nextTune[i] != 3 && !Assets.Scripts.Data.Data.Instance.isAIPlayer[i]) {
-                    return;
-                }
-            }
-    		inPlayerSelect = false;
-    		GetComponent<Animator>().SetInteger("State",3);
-        }
+		if(ControllerManager.instance.NumPlayers > 1 && !playerJoining) {
+			inPlayerSelect = false;
+			GetComponent<Animator>().SetInteger("State",3);
+		}
 	}
 	#endregion
 		
@@ -174,10 +168,14 @@ public class MainMenuManager : MonoBehaviour {
 				StopAllCoroutines();
 				StartCoroutine(AddPlayerAnim());
 			}
-
+			playerJoining = false;
 			for(int i = 0; i < ControllerManager.instance.NumPlayers; i++) {
 				if(inputDelay[i] > 0f) inputDelay[i] -= Time.deltaTime;
 				if(nextTune[i] < 3) {
+					if(!ControllerManager.instance.IsAI((PlayerID)(i+1))) {
+						Debug.Log(ControllerManager.instance.IsAI((PlayerID)(i+1)));
+						playerJoining = true;
+					}
 					if(ControllerManager.instance.GetAxis(ControllerInputWrapper.Axis.DPadY, (PlayerID)(i+1)) > 0
 						&& inputDelay[i] <= 0f) {
 						inputDelay[i] = 0.25f;
