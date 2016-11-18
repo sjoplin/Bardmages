@@ -23,7 +23,7 @@ namespace Assets.Scripts.Data
         [Tooltip("Prefab for the king of the hill hill.")]
         private GameObject hill;
 
-        public delegate void OpenMidRoundUI();
+		public delegate void OpenMidRoundUI(int player);
         private OpenMidRoundUI uiCaller;
 
         /// <summary> internal reference for ensuring singleton. </summary>
@@ -118,14 +118,15 @@ namespace Assets.Scripts.Data
                 deathCount = 0;
                 for(int i = 0; i < isDead.Length; i++)
                 {
-                    if (!isDead[i])
+					if (!isDead[i]) {
                         AddScore((PlayerID)(i+1));
+						if (uiCaller != null)
+							uiCaller(i);
+					}
                     isDead[i] = false;
                 }
                 cm.transform.position = cameraPos;
-                cm.transform.localRotation = cameraRot;
-                if (uiCaller != null)
-                    uiCaller();
+				cm.transform.localRotation = cameraRot;
                 //Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
             }
             if (countDown > -2)
