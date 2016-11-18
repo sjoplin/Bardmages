@@ -127,6 +127,14 @@ public class MainMenuManager : MonoBehaviour {
 			GetComponent<Animator>().SetInteger("State",3);
 		}
 	}
+
+	public void GoToCredits() {
+		GetComponent<Animator>().SetInteger("State",4);
+	}
+
+	public void GoToControls() {
+		GetComponent<Animator>().SetInteger("State",5);
+	}
 	#endregion
 		
 
