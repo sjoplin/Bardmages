@@ -57,24 +57,18 @@ public class MainMenuManager : MonoBehaviour {
 
 	#region State_Changing
     public void GoToMainMenu() {
-        if (!IsTransitioning()) {
-		    GetComponent<Animator>().SetInteger("State",0);
-        }
+	    GetComponent<Animator>().SetInteger("State",0);
 	}
 
     public void GoToPlayMenu() {
-        if (!IsTransitioning()) {
-            GetComponent<Animator>().SetInteger("State",1);
-        }
+        GetComponent<Animator>().SetInteger("State",1);
 	}
 
     public void GoToPlayerSelect(int mode) {
-        if (!IsTransitioning()) {
-			inPlayerSelect = true;
-			if(mode == 0) Assets.Scripts.Data.Data.Instance.IsElimination = true;
-			if(mode == 1) Assets.Scripts.Data.Data.Instance.IsElimination = false;
-			GetComponent<Animator>().SetInteger("State",2);
-        }
+		inPlayerSelect = true;
+		if(mode == 0) Assets.Scripts.Data.Data.Instance.IsElimination = true;
+		if(mode == 1) Assets.Scripts.Data.Data.Instance.IsElimination = false;
+		GetComponent<Animator>().SetInteger("State",2);
 	}
 
     private bool IsTransitioning() {
@@ -128,7 +122,7 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void GoToLevelSelect() {
-        if(ControllerManager.instance.NumPlayers > 1 && !playerJoining && !IsTransitioning()) {
+        if(ControllerManager.instance.NumPlayers > 1 && !playerJoining) {
 			inPlayerSelect = false;
 			GetComponent<Animator>().SetInteger("State",3);
 		}
