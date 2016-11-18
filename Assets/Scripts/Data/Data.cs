@@ -106,6 +106,12 @@ namespace Assets.Scripts.Data
             SceneManager.LoadScene("Load");
         }
 
+        /// <summary> Reloads a level. </summary>
+        public void loadScene()
+        {
+            SceneManager.LoadScene("Load");
+        }
+
         /// <summary> Spawns a bard in the scene. </summary>
         public GameObject Spawn(int character, Transform spawn)
         {
