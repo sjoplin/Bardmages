@@ -169,7 +169,7 @@ namespace Assets.Scripts.Data
             {
                 if(Data.Instance.IsElimination)
                 {
-                    if (scores[i] > 10)
+                    if (scores[i] > 9)
                         done = true;
                 }
                 else
