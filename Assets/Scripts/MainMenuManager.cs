@@ -87,6 +87,8 @@ public class MainMenuManager : MonoBehaviour {
 		}
 	}
 
+	public void QuitGame() { Application.Quit(); }
+
 	public void ToggleAI(int num) {
 //		Debug.Log("Toggling AI: " + num);
 		bool isAi = ControllerManager.instance.IsAI((PlayerID)(num+1));
