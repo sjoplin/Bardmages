@@ -21456,7 +21456,6 @@ MonoBehaviour:
   - -5
   - -3
   - -7
-  hasMovingPlatforms: 0
 --- !u!4 &1459665844
 Transform:
   m_ObjectHideFlags: 0

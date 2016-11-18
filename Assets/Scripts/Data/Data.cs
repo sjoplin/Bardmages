@@ -91,18 +91,17 @@ namespace Assets.Scripts.Data
 			isAIPlayer = new bool[4];
         }
 
-        // TODO TEST CODE REMOVE
-        void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.P))
-                loadScene("Test");
-        }
-
         /// <summary> Loads a level. </summary>
         /// <param name="name"> The level to go to. </param>
         public void loadScene(string name)
         {
             level = name;
+            SceneManager.LoadScene("Load");
+        }
+
+        /// <summary> Reloads a level. </summary>
+        public void loadScene()
+        {
             SceneManager.LoadScene("Load");
         }
 
