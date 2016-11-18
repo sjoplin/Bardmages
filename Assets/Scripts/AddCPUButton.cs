@@ -9,20 +9,30 @@ public class AddCPUButton : MainMenuButton {
 	private bool recentChange = false;
 	private Coroutine flipAndChange;
 	private Color initialColor;
+	private static bool animating;
 
     protected override void HandlePressed () {
+		if(animating) return;
         base.HandlePressed ();
 		if(flipAndChange != null) StopCoroutine(flipAndChange);
 		flipAndChange = StartCoroutine(FlipAndChange());
+		animating = true;
     }
 
 	public void Animate() {
+		if(animating) return;
 		if(flipAndChange != null) StopCoroutine(flipAndChange);
 		flipAndChange = StartCoroutine(FlipAndChange());
+		animating = true;
 	}
 
-    private IEnumerator FlipAndChange() {
+	void OnEnable() {
+		GetComponent<BoxCollider>().enabled = true;
+	}
+
+	private IEnumerator FlipAndChange() {
         float timer = 0f;
+		GetComponent<BoxCollider>().enabled = false;
 		if(initialColor == null && !opened) initialColor = transform.GetChild(0).GetComponent<Renderer>().material.color;
 		if(recentChange) {
 			recentChange = false;
@@ -30,7 +40,6 @@ public class AddCPUButton : MainMenuButton {
 		} else {
 			recentChange = true;
 			opened = !opened;
-//			Debug.Log("Changed open to: " + opened);
 		}
         while (timer < 1f) {
             timer += Time.deltaTime*2f;
@@ -44,6 +53,8 @@ public class AddCPUButton : MainMenuButton {
             yield return new WaitForEndOfFrame();
         }
 		recentChange = false;
+		GetComponent<BoxCollider>().enabled = true;
+		animating = false;
 		yield return null;
     }
 }

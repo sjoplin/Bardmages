@@ -88,6 +88,7 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void ToggleAI(int num) {
+//		Debug.Log("Toggling AI: " + num);
 		bool isAi = ControllerManager.instance.IsAI((PlayerID)(num+1));
 		if(!isAi) {
 			int[] aiTunes = new int[3];
@@ -418,7 +419,8 @@ public class MainMenuManager : MonoBehaviour {
 //			}
 //		}
 //
-//		for(int i = 0; i < ControllerManager.instance.NumPlayers; i++) {
+//		for(int i = ControllerManager.instance.NumPlayers+1; i < 4; i++) {
+//			if(!ControllerManager.instance.IsAI((PlayerID)(i+1))) playerBlocks[i].transform.FindChild("CPU").GetComponent<BoxCollider>().enabled = false;
 //			GameObject cpuButton = playerBlocks[i].transform.FindChild("CPU").gameObject;
 //			Debug.Log("Checking: " + (PlayerID)(i+1) + ", " + cpuButton.GetComponent<AddCPUButton>().opened + " " + ControllerManager.instance.IsAI((PlayerID)(i+1)));
 //			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(i+1))) ||
@@ -467,11 +469,20 @@ public class MainMenuManager : MonoBehaviour {
 	                }
 					playerReadyText[i].GetComponent<Renderer>().enabled = false;
 					pressStart[i].GetComponent<Renderer>().enabled = true;
-					if(i+1 < 4 && !ControllerManager.instance.IsAI((PlayerID)(i+2))) playerBlocks[i+1].transform.FindChild("CPU").gameObject.SetActive(false);
+//					if(i+1 < 4 && !ControllerManager.instance.IsAI((PlayerID)(i+2))) {
+////						playerBlocks[i+1].transform.FindChild("CPU").gameObject.SetActive(false);
+//						Debug.Log("TURNING OFF");
+//					}
 //					if (ControllerManager.instance.IsAI((PlayerID)(i+1))) playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(true);
 				}
 			}
 			yield return new WaitForEndOfFrame();
+		}
+
+//		Debug.Log(ControllerManager.instance.NumPlayers + " " + ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1)));
+		if(ControllerManager.instance.NumPlayers < 3 && !ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1))) {
+			playerBlocks[ControllerManager.instance.NumPlayers+1].transform.FindChild("CPU").gameObject.SetActive(false);
+//			Debug.Log("TURNING OFF:" + ControllerManager.instance.NumPlayers);
 		}
 
 		if(ControllerManager.instance.NumPlayers < 4) {
