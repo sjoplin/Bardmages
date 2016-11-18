@@ -60,7 +60,7 @@ Material:
     m_Floats:
     - first:
         name: _ReflDistort
-      second: 0.633
+      second: 0.608
     - first:
         name: _RefrDistort
       second: 0.253
@@ -79,7 +79,7 @@ Material:
       second: {r: 1, g: 1, b: 0, a: 0}
     - first:
         name: _HorizonColor
-      second: {r: 0.024221446, g: 0.19225092, b: 0.4705882, a: 0}
+      second: {r: 1, g: 1, b: 1, a: 0}
     - first:
         name: _MainTex_ST
       second: {r: 1, g: 1, b: 0, a: 0}
@@ -94,7 +94,7 @@ Material:
       second: {r: 1, g: 1, b: 0, a: 0}
     - first:
         name: _RefrColor
-      second: {r: 0.9372549, g: 0.9372549, b: 0.9372549, a: 1}
+      second: {r: 0.6397059, g: 0.8360041, b: 1, a: 1}
     - first:
         name: _RefractionTex_ST
       second: {r: 1, g: 1, b: 0, a: 0}
