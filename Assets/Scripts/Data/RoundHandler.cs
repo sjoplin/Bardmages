@@ -114,7 +114,6 @@ namespace Assets.Scripts.Data
         {
 			if(deathCount >= (Data.Instance.NumOfPlayers-1))
             {
-                canvas.SetActive(true);
                 ResetRound();
                 deathCount = 0;
                 for(int i = 0; i < isDead.Length; i++)
@@ -190,6 +189,8 @@ namespace Assets.Scripts.Data
         /// <summary> Callback for the mid round UI to start the next round. </summary>
         public void BeginRound()
         {
+			canvas.SetActive(true);
+			GetComponent<AudioSource>().Play();
             countDown = 3f;
         }
 
@@ -253,7 +254,6 @@ namespace Assets.Scripts.Data
         private void ResetRound()
         {
 			roundActive = false;
-			GetComponent<AudioSource>().Play();
 			LevelManager.instance.music.Stop();
             for (int i = 0; i < Bards.Length; i++)
             {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Kill
   - Floor
+  - MovingFloor
   layers:
   - Default
   - TransparentFX
