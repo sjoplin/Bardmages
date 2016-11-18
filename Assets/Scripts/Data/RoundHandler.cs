@@ -161,7 +161,7 @@ namespace Assets.Scripts.Data
             {
                 if(Data.Instance.IsElimination)
                 {
-                    if (scores[i] > 9)
+                    if (scores[i] > 4)
                         done = true;
                 }
                 else
@@ -170,12 +170,14 @@ namespace Assets.Scripts.Data
                         done = true;
                 }
             }
-            if (done)
+			if (done && countDown != -8000)
             {
-                countDown = -5000;
+                countDown = -8000;
                 canvas.SetActive(true);
                 ResetRound();
                 timerText.text = "Finish!";
+				Data.Instance.FinalScores = scores;
+				StartCoroutine(LoadGameEnd());
             }
         }
 
@@ -306,5 +308,11 @@ namespace Assets.Scripts.Data
                 bc[i] = Bards[i].GetComponent<BaseControl>();
             return bc;
         }
+
+		private IEnumerator LoadGameEnd() {
+			yield return new WaitForSeconds(2f);
+
+			Data.Instance.loadScene("WinScreen");
+		}
     }
 }

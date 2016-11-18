@@ -11,10 +11,14 @@ public class MidRoundUI : MonoBehaviour {
 	private static bool updateUI;
 
 	void Start() {
-		for(int i = 0; i < 4; i++) {
-			for(int j = 0; j < 10; j++) { 
+		int i = 0;
+		for(; i < Assets.Scripts.Data.RoundHandler.Instance.Bards.Length; i++) {
+			for(int j = 0; j < 5; j++) { 
 				playerScoreBoxes[i].GetChild(j).GetChild(0).GetComponent<Image>().CrossFadeAlpha(0f,2f,true);
 			}
+		}
+		for(; i < 4; i++) {
+			playerScoreBoxes[i].parent.gameObject.SetActive(false);
 		}
 		Assets.Scripts.Data.RoundHandler.Instance.RegisterUI(ShowUI);
 	}
@@ -47,7 +51,6 @@ public class MidRoundUI : MonoBehaviour {
 		while(timer < 1f) {
 			timer += Time.deltaTime;
 
-//			GetComponent<RectTransform>().sizeDelta = Vector2.Lerp(new Vector2(1024f,0f), new Vector2(1024f,576f),timer);
 			GetComponent<CanvasGroup>().alpha = timer;
 
 			yield return new WaitForEndOfFrame();
@@ -64,7 +67,6 @@ public class MidRoundUI : MonoBehaviour {
 		while(timer < 1f) {
 			timer += Time.deltaTime;
 
-//			GetComponent<RectTransform>().sizeDelta = Vector2.Lerp(new Vector2(1024f,576f), new Vector2(1024f,0f),timer);
 			GetComponent<CanvasGroup>().alpha = 1-timer;
 
 			yield return new WaitForEndOfFrame();

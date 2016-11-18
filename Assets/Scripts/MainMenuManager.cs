@@ -173,7 +173,6 @@ public class MainMenuManager : MonoBehaviour {
 				if(inputDelay[i] > 0f) inputDelay[i] -= Time.deltaTime;
 				if(nextTune[i] < 3) {
 					if(!ControllerManager.instance.IsAI((PlayerID)(i+1))) {
-						Debug.Log(ControllerManager.instance.IsAI((PlayerID)(i+1)));
 						playerJoining = true;
 					}
 					if(ControllerManager.instance.GetAxis(ControllerInputWrapper.Axis.DPadY, (PlayerID)(i+1)) > 0

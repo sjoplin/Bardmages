@@ -56,6 +56,9 @@ namespace Assets.Scripts.Data
         private bool isElimination;
         public bool IsElimination { get { return isElimination; } set { isElimination = value; } }
 
+		private int[] finalScores;
+		public int[] FinalScores { get { return finalScores; } set{ finalScores = value; } }
+
         void Awake()
         {
             if (Instance == null)
