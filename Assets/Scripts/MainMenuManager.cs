@@ -56,20 +56,25 @@ public class MainMenuManager : MonoBehaviour {
 	private Coroutine playerReadyAnim;
 
 	#region State_Changing
-	public void GoToMainMenu() {
-		GetComponent<Animator>().SetInteger("State",0);
+    public void GoToMainMenu() {
+	    GetComponent<Animator>().SetInteger("State",0);
 	}
 
-	public void GoToPlayMenu() {
-		GetComponent<Animator>().SetInteger("State",1);
+    public void GoToPlayMenu() {
+        GetComponent<Animator>().SetInteger("State",1);
 	}
 
-	public void GoToPlayerSelect(int mode) {
+    public void GoToPlayerSelect(int mode) {
 		inPlayerSelect = true;
 		if(mode == 0) Assets.Scripts.Data.Data.Instance.IsElimination = true;
 		if(mode == 1) Assets.Scripts.Data.Data.Instance.IsElimination = false;
 		GetComponent<Animator>().SetInteger("State",2);
 	}
+
+    private bool IsTransitioning() {
+        AnimatorStateInfo state = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+        return state.normalizedTime < 1;
+    }
 
 	public void GoToGame() {
 		Assets.Scripts.Data.Data.Instance.NumOfPlayers = ControllerManager.instance.NumPlayers;
@@ -117,7 +122,7 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void GoToLevelSelect() {
-		if(ControllerManager.instance.NumPlayers > 1 && !playerJoining) {
+        if(ControllerManager.instance.NumPlayers > 1 && !playerJoining) {
 			inPlayerSelect = false;
 			GetComponent<Animator>().SetInteger("State",3);
 		}
@@ -239,6 +244,9 @@ public class MainMenuManager : MonoBehaviour {
 
 	#region Animation_Coroutines
     private IEnumerator PlayerReady(int player) {
+		playerReadyText[player].GetComponent<Renderer>().enabled = true;
+		pressStart[player].GetComponent<Renderer>().enabled = false;
+
 		float timer = 0f;
 
 //		if(ControllerManager.instance.NumPlayers < 4) {
@@ -272,9 +280,6 @@ public class MainMenuManager : MonoBehaviour {
 
 			yield return new WaitForEndOfFrame();
 		}
-
-		playerReadyText[player].GetComponent<Renderer>().enabled = true;
-		pressStart[player].GetComponent<Renderer>().enabled = false;
 
 		if(ControllerManager.instance.NumPlayers < 4) {
 			GameObject cpuButton = playerBlocks[ControllerManager.instance.NumPlayers].transform.FindChild("CPU").gameObject;
@@ -425,6 +430,12 @@ public class MainMenuManager : MonoBehaviour {
 						timer);
                     if (timer > 0.25f) {
 					    playerTuneDescriptions[i].GetComponent<Renderer>().enabled = true;
+                    } else {
+                        for (int j = 0; j < 3; j++) {
+                            playerTunes[i, j].transform.localRotation = Quaternion.identity;
+                            playerTunes[i, j].transform.GetChild(0).GetComponent<TextMesh>().text = tunes[selectedTune[i, j]].tuneName;
+                        }
+                        playerTuneDescriptions[i].transform.localRotation = Quaternion.Euler(-90, 0, 0);
                     }
                     UpdateTuneDescription(i);
 				}
