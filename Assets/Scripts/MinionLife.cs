@@ -9,6 +9,6 @@ public class MinionLife : PlayerLife {
 	/// </summary>
 	protected override void Start() {
 		base.Start ();
-		health = health / 2;
+		health = .1f;
 	}
 }
