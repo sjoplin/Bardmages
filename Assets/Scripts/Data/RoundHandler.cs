@@ -16,9 +16,15 @@ namespace Assets.Scripts.Data
         private Text timerText;
         /// <summary> Spawn Points for this stage. </summary>
         [SerializeField]
-        [Tooltip("Spawn Points for this stage.  4 expected.")]
+        [Tooltip("Spawn Points for this stage.  5 expected. 5th is the hill spawn")]
         private Transform[] spawnPoints;
-        
+        /// <summary> Prefab for the king of the hill hill. </summary>
+        [SerializeField]
+        [Tooltip("Prefab for the king of the hill hill.")]
+        private GameObject hill;
+
+        public delegate void OpenMidRoundUI();
+        private OpenMidRoundUI uiCaller;
 
         /// <summary> internal reference for ensuring singleton. </summary>
         private static RoundHandler instance;
@@ -62,6 +68,7 @@ namespace Assets.Scripts.Data
         private Quaternion cameraRot;
         /// <summary> Pointer to the camera to reset it. </summary>
         private CameraMovement cm;
+        private GameObject hillObject;
 
 		private bool roundActive;
         
@@ -96,13 +103,17 @@ namespace Assets.Scripts.Data
             cameraPos = cm.transform.position;
             cameraRot = cm.transform.localRotation;
             ResetRound();
+            if (!Data.Instance.IsElimination)
+            {
+                hillObject = Instantiate(hill);
+                hillObject.transform.position = spawnPoints[4].transform.position;
+            }
         }
 
         void Update()
         {
 			if(deathCount >= (Data.Instance.NumOfPlayers-1))
             {
-                countDown = 3f;
                 canvas.SetActive(true);
                 ResetRound();
                 deathCount = 0;
@@ -114,6 +125,8 @@ namespace Assets.Scripts.Data
                 }
                 cm.transform.position = cameraPos;
                 cm.transform.localRotation = cameraRot;
+                if (uiCaller != null)
+                    uiCaller();
                 //Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
             }
             if (countDown > -2)
@@ -172,6 +185,19 @@ namespace Assets.Scripts.Data
                 ResetRound();
                 timerText.text = "Finish!";
             }
+        }
+
+        /// <summary> Callback for the mid round UI to start the next round. </summary>
+        public void BeginRound()
+        {
+            countDown = 3f;
+        }
+
+        /// <summary> Register the function to turn the mid round score display. </summary>
+        /// <param name="function"> A function that turn the UI on. </param>
+        public void RegisterUI(OpenMidRoundUI function)
+        {
+            uiCaller = function;
         }
 
         /// <summary> Increments the death count for this round or sets the given player to respawn. </summary>
@@ -254,6 +280,11 @@ namespace Assets.Scripts.Data
                     Bards[i].GetComponent<NavMeshAgent>().enabled = true;
                 Bards[i].Respawn();
                 //Bards[i].transform.position = spawnPoints[i].position;
+            }
+            if (!Data.Instance.IsElimination)
+            {
+                hill.transform.parent = null;
+                hill.transform.position = spawnPoints[4].transform.position;
             }
         }
         
