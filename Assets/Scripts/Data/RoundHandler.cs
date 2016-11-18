@@ -125,8 +125,8 @@ namespace Assets.Scripts.Data
 					}
                     isDead[i] = false;
                 }
-                cm.transform.position = cameraPos;
-				cm.transform.localRotation = cameraRot;
+//                cm.transform.position = cameraPos;
+//				cm.transform.localRotation = cameraRot;
                 //Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
             }
             if (countDown > -2)
@@ -192,6 +192,9 @@ namespace Assets.Scripts.Data
         {
 			canvas.SetActive(true);
 			GetComponent<AudioSource>().Play();
+			for(int i = 0; i < scores.Length; i++) {
+				Bards[i].Respawn();
+			}
             countDown = 3f;
         }
 
@@ -246,7 +249,6 @@ namespace Assets.Scripts.Data
             Bards[player].GetComponent<CharacterController>().enabled = true;
             if (Bards[player].GetComponent<NavMeshAgent>())
                 Bards[player].GetComponent<NavMeshAgent>().enabled = true;
-            Bards[player].Respawn();
             Bards[player].transform.position = spawnPoints[player].position;
             yield return null;
         }
