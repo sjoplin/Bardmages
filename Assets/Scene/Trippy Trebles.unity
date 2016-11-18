@@ -254,16 +254,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 74225546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1347817507220a4384f3ff6f7c24546, type: 3}
+  m_Script: {fileID: 11500000, guid: 93c7976f64dfb4b8b8158c912e074a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveUnitsPerSecond:
-    value: {x: 0, y: 0, z: 0}
-    space: 1
-  rotateDegreesPerSecond:
-    value: {x: 0, y: 0, z: 3}
-    space: 1
-  ignoreTimescale: 0
+  rotateSpeed: 4
+  startRot: 10
 --- !u!1001 &136677383
 Prefab:
   m_ObjectHideFlags: 0
@@ -635,7 +630,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 40153a9372225473ca7747f7f0389734, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4964e58df750d4616bbb95bc343e64b4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -1303,16 +1298,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 528460379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1347817507220a4384f3ff6f7c24546, type: 3}
+  m_Script: {fileID: 11500000, guid: 93c7976f64dfb4b8b8158c912e074a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveUnitsPerSecond:
-    value: {x: 0, y: 0, z: 0}
-    space: 1
-  rotateDegreesPerSecond:
-    value: {x: 0, y: 0, z: -3}
-    space: 1
-  ignoreTimescale: 0
+  rotateSpeed: -1
+  startRot: 0
 --- !u!212 &528460381
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2445,11 +2435,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011455020944, guid: a2ce72a2606e24fae82abe786a590651,
-        type: 2}
-      propertyPath: music
-      value: 
-      objectReference: {fileID: 302904548}
     - target: {fileID: 114000012373615504, guid: a2ce72a2606e24fae82abe786a590651,
         type: 2}
       propertyPath: spawnPoints.Array.data[0]
@@ -2472,45 +2457,9 @@ Prefab:
       objectReference: {fileID: 946711128}
     - target: {fileID: 114000011455020944, guid: a2ce72a2606e24fae82abe786a590651,
         type: 2}
-      propertyPath: hasMovingPlatforms
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010991087508, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010991087508, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010991087508, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012393914354, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011864353084, guid: a2ce72a2606e24fae82abe786a590651,
-        type: 2}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011864353084, guid: a2ce72a2606e24fae82abe786a590651,
-        type: 2}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011864353084, guid: a2ce72a2606e24fae82abe786a590651,
-        type: 2}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011864353084, guid: a2ce72a2606e24fae82abe786a590651,
-        type: 2}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: music
+      value: 
+      objectReference: {fileID: 302904548}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2ce72a2606e24fae82abe786a590651, type: 2}
   m_IsPrefabParent: 0

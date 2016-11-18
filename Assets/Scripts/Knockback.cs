@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Knockback : Attack
 {
-    public float knockSpeed = 20.0f;
-    public float knockValue = 1.0f;
+    public float knockSpeed;
+    public float knockValue;
 
     private Rigidbody rigidbodyTune;
     private BaseControl enemy;
@@ -47,4 +47,28 @@ public class Knockback : Attack
             Destroy(this.gameObject);
         }
     }
+
+	void FixedUpdate () {
+		if (crit) {
+			
+			bool sphereCast = true;
+			RaycastHit hitInf = new RaycastHit ();
+			if (Physics.Raycast (new Ray (transform.position, transform.forward), out hitInf)) {
+				if (hitInf.collider.transform.root.GetComponent<BaseControl> ()) {
+					sphereCast = false;
+				}
+			}
+			if (sphereCast) {
+				Collider[] cols = Physics.OverlapSphere (transform.position + transform.forward * 10f, 10f);
+				foreach (Collider c in cols) {
+					if (c.transform.root.GetComponent<BaseControl> () && this.agressor != c.transform.root.GetComponent<BaseControl> ().playerOwner) {
+						GetComponent<Rigidbody> ().AddForce (((c.transform.root.position - transform.position) - transform.forward * 2f).normalized * 1000f, ForceMode.Acceleration);
+					}
+				}
+			}
+			if (GetComponent<Rigidbody> ().velocity != Vector3.zero) {
+				transform.forward = GetComponent<Rigidbody> ().velocity;
+			}
+		}
+	}
 }

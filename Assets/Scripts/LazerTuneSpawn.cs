@@ -11,7 +11,7 @@ public class LazerTuneSpawn : Attack {
     /// </summary>
 	protected override void Start () {
         destroyAfterTime = crit ? 1f : 0.1f;
-        damage = crit ? 1f : 0.1f;
+        damage = crit ? .7f : 0.2f;
         base.Start();
 	}
 
