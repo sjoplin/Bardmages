@@ -106,8 +106,17 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void GoToLevelSelect() {
-		inPlayerSelect = false;
-		GetComponent<Animator>().SetInteger("State",3);
+        int numPlayers = ControllerManager.instance.NumPlayers;
+        if (numPlayers >= 2) {
+            // Check if everyone has finished choosing tunes.
+            for (int i = 0; i < numPlayers; i++) {
+                if (nextTune[i] != 3 && !Assets.Scripts.Data.Data.Instance.isAIPlayer[i]) {
+                    return;
+                }
+            }
+    		inPlayerSelect = false;
+    		GetComponent<Animator>().SetInteger("State",3);
+        }
 	}
 	#endregion
 		
