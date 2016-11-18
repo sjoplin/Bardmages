@@ -93,8 +93,6 @@ namespace Bardmages.AI {
                 }
             }
 
-            Debug.DrawLine(transform.position + Vector3.up, targetPosition + targetOffset + Vector3.up, Color.cyan);
-
             if (moveDistance != 0) {
                 // Approach if too far away from the target for the current attack.
                 targetOffset.Normalize();
