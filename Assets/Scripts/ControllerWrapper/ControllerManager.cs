@@ -28,6 +28,7 @@ public class ControllerManager  {
 	public void ClearPlayers()
 	{
         playerControls = new Dictionary<PlayerID, ControllerInputWrapper>();
+		Debug.Log("Players Cleared");
 	}
 
 	public int NumPlayers {
