@@ -57,8 +57,9 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Landslide
-  tuneDescription: Regular\n+ Heal yourself for 10% \n\nCrit\n+ Heal yourself for
-    25%
+  tuneDescription: Regular\n+Spawns a landslide that deals\n 20% damage and shoves
+    enemies back\nCrit\n+ 1.5X wider
   maxDistance: Infinity
   minDistance: 0
+  isHuman: 0
   attach: 0

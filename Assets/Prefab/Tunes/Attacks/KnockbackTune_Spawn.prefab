@@ -232,14 +232,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe1d9280ef18fc44a2492a88394faf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 0.1
   destroyOnImpact: 0
   destroyAfterTime: 5
   agressor: 0
   victim: 0
   impacted: 0
   knockSpeed: 50
-  knockValue: 3
+  knockValue: 1
 --- !u!114 &114000012096610992
 MonoBehaviour:
   m_ObjectHideFlags: 1

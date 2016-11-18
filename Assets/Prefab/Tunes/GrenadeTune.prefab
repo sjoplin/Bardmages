@@ -57,7 +57,8 @@ MonoBehaviour:
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Grenade
-  tuneDescription: Regular\n+ Throw grenade that deals 50% damage\n to nearby enemies\n\nCrit\n+
+  tuneDescription: Regular\n+ Throw grenade that\n deals 50% damage\n to nearby enemies\n\nCrit\n+
     Throw further
   maxDistance: 25
   minDistance: 10
+  isHuman: 0

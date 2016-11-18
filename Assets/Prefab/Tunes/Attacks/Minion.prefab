@@ -1309,8 +1309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tunes:
   - {fileID: 114000011246562238, guid: e14b9db2dcbd84a7d985981971f0f71d, type: 2}
-  - {fileID: 114000013588802250, guid: fbcf9d394b8244195ab435fbcc71a12c, type: 2}
-  - {fileID: 114000011396993340, guid: 716f894956e7746fc89528d8bbec500a, type: 2}
+  - {fileID: 114000011396993340, guid: 25da98d4970c849e1b5c668572a12180, type: 2}
+  - {fileID: 114000013812798790, guid: d087c3677327c3849b8272a40c21ea0e, type: 2}
   instrumentSound: {fileID: 8300000, guid: cd9dc34c25ce74f928558143f6385938, type: 3}
   buttonPressDelay: 0.1
   volumeOverride: 0.25
@@ -1420,6 +1420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9e61c4818dd4ace809875ad9543062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inaccuracyMax: 20
+  inaccuracyRate: 0.5
 --- !u!114 &114000012380890056
 MonoBehaviour:
   m_ObjectHideFlags: 0

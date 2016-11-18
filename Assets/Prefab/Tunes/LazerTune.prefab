@@ -51,12 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592c3effaa6e7464f8b778a724ce5699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tune: 0000000000000000000000000000000000000000
+  tune: 0000000002000000030000000100000000000000
   spawnObject: {fileID: 1000010562112550, guid: 41492c5de0c3d4bb1b0bacd580d816c3,
     type: 2}
   tuneProgress: 0
   ownerTransform: {fileID: 0}
   tuneName: Lazer
+  tuneDescription: Regular\n+Shoots a lazer that deals \n 20% damage.\nCrit\n+ does
+    70% damage and lasts longer.
   maxDistance: 70
   minDistance: 0
+  isHuman: 0
   attach: 1

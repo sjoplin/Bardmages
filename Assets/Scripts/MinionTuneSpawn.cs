@@ -41,11 +41,11 @@ public class MinionTuneSpawn : MonoBehaviour, Spawnable {
 	void Start () {
 
 		if (crit) {
-			Destroy (this.gameObject, 10f);
-			if (!copy) {
-				GameObject temp = (GameObject)GameObject.Instantiate (this.gameObject, transform.position + Vector3.right, transform.rotation);
-				temp.GetComponent<MinionTuneSpawn> ().copy = true;
-			}	
+			Destroy (this.gameObject, 20f);
+//			if (!copy) {
+//				GameObject temp = (GameObject)GameObject.Instantiate (this.gameObject, transform.position + Vector3.right, transform.rotation);
+//				temp.GetComponent<MinionTuneSpawn> ().copy = true;
+//			}	
 		} else {
 			Destroy (this.gameObject, 10f);
 		}
