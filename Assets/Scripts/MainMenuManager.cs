@@ -250,7 +250,9 @@ public class MainMenuManager : MonoBehaviour {
 
 		playerReadyText[player].GetComponent<Renderer>().enabled = true;
 		pressStart[player].GetComponent<Renderer>().enabled = false;
-		if(player < 3) playerBlocks[player+1].transform.FindChild("CPU").gameObject.SetActive(true);
+		if(ControllerManager.instance.NumPlayers < 4) {
+			playerBlocks[ControllerManager.instance.NumPlayers].transform.FindChild("CPU").gameObject.SetActive(true);
+		}
 
 		yield return null;
 	}
@@ -367,9 +369,12 @@ public class MainMenuManager : MonoBehaviour {
 				}
 			}
 			if(i < 4 && !openedAI) {
+				GameObject cpuButton = playerBlocks[i].transform.FindChild("CPU").gameObject;
 				openedAI = true;
-				Debug.Log(i);
-				playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(true);
+				if(!cpuButton.GetComponent<AddCPUButton>().opened){
+					cpuButton.GetComponent<AddCPUButton>().Animate();
+				}
+				cpuButton.SetActive(true);
 			}
 			for(; i < 4; i++) {
 				playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
