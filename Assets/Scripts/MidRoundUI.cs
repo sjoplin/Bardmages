@@ -17,6 +17,7 @@ public class MidRoundUI : MonoBehaviour {
 			}
 		}
 		Assets.Scripts.Data.RoundHandler.Instance.RegisterUI(ShowUI);
+		Assets.Scripts.Data.RoundHandler.Instance.RegisterUI(ColiseumSpectater.Reset);
 	}
 
 	void Update() {
