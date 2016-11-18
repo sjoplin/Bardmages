@@ -39,6 +39,8 @@ public class CameraMovement : MonoBehaviour {
 			}
 		}
 
+		maxDistance = Mathf.Max(maxDistance,10f);
+
 		foreach(Transform t in targets) {
             if(t.gameObject.activeSelf && t.GetComponent<PlayerLife>().Alive) {
 				averagePosition += t.position;

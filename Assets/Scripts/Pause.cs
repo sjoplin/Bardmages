@@ -23,7 +23,8 @@ class Pause : MonoBehaviour
         if (ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.Start, PlayerID.One) || 
             ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.Start, PlayerID.Two) || 
             ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.Start, PlayerID.Three) || 
-            ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.Start, PlayerID.Four))
+            ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.Start, PlayerID.Four) ||
+			Input.GetKeyDown(KeyCode.Return))
         {
             isPaused = !isPaused;
             Debug.Log(isPaused);

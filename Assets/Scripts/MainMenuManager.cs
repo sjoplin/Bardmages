@@ -123,6 +123,8 @@ public class MainMenuManager : MonoBehaviour {
 
 	#region Unity_Code
 	void Start() {
+		ControllerManager.instance.ClearPlayers();
+
 		selectedTune = new int[4,3];
 		nextTune = new int[4];
 		for(int i = 0; i < 4; i++) {
