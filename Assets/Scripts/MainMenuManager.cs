@@ -54,18 +54,29 @@ public class MainMenuManager : MonoBehaviour {
 	private bool playerJoining;
 
 	#region State_Changing
-	public void GoToMainMenu() {
-		GetComponent<Animator>().SetInteger("State",0);
+    public void GoToMainMenu() {
+        if (!IsTransitioning()) {
+		    GetComponent<Animator>().SetInteger("State",0);
+        }
 	}
 
-	public void GoToPlayMenu() {
-		GetComponent<Animator>().SetInteger("State",1);
+    public void GoToPlayMenu() {
+        if (!IsTransitioning()) {
+            GetComponent<Animator>().SetInteger("State",1);
+        }
 	}
 
 	public void GoToPlayerSelect() {
-		inPlayerSelect = true;
-		GetComponent<Animator>().SetInteger("State",2);
+        if (!IsTransitioning()) {
+    		inPlayerSelect = true;
+    		GetComponent<Animator>().SetInteger("State",2);
+        }
 	}
+
+    private bool IsTransitioning() {
+        AnimatorStateInfo state = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+        return state.normalizedTime < 1;
+    }
 
 	public void GoToGame() {
 		Assets.Scripts.Data.Data.Instance.NumOfPlayers = ControllerManager.instance.NumPlayers;
@@ -107,7 +118,7 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void GoToLevelSelect() {
-		if(ControllerManager.instance.NumPlayers > 1 && !playerJoining) {
+        if(ControllerManager.instance.NumPlayers > 1 && !playerJoining && !IsTransitioning()) {
 			inPlayerSelect = false;
 			GetComponent<Animator>().SetInteger("State",3);
 		}
@@ -227,6 +238,10 @@ public class MainMenuManager : MonoBehaviour {
 
 	#region Animation_Coroutines
     private IEnumerator PlayerReady(int player) {
+        playerReadyText[player].GetComponent<Renderer>().enabled = true;
+        pressStart[player].GetComponent<Renderer>().enabled = false;
+        if(player < 3) playerBlocks[player+1].transform.FindChild("CPU").gameObject.SetActive(true);
+
 		float timer = 0f;
 
 		while(timer < 1f) {
@@ -241,10 +256,6 @@ public class MainMenuManager : MonoBehaviour {
 
 			yield return new WaitForEndOfFrame();
 		}
-
-		playerReadyText[player].GetComponent<Renderer>().enabled = true;
-		pressStart[player].GetComponent<Renderer>().enabled = false;
-		if(player < 3) playerBlocks[player+1].transform.FindChild("CPU").gameObject.SetActive(true);
 
 		yield return null;
 	}
