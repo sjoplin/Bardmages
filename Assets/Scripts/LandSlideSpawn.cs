@@ -8,7 +8,6 @@ public class LandSlideSpawn : Attack {
 
 
 	private PlayerID owner;
-	private bool crit;
 	private float secondRockSpawn = .3f;
 	private float thirdRockSpawn = .6f;
 	public GameObject rock2, rock3;

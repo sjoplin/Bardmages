@@ -78,6 +78,7 @@ public abstract class BaseBard : MonoBehaviour {
             bool soundPlayed = false; //prevents two sounds from being played the same frame
             if(currentTunes.Count > 0) {
                 //This makes sure that if we have started a tune, that we only continue iterating that tune
+                List<Tune> tunesToRemove = new List<Tune>();
                 for(int i = 0; i < currentTunes.Count; i++) {
                     if(GetButtonDown(currentTunes[i].NextButton())) {
                         if(!soundPlayed) {
@@ -86,14 +87,16 @@ public abstract class BaseBard : MonoBehaviour {
                             soundPlayed = true;
                         }
                         IterateTune(currentTunes[i]);
-                        for (int j = 0; j < currentTunes.Count; j++) {
-                            if(j != i && !GetButton(currentTunes[j].NextButton())) {
-                                i = 0;
-                                currentTunes.Remove(currentTunes[j]);
+                        for (int j = i; j < currentTunes.Count; j++) {
+                            if(j != i && !GetButtonDown(currentTunes[j].NextButton())) {
+                                tunesToRemove.Add(currentTunes[j]);
                                 break;
                             }
                         }
                     }
+                }
+                foreach (Tune tune in tunesToRemove) {
+                    currentTunes.Remove(tune);
                 }
             } else {
                 foreach(Tune t in tunes) {

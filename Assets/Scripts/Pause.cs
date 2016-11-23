@@ -20,6 +20,8 @@ class Pause : MonoBehaviour
 
     void Update()
     {
+        if (!Assets.Scripts.Data.Data.Instance.CanPause)
+            return;
         if (ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.Start, PlayerID.One) || 
             ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.Start, PlayerID.Two) || 
             ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.Start, PlayerID.Three) || 

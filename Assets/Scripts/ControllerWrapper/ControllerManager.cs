@@ -28,6 +28,7 @@ public class ControllerManager  {
 	public void ClearPlayers()
 	{
         playerControls = new Dictionary<PlayerID, ControllerInputWrapper>();
+		Debug.Log("Players Cleared");
 	}
 
 	public int NumPlayers {
@@ -144,8 +145,7 @@ public class ControllerManager  {
 	/// </summary>
 	/// <returns>The index of the AI player that was removed.</returns>
 	/// <param name="removalButton">The button that needs to be pressed to remove an AI.</param>
-	public int AllowAIRemoval(bool check) {
-		PlayerID playerToRemove = PlayerID.None;
+	public int AllowAIRemoval(bool check, PlayerID playerToRemove) {
 		bool removing = false;
 		foreach(KeyValuePair<PlayerID, ControllerInputWrapper> kvp in playerControls) {
 			if(check) {
@@ -153,7 +153,7 @@ public class ControllerManager  {
 				break;
 			}
 		}
-		if(removing) {
+		if(removing && playerToRemove == PlayerID.None) {
 			foreach(KeyValuePair<PlayerID, ControllerInputWrapper> kvp in playerControls) {
 				if(kvp.Value is AIWrapper && kvp.Key > playerToRemove) {
 					playerToRemove = kvp.Key;
@@ -172,6 +172,7 @@ public class ControllerManager  {
 	/// <param name="playerToRemove">The ID of the controller to remove.</param>
 	private void RemoveController(PlayerID playerToRemove) {
 		playerControls.Remove(playerToRemove);
+		Debug.Log("Removed: " + playerToRemove);
 		if ((int)playerToRemove <= NumPlayers) {
 			// Shift all players after the removed player back one place.
 			for (int i = (int)playerToRemove + 1; i <= NumPlayers + 1; i++) {

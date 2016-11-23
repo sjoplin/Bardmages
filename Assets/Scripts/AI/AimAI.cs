@@ -21,6 +21,9 @@ namespace Bardmages.AI {
         [Tooltip("The chance that the AI will not aim correctly.")]
         private float inaccuracyRate = 0.5f;
 
+        /// <summary> The position that the AI is aiming at. </summary>
+        private GameObject target;
+
         /// <summary>
         /// Changes any needed settings for the AI.
         /// </summary>
@@ -33,8 +36,9 @@ namespace Bardmages.AI {
         /// </summary>
         protected override void UpdateAI() {
             // Check if the current move has distance constraints.
-            GameObject target = GetTarget();
+            target = GetTarget();
             Vector3 targetPosition = target.transform.position;
+            Vector3 targetOffset = Vector3.zero;
             float moveDistance = 0;
 
             if (!bard.isPlayingTune) {
@@ -48,24 +52,45 @@ namespace Bardmages.AI {
                 }
             }
 
-            Vector3 targetOffset = targetPosition - transform.position;
-            targetOffset = Quaternion.AngleAxis(inaccuracyAngle, Vector3.up) * targetOffset;
-            targetPosition = transform.position + targetOffset;
-
-            float targetDistance = control.GetDistance2D(targetPosition);
-            float maxDistance = bard.currentTune.maxDistance;
-            float minDistance = bard.currentTune.minDistance;
-            if (target.GetComponent<BaseControl>() == null) {
-                maxDistance = 0.1f;
-                minDistance = 0.1f;
-            } else {
-                // Stay at least a diameter away from the target to avoid pile-up/"dancing".
-                minDistance = Mathf.Max(radius * 4, minDistance);
+            // Check for landslide tunes.
+            float landslideRange = radius * 20;
+            Collider[] colliders = Physics.OverlapSphere(transform.position, landslideRange);
+            bool isLandslide = false;
+            foreach (Collider collider in colliders) {
+                if (collider.GetComponent<LandSlideSpawn>()) {
+                    if (Physics.BoxCast(collider.transform.position, new Vector3(5, 1, landslideRange), collider.transform.forward)) {
+                        Vector3 landslideDirection = collider.transform.forward;
+                        Vector3 avoidDirection = Quaternion.AngleAxis(90, Vector3.up) * landslideDirection;
+                        targetPosition = transform.position + avoidDirection * 5;
+                        moveDistance = 1;
+                        isLandslide = true;
+                        break;
+                    }
+                }
             }
-            if (targetDistance > maxDistance) {
-                moveDistance = maxDistance;
-            } else if (targetDistance < minDistance) {
-                moveDistance = minDistance;
+
+            if (!isLandslide) {
+                targetOffset = targetPosition - transform.position;
+                if (target.GetComponent<BaseControl>() != null) {
+                    targetOffset = Quaternion.AngleAxis(inaccuracyAngle, Vector3.up) * targetOffset;
+                }
+                targetPosition = transform.position + targetOffset;
+
+                float targetDistance = control.GetDistance2D(targetPosition);
+                float maxDistance = bard.currentTune.maxDistance;
+                float minDistance = bard.currentTune.minDistance;
+                if (target.GetComponent<BaseControl>() == null) {
+                    maxDistance = 0.1f;
+                    minDistance = 0.1f;
+                } else {
+                    // Stay at least a diameter away from the target to avoid pile-up/"dancing".
+                    minDistance = Mathf.Max(radius * 4, minDistance);
+                }
+                if (targetDistance > maxDistance) {
+                    moveDistance = maxDistance;
+                } else if (targetDistance < minDistance) {
+                    moveDistance = minDistance;
+                }
             }
 
             if (moveDistance != 0) {

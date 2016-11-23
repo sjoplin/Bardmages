@@ -3,21 +3,44 @@ using System.Collections;
 
 public class AddCPUButton : MainMenuButton {
 
-	private bool opened = false;
+	[HideInInspector]
+	public bool opened = false;
+
+	private bool recentChange = false;
 	private Coroutine flipAndChange;
 	private Color initialColor;
+	private static bool animating;
 
-    protected override void HandlePressed ()
-    {
+    protected override void HandlePressed () {
+		if(animating) return;
         base.HandlePressed ();
 		if(flipAndChange != null) StopCoroutine(flipAndChange);
 		flipAndChange = StartCoroutine(FlipAndChange());
+		animating = true;
     }
 
-    private IEnumerator FlipAndChange() {
+	public void Animate() {
+		if(animating) return;
+		if(flipAndChange != null) StopCoroutine(flipAndChange);
+		flipAndChange = StartCoroutine(FlipAndChange());
+		animating = true;
+	}
+
+	void OnEnable() {
+		GetComponent<BoxCollider>().enabled = true;
+	}
+
+	private IEnumerator FlipAndChange() {
         float timer = 0f;
+		GetComponent<BoxCollider>().enabled = false;
 		if(initialColor == null && !opened) initialColor = transform.GetChild(0).GetComponent<Renderer>().material.color;
-		opened = !opened;
+		if(recentChange) {
+			recentChange = false;
+			yield return null;
+		} else {
+			recentChange = true;
+			opened = !opened;
+		}
         while (timer < 1f) {
             timer += Time.deltaTime*2f;
 			if(opened) {
@@ -29,6 +52,9 @@ public class AddCPUButton : MainMenuButton {
 			}
             yield return new WaitForEndOfFrame();
         }
+		recentChange = false;
+		GetComponent<BoxCollider>().enabled = true;
+		animating = false;
 		yield return null;
     }
 }

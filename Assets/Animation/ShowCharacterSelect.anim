@@ -129,12 +129,12 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - time: 0.016666668
+      - time: 0.06666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 0.033333335
+      - time: 0.083333336
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -590,12 +590,12 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - time: 0.016666668
+      - time: 0.06666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 0.033333335
+      - time: 0.083333336
         value: 1
         inSlope: Infinity
         outSlope: Infinity

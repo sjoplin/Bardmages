@@ -80,6 +80,10 @@ public class LevelManager : MonoBehaviour {
 		StartCoroutine(ChangeKey());
 	}
 
+	public void DisableUI(int i) {
+		playerUI[i].gameObject.SetActive(false);
+	}
+
 	private IEnumerator ChangeKey() {
 		yield return new WaitUntil( () => beatCounter >= 12);
 		beatCounter = 0;

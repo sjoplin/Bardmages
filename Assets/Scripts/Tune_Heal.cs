@@ -28,4 +28,12 @@ public class Tune_Heal : Tune {
         temp.transform.GetChild(0).parent = null;
     }
 
+    /// <summary>
+    /// Determines if the tune will have no current effect.
+    /// </summary>
+    /// <returns>Whether the tune is useless.</returns>
+    /// <param name="control">Control.</param>
+    public override bool IsTuneUseless(BaseControl control) {
+        return control.GetComponent<PlayerLife>().Health == 1f;
+    }
 }

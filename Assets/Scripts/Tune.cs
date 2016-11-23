@@ -37,7 +37,7 @@ public class Tune : MonoBehaviour {
 	public string tuneDescription;
 
     /// <summary> The percentage threshold for a note being considered on the beat. </summary>
-    public const float PERFECT_THRESHOLD = 0.8f;
+    public const float PERFECT_THRESHOLD = 0.75f;
 
     /// <summary> The maximum distance away from the enemy for the tune to be able to succeed. Used for AI. </summary>
     [SerializeField]
@@ -107,5 +107,14 @@ public class Tune : MonoBehaviour {
     /// <returns><c>true</c> if the specified <see cref="Tune"/> is equal to the current <see cref="Tune"/>; otherwise, <c>false</c>.</returns>
     public bool Equals(Tune other) {
         return other != null && tuneName.Equals(other.tuneName);
+    }
+
+    /// <summary>
+    /// Determines if the tune will have no current effect.
+    /// </summary>
+    /// <returns>Whether the tune is useless.</returns>
+    /// <param name="control">Control.</param>
+    public virtual bool IsTuneUseless(BaseControl control) {
+        return false;
     }
 }

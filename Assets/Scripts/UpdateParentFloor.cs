@@ -26,8 +26,11 @@ public class UpdateParentFloor : MonoBehaviour {
 	        GameObject closestFloor = null;
 	        float nearestDistanceSquared = Mathf.Infinity;
 	        foreach (GameObject floor in allFloors) {
-				if(floor == null) continue;
+                if(floor == null) continue;
 	            var floorPosition = floor.transform.position;
+                if (floorPosition.y > transform.position.y) {
+                    continue;
+                }
 	            var currDistanceSquared = (floorPosition - transform.position).sqrMagnitude;
 	            if (currDistanceSquared < nearestDistanceSquared) {
 	                closestFloor = floor;

@@ -53,28 +53,45 @@ public class MainMenuManager : MonoBehaviour {
 	private int numAI;
 	private bool playerJoining;
 
+	private Coroutine playerReadyAnim;
+
 	#region State_Changing
-	public void GoToMainMenu() {
-		GetComponent<Animator>().SetInteger("State",0);
+    public void GoToMainMenu() {
+	    GetComponent<Animator>().SetInteger("State",0);
 	}
 
-	public void GoToPlayMenu() {
-		GetComponent<Animator>().SetInteger("State",1);
+    public void GoToPlayMenu() {
+        GetComponent<Animator>().SetInteger("State",1);
 	}
 
-	public void GoToPlayerSelect() {
+    public void GoToPlayerSelect(int mode) {
 		inPlayerSelect = true;
+		if(mode == 0) Assets.Scripts.Data.Data.Instance.IsElimination = true;
+		if(mode == 1) Assets.Scripts.Data.Data.Instance.IsElimination = false;
 		GetComponent<Animator>().SetInteger("State",2);
 	}
+
+    private bool IsTransitioning() {
+        AnimatorStateInfo state = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+        return state.normalizedTime < 1;
+    }
 
 	public void GoToGame() {
 		Assets.Scripts.Data.Data.Instance.NumOfPlayers = ControllerManager.instance.NumPlayers;
 		Assets.Scripts.Data.Data.Instance.loadScene(levelImages[curLevel].name);
+
+		for(int i = 0; i < ControllerManager.instance.NumPlayers; i++) {
+			if(ControllerManager.instance.IsAI((PlayerID)(i+1))) {
+				Assets.Scripts.Data.Data.Instance.isAIPlayer[i] = true;
+			}
+		}
 	}
 
+	public void QuitGame() { Application.Quit(); }
+
 	public void ToggleAI(int num) {
-		bool isAi = Assets.Scripts.Data.Data.Instance.isAIPlayer[num];
-		Assets.Scripts.Data.Data.Instance.isAIPlayer[num] = !isAi;
+//		Debug.Log("Toggling AI: " + num);
+		bool isAi = ControllerManager.instance.IsAI((PlayerID)(num+1));
 		if(!isAi) {
 			int[] aiTunes = new int[3];
 			for(int i = 0; i < 3; i++) {
@@ -91,10 +108,11 @@ public class MainMenuManager : MonoBehaviour {
 			Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(num+1), tunes[aiTunes[2]], 2);
 			numAI++;
 			ControllerManager.instance.AddAI(true);
-			StartCoroutine(PlayerReady(num));
+			if(playerReadyAnim != null) StopCoroutine(playerReadyAnim);
+			playerReadyAnim = StartCoroutine(PlayerReady(num));
 		} else {
 			numAI--;
-			ControllerManager.instance.AllowAIRemoval(true);
+			ControllerManager.instance.AllowAIRemoval(true, (PlayerID)(num+1));
 			StartCoroutine(AddPlayerAnim());
 		}
 	}
@@ -107,10 +125,18 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void GoToLevelSelect() {
-		if(ControllerManager.instance.NumPlayers > 1 && !playerJoining) {
+        if(ControllerManager.instance.NumPlayers > 1 && !playerJoining) {
 			inPlayerSelect = false;
 			GetComponent<Animator>().SetInteger("State",3);
 		}
+	}
+
+	public void GoToCredits() {
+		GetComponent<Animator>().SetInteger("State",4);
+	}
+
+	public void GoToControls() {
+		GetComponent<Animator>().SetInteger("State",5);
 	}
 	#endregion
 		
@@ -118,6 +144,7 @@ public class MainMenuManager : MonoBehaviour {
 	#region Unity_Code
 	void Start() {
 		ControllerManager.instance.ClearPlayers();
+		Assets.Scripts.Data.Data.Instance.isAIPlayer = new bool[4];
 
 		selectedTune = new int[4,3];
 		nextTune = new int[4];
@@ -173,7 +200,6 @@ public class MainMenuManager : MonoBehaviour {
 				if(inputDelay[i] > 0f) inputDelay[i] -= Time.deltaTime;
 				if(nextTune[i] < 3) {
 					if(!ControllerManager.instance.IsAI((PlayerID)(i+1))) {
-						Debug.Log(ControllerManager.instance.IsAI((PlayerID)(i+1)));
 						playerJoining = true;
 					}
 					if(ControllerManager.instance.GetAxis(ControllerInputWrapper.Axis.DPadY, (PlayerID)(i+1)) > 0
@@ -192,7 +218,8 @@ public class MainMenuManager : MonoBehaviour {
 					if(ControllerManager.instance.GetButtonDown(ControllerInputWrapper.Buttons.A, (PlayerID)(i+1))) {
 						nextTune[i]++;
 						if(nextTune[i] == 3) {
-							StartCoroutine(PlayerReady(i));
+							if(playerReadyAnim != null) StopCoroutine(playerReadyAnim);
+							playerReadyAnim = StartCoroutine(PlayerReady(i));
 							playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(false);
 							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,0]], 0);
 							Assets.Scripts.Data.Data.Instance.AddTuneToPlayer((PlayerID)(i+1), tunes[selectedTune[i,1]], 1);
@@ -228,7 +255,29 @@ public class MainMenuManager : MonoBehaviour {
 
 	#region Animation_Coroutines
     private IEnumerator PlayerReady(int player) {
+		playerReadyText[player].GetComponent<Renderer>().enabled = true;
+		pressStart[player].GetComponent<Renderer>().enabled = false;
+
 		float timer = 0f;
+
+//		if(ControllerManager.instance.NumPlayers < 4) {
+//			GameObject cpuButton = playerBlocks[ControllerManager.instance.NumPlayers].transform.FindChild("CPU").gameObject;
+//			cpuButton.SetActive(true);
+//			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1))) ||
+//				(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1)))) {
+//				cpuButton.GetComponent<AddCPUButton>().Animate();
+//			}
+//		}
+//
+//		for(int i = 0; i < ControllerManager.instance.NumPlayers; i++) {
+//			GameObject cpuButton = playerBlocks[i].transform.FindChild("CPU").gameObject;
+//			Debug.Log("Checking: " + (PlayerID)(i+1) + ", " + cpuButton.GetComponent<AddCPUButton>().opened + " " + ControllerManager.instance.IsAI((PlayerID)(i+1)));
+//			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(i+1))) ||
+//				(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(i+1)))) {
+//				cpuButton.GetComponent<AddCPUButton>().Animate();
+//				Debug.Log("Attempting to fix: " + i);
+//			}
+//		}
 
 		while(timer < 1f) {
 			timer += Time.deltaTime;
@@ -243,9 +292,25 @@ public class MainMenuManager : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 		}
 
-		playerReadyText[player].GetComponent<Renderer>().enabled = true;
-		pressStart[player].GetComponent<Renderer>().enabled = false;
-		if(player < 3) playerBlocks[player+1].transform.FindChild("CPU").gameObject.SetActive(true);
+		if(ControllerManager.instance.NumPlayers < 4) {
+			GameObject cpuButton = playerBlocks[ControllerManager.instance.NumPlayers].transform.FindChild("CPU").gameObject;
+			cpuButton.SetActive(true);
+			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1))) ||
+				(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1)))) {
+				cpuButton.GetComponent<AddCPUButton>().Animate();
+			}
+		}
+
+		for(int i = 0; i < ControllerManager.instance.NumPlayers; i++) {
+			GameObject cpuButton = playerBlocks[i].transform.FindChild("CPU").gameObject;
+//			Debug.Log("Checking: " + (PlayerID)(i+1) + ", " + cpuButton.GetComponent<AddCPUButton>().opened + " " + ControllerManager.instance.IsAI((PlayerID)(i+1)));
+			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(i+1))) ||
+				(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(i+1)))) {
+				cpuButton.GetComponent<AddCPUButton>().Animate();
+//				Debug.Log("Attempting to fix: " + i);
+			}
+		}
+
 
 		yield return null;
 	}
@@ -345,33 +410,99 @@ public class MainMenuManager : MonoBehaviour {
 	private IEnumerator AddPlayerAnim() {
 		float timer = 0f;
 
+		bool openedAI = false;
+
+//		if(ControllerManager.instance.NumPlayers < 4) {
+//			GameObject cpuButton = playerBlocks[ControllerManager.instance.NumPlayers].transform.FindChild("CPU").gameObject;
+//			cpuButton.SetActive(true);
+//			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1))) ||
+//				(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1)))) {
+//				cpuButton.GetComponent<AddCPUButton>().Animate();
+//			}
+//		}
+//
+//		for(int i = ControllerManager.instance.NumPlayers+1; i < 4; i++) {
+//			if(!ControllerManager.instance.IsAI((PlayerID)(i+1))) playerBlocks[i].transform.FindChild("CPU").GetComponent<BoxCollider>().enabled = false;
+//			GameObject cpuButton = playerBlocks[i].transform.FindChild("CPU").gameObject;
+//			Debug.Log("Checking: " + (PlayerID)(i+1) + ", " + cpuButton.GetComponent<AddCPUButton>().opened + " " + ControllerManager.instance.IsAI((PlayerID)(i+1)));
+//			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(i+1))) ||
+//				(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(i+1)))) {
+//				cpuButton.GetComponent<AddCPUButton>().Animate();
+//				Debug.Log("Attempting to fix: " + i);
+//			}
+//		}
+
 		while(timer < 1f) {
 			timer += Time.deltaTime;
-			int i = 0;
-			for(; i < ControllerManager.instance.NumPlayers; i++) {
-				if(nextTune[i] != 3 && !Assets.Scripts.Data.Data.Instance.isAIPlayer[i]) {
+			for(int i = 0; i < ControllerManager.instance.NumPlayers; i++) {
+				if(nextTune[i] != 3 && !ControllerManager.instance.IsAI((PlayerID)(i+1))) {
+					Debug.Log(i + " " + numAI + " " + ControllerManager.instance.IsAI((PlayerID)(i+1)));
 					playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
 						Quaternion.Euler(new Vector3(-180f,0f,0f)),
 						timer);
                     if (timer > 0.25f) {
 					    playerTuneDescriptions[i].GetComponent<Renderer>().enabled = true;
+                    } else {
+                        for (int j = 0; j < 3; j++) {
+                            playerTunes[i, j].transform.localRotation = Quaternion.identity;
+                            playerTunes[i, j].transform.GetChild(0).GetComponent<TextMesh>().text = tunes[selectedTune[i, j]].tuneName;
+                        }
+                        playerTuneDescriptions[i].transform.localRotation = Quaternion.Euler(-90, 0, 0);
                     }
                     UpdateTuneDescription(i);
 				}
 			}
-			if(i < 4) playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(true);
-			for(; i < 4; i++) {
-				playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
-					Quaternion.Euler(new Vector3(0f,0f,0f)),
-                    timer);
-                if (timer > 0.25f) {
-				    playerTuneDescriptions[i].GetComponent<Renderer>().enabled = false;
-                }
-				playerReadyText[i].GetComponent<Renderer>().enabled = false;
-				pressStart[i].GetComponent<Renderer>().enabled = true;
-				if(i+1 < 4) playerBlocks[i+1].transform.FindChild("CPU").gameObject.SetActive(false);
+//			if(i < 4 && !openedAI) {
+//				GameObject cpuButton = playerBlocks[i].transform.FindChild("CPU").gameObject;
+//				openedAI = true;
+//				cpuButton.SetActive(true);
+//				if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(i+1))) ||
+//					(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(i+1)))) {
+//					cpuButton.GetComponent<AddCPUButton>().Animate();
+//				}
+//			}
+			for(int i = 0; i < 4; i++) {
+				if(!ControllerManager.instance.playerControls.ContainsKey((PlayerID)(i+1)) || ControllerManager.instance.IsAI((PlayerID)(i+1))) {
+					playerBlocks[i].transform.localRotation = Quaternion.Lerp(playerBlocks[i].transform.localRotation,
+						Quaternion.Euler(new Vector3(0f,0f,0f)),
+	                    timer);
+	                if (timer > 0.25f) {
+					    playerTuneDescriptions[i].GetComponent<Renderer>().enabled = false;
+	                }
+					playerReadyText[i].GetComponent<Renderer>().enabled = false;
+					pressStart[i].GetComponent<Renderer>().enabled = true;
+//					if(i+1 < 4 && !ControllerManager.instance.IsAI((PlayerID)(i+2))) {
+////						playerBlocks[i+1].transform.FindChild("CPU").gameObject.SetActive(false);
+//						Debug.Log("TURNING OFF");
+//					}
+//					if (ControllerManager.instance.IsAI((PlayerID)(i+1))) playerBlocks[i].transform.FindChild("CPU").gameObject.SetActive(true);
+				}
 			}
 			yield return new WaitForEndOfFrame();
+		}
+
+//		Debug.Log(ControllerManager.instance.NumPlayers + " " + ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1)));
+		if(ControllerManager.instance.NumPlayers < 3 && !ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1))) {
+			playerBlocks[ControllerManager.instance.NumPlayers+1].transform.FindChild("CPU").gameObject.SetActive(false);
+//			Debug.Log("TURNING OFF:" + ControllerManager.instance.NumPlayers);
+		}
+
+		if(ControllerManager.instance.NumPlayers < 4) {
+			GameObject cpuButton = playerBlocks[ControllerManager.instance.NumPlayers].transform.FindChild("CPU").gameObject;
+			cpuButton.SetActive(true);
+			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1))) ||
+				(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(ControllerManager.instance.NumPlayers+1)))) {
+				cpuButton.GetComponent<AddCPUButton>().Animate();
+			}
+		}
+
+		for(int i = 0; i < ControllerManager.instance.NumPlayers; i++) {
+			GameObject cpuButton = playerBlocks[i].transform.FindChild("CPU").gameObject;
+			cpuButton.SetActive(true);
+			if((!cpuButton.GetComponent<AddCPUButton>().opened && ControllerManager.instance.IsAI((PlayerID)(i+1))) ||
+				(cpuButton.GetComponent<AddCPUButton>().opened && !ControllerManager.instance.IsAI((PlayerID)(i+1)))) {
+				cpuButton.GetComponent<AddCPUButton>().Animate();
+			}
 		}
 
 		yield return null;

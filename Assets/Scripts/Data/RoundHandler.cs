@@ -23,8 +23,8 @@ namespace Assets.Scripts.Data
         [Tooltip("Prefab for the king of the hill hill.")]
         private GameObject hill;
 
-		public delegate void OpenMidRoundUI(int player);
-        private OpenMidRoundUI uiCaller;
+        public delegate void OpenMidRoundUI(int player);
+        private OpenMidRoundUI uiCaller, coliseum;
 
         /// <summary> internal reference for ensuring singleton. </summary>
         private static RoundHandler instance;
@@ -72,11 +72,16 @@ namespace Assets.Scripts.Data
         void Init()
         {
             bards = new PlayerLife[Data.Instance.numOfPlayers];
-            for (int i = 0; i < Bards.Length; i++)
+			int i = 0;
+            for (; i < Bards.Length; i++)
             {
                 Bards[i] = Data.Instance.Spawn(i, spawnPoints[i]).GetComponent<PlayerLife>();
 				LevelControllerManager.instance.AddPlayer((PlayerID)(i+1), Bards[i].GetComponent<BaseControl>());
             }
+
+			for(; i < 4; i++) {
+				LevelManager.instance.DisableUI(i);
+			}
         }
 
         void Start()
@@ -102,6 +107,7 @@ namespace Assets.Scripts.Data
                 hillObject = Instantiate(hill);
                 hillObject.transform.position = spawnPoints[4].transform.position;
             }
+            Data.Instance.CanPause = false;
         }
 
         void Update()
@@ -116,9 +122,12 @@ namespace Assets.Scripts.Data
                         AddScore((PlayerID)(i+1));
 						if (uiCaller != null)
 							uiCaller(i);
+                        if (coliseum != null)
+                            coliseum(i);
 					}
                     isDead[i] = false;
                 }
+                Data.Instance.CanPause = false;
                 //Debug.Log(scores[0] + " " + scores[1] + " " + scores[2] + " " + scores[3]);
             }
             if (countDown > -2)
@@ -154,6 +163,7 @@ namespace Assets.Scripts.Data
                 {
                     canvas.SetActive(false);
                     countDown = -5000;
+                    Data.Instance.CanPause = true;
                 }
             }
             bool done = false;
@@ -161,7 +171,7 @@ namespace Assets.Scripts.Data
             {
                 if(Data.Instance.IsElimination)
                 {
-                    if (scores[i] > 9)
+                    if (scores[i] > 4)
                         done = true;
                 }
                 else
@@ -170,12 +180,15 @@ namespace Assets.Scripts.Data
                         done = true;
                 }
             }
-            if (done)
+			if (done && countDown != -8000)
             {
-                countDown = -5000;
+                countDown = -8000;
                 canvas.SetActive(true);
                 ResetRound();
                 timerText.text = "Finish!";
+				Data.Instance.FinalScores = scores;
+				StartCoroutine(LoadGameEnd());
+                Data.Instance.CanPause = false;
             }
         }
 
@@ -197,6 +210,13 @@ namespace Assets.Scripts.Data
             uiCaller = function;
         }
 
+        /// <summary> Register the function to turn the mid round score display. </summary>
+        /// <param name="function"> A function that turn the UI on. </param>
+        public void RegisterReset(OpenMidRoundUI function)
+        {
+            coliseum = function;
+        }
+
         /// <summary> Increments the death count for this round or sets the given player to respawn. </summary>
         /// <param name="id"> The player that died. </param>
         public void AddDeath(PlayerID id)
@@ -210,6 +230,13 @@ namespace Assets.Scripts.Data
                 }
                 else
                 {
+                    KingofHill k = bards[(((int)id) - 1)].gameObject.GetComponentInChildren<KingofHill>();
+                    if (k != null)
+                    {
+                        k.ResetRound();
+                        hill.transform.parent = null;
+                        hill.transform.position = spawnPoints[4].transform.position;
+                    }
                     StartCoroutine(Respawn(((int)id) - 1));
                 }
             }
@@ -239,9 +266,10 @@ namespace Assets.Scripts.Data
             Bards[player].GetComponent<BaseControl>().enabled = true;
             Bards[player].GetComponent<BaseBard>().enabled = true;
             Bards[player].GetComponent<CharacterController>().enabled = true;
+            Bards[player].transform.position = spawnPoints[player].position;
             if (Bards[player].GetComponent<NavMeshAgent>())
                 Bards[player].GetComponent<NavMeshAgent>().enabled = true;
-            Bards[player].transform.position = spawnPoints[player].position;
+            Bards[player].Respawn();
             yield return null;
         }
 
@@ -306,5 +334,11 @@ namespace Assets.Scripts.Data
                 bc[i] = Bards[i].GetComponent<BaseControl>();
             return bc;
         }
+
+		private IEnumerator LoadGameEnd() {
+			yield return new WaitForSeconds(2f);
+
+			Data.Instance.loadScene("WinScreen");
+		}
     }
 }

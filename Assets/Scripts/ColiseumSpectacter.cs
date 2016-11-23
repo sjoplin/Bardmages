@@ -7,7 +7,7 @@ public class ColiseumSpectacter : MonoBehaviour {
 	public GameObject toBeThrown;
 	public GameObject spawnLoc;
 	private float randomNumLim = 1000f;
-	private static bool yesReset = false;
+	private bool yesReset = false;
 	void Start () {
 		rand = new Random();
 	}
@@ -32,7 +32,7 @@ public class ColiseumSpectacter : MonoBehaviour {
 	
 	}
 
-	public static void Reset(int throwaway) {
+	public void Reset(int throwaway) {
 		yesReset = true;
 	}
 
